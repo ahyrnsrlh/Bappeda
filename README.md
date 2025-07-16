@@ -111,21 +111,3 @@ resources/
 
 ---
 
-### 📄 Prompt Akhir untuk AI/Dev Team:
-
-> Buatkan sebuah aplikasi berbasis Laravel + Inertia + Vue untuk sistem manajemen rapat dan dokumen dengan autentikasi role-based. Terdapat 3 role utama: Kepala Bidang, Konsultan Individu, dan Tim Kerja.
->
-> Setiap role memiliki akses berbeda terhadap fitur berikut:
->
-> * Login akun role-based
-> * Kelola jadwal rapat (buat, lihat)
-> * Upload hasil rapat
-> * Arsipkan dokumen
-> * Lihat file tim lain (khusus Kepala Bidang dan Tim Kerja)
-> * Kelola file sendiri (Tim Kerja)
-> * Unduh semua file tim
->
-> Implementasikan middleware dan gate/policy Laravel untuk membatasi akses. Gunakan Inertia.js + Vue 3 untuk frontend SPA. Buat halaman dashboard yang berbeda untuk setiap role. Simpan file ke storage publik dan tampilkan preview jika memungkinkan (PDF/docx/image). Sertakan sistem manajemen tim agar file/jadwal bisa dikelompokkan berdasarkan tim kerja.
-
----
-
