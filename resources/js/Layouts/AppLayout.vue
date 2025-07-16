@@ -7,7 +7,14 @@
                 <div class="w-64 px-4 py-4">
                     <div class="flex items-center">
                         <div
-                            class="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl flex items-center justify-center mr-3"
+                            class="w-10 h-10 rounded-xl flex items-center justify-center mr-3"
+                            style="
+                                background: linear-gradient(
+                                    135deg,
+                                    #eaaa00 0%,
+                                    #d69e00 100%
+                                );
+                            "
                         >
                             <svg
                                 class="w-6 h-6 text-white"
@@ -42,7 +49,14 @@
                     >
                         <div class="flex items-center space-x-3">
                             <div
-                                class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center"
+                                class="w-8 h-8 rounded-full flex items-center justify-center"
+                                style="
+                                    background: linear-gradient(
+                                        135deg,
+                                        #eaaa00 0%,
+                                        #d69e00 100%
+                                    );
+                                "
                             >
                                 <span class="text-white text-sm font-semibold">
                                     {{
@@ -102,8 +116,13 @@
                             class="group flex items-center px-3 py-3 text-sm font-medium rounded-xl transition-all duration-200"
                             :class="
                                 $page.url === '/dashboard'
-                                    ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg'
+                                    ? 'text-white shadow-lg'
                                     : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                            "
+                            :style="
+                                $page.url === '/dashboard'
+                                    ? 'background: linear-gradient(135deg, #EAAA00 0%, #D69E00 100%);'
+                                    : ''
                             "
                         >
                             <div
@@ -131,7 +150,7 @@
                             class="group flex items-center px-3 py-3 text-sm font-medium rounded-xl transition-all duration-200"
                             :class="
                                 $page.url.startsWith('/meetings')
-                                    ? 'bg-gradient-to-r from-green-500 to-green-600 text-white shadow-lg'
+                                    ? 'bg-gradient-to-r from-yellow-500 to-yellow-600 text-white shadow-lg'
                                     : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                             "
                         >
@@ -160,7 +179,7 @@
                             class="group flex items-center px-3 py-3 text-sm font-medium rounded-xl transition-all duration-200"
                             :class="
                                 $page.url.startsWith('/meeting-notes')
-                                    ? 'bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-lg'
+                                    ? 'bg-gradient-to-r from-yellow-500 to-yellow-600 text-white shadow-lg'
                                     : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                             "
                         >
@@ -189,7 +208,7 @@
                             class="group flex items-center px-3 py-3 text-sm font-medium rounded-xl transition-all duration-200"
                             :class="
                                 $page.url.startsWith('/files')
-                                    ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg'
+                                    ? 'bg-gradient-to-r from-yellow-500 to-yellow-600 text-white shadow-lg'
                                     : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                             "
                         >

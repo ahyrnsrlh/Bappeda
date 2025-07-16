@@ -7,7 +7,7 @@
                 <Link
                     v-if="canCreateNote"
                     href="/meeting-notes/create"
-                    class="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700"
+                    class="inline-flex items-center px-4 py-2 bg-yellow-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-700"
                 >
                     Buat Notulen
                 </Link>
@@ -254,7 +254,7 @@
                 <div v-if="canCreateNote" class="mt-6">
                     <Link
                         href="/meeting-notes/create"
-                        class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700"
+                        class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700"
                     >
                         Buat Notulen
                     </Link>

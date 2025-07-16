@@ -3,7 +3,15 @@
         <div class="space-y-8 pb-8">
             <!-- Modern Header with Gradient -->
             <div
-                class="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 rounded-2xl shadow-xl"
+                class="relative overflow-hidden rounded-2xl shadow-xl"
+                style="
+                    background: linear-gradient(
+                        135deg,
+                        #eaaa00 0%,
+                        #d69e00 50%,
+                        #c28d00 100%
+                    );
+                "
             >
                 <div class="absolute inset-0 bg-black opacity-20"></div>
                 <div class="relative px-6 py-8 sm:px-8 sm:py-12">
@@ -13,10 +21,10 @@
                                 Selamat datang,
                                 {{ $page.props.auth.user.name }}! 👋
                             </h1>
-                            <p class="text-blue-100 text-lg">
+                            <p class="text-yellow-100 text-lg">
                                 {{ getRoleLabel($page.props.auth.user.role) }}
                             </p>
-                            <p class="text-blue-200 text-sm mt-1">
+                            <p class="text-yellow-200 text-sm mt-1">
                                 {{ getCurrentDate() }}
                             </p>
                         </div>
@@ -31,7 +39,7 @@
                     class="group relative bg-white overflow-hidden shadow-lg rounded-2xl border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
                 >
                     <div
-                        class="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 opacity-50"
+                        class="absolute inset-0 bg-gradient-to-br from-yellow-50 to-orange-50 opacity-50"
                     ></div>
                     <div class="relative p-6">
                         <div class="flex items-center justify-between">
@@ -63,10 +71,21 @@
                             </div>
                             <div class="flex-shrink-0">
                                 <div
-                                    class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center group-hover:bg-blue-200 transition-colors duration-300"
+                                    class="w-12 h-12 rounded-xl flex items-center justify-center transition-colors duration-300"
+                                    style="
+                                        background-color: rgba(
+                                            234,
+                                            170,
+                                            0,
+                                            0.1
+                                        );
+                                    "
+                                    onmouseover="this.style.backgroundColor='rgba(234, 170, 0, 0.2)'"
+                                    onmouseout="this.style.backgroundColor='rgba(234, 170, 0, 0.1)'"
                                 >
                                     <svg
-                                        class="w-6 h-6 text-blue-600"
+                                        class="w-6 h-6"
+                                        style="color: #eaaa00"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
@@ -271,10 +290,19 @@
                                 class="text-xl font-semibold text-gray-900 flex items-center"
                             >
                                 <div
-                                    class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3"
+                                    class="w-8 h-8 rounded-lg flex items-center justify-center mr-3"
+                                    style="
+                                        background-color: rgba(
+                                            234,
+                                            170,
+                                            0,
+                                            0.1
+                                        );
+                                    "
                                 >
                                     <svg
-                                        class="w-4 h-4 text-blue-600"
+                                        class="w-4 h-4"
+                                        style="color: #eaaa00"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
@@ -291,7 +319,10 @@
                             </h3>
                             <Link
                                 href="/meetings"
-                                class="text-sm font-medium text-blue-600 hover:text-blue-500 transition-colors duration-200"
+                                class="text-sm font-medium transition-colors duration-200"
+                                style="color: #eaaa00"
+                                onmouseover="this.style.color='#D69E00'"
+                                onmouseout="this.style.color='#EAAA00'"
                             >
                                 Lihat Semua →
                             </Link>
@@ -403,10 +434,19 @@
                             >
                                 <div class="flex items-center flex-1">
                                     <div
-                                        class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3"
+                                        class="w-10 h-10 rounded-lg flex items-center justify-center mr-3"
+                                        style="
+                                            background-color: rgba(
+                                                234,
+                                                170,
+                                                0,
+                                                0.1
+                                            );
+                                        "
                                     >
                                         <svg
-                                            class="w-5 h-5 text-blue-600"
+                                            class="w-5 h-5"
+                                            style="color: #eaaa00"
                                             fill="none"
                                             stroke="currentColor"
                                             viewBox="0 0 24 24"
@@ -492,7 +532,16 @@
                         <Link
                             v-if="canCreateMeeting"
                             href="/meetings/create"
-                            class="group relative overflow-hidden bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl p-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+                            class="group relative overflow-hidden text-white rounded-xl p-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+                            style="
+                                background: linear-gradient(
+                                    135deg,
+                                    #eaaa00 0%,
+                                    #d69e00 100%
+                                );
+                            "
+                            onmouseover="this.style.background='linear-gradient(135deg, #D69E00 0%, #C28D00 100%)'"
+                            onmouseout="this.style.background='linear-gradient(135deg, #EAAA00 0%, #D69E00 100%)'"
                         >
                             <div class="flex items-center justify-center mb-2">
                                 <svg
@@ -659,7 +708,8 @@ const formatDate = (date) => {
 
 const getStatusClass = (status) => {
     const classes = {
-        scheduled: "bg-blue-100 text-blue-800 border border-blue-200",
+        scheduled:
+            "text-yellow-800 border border-yellow-200" + " " + "bg-yellow-100",
         completed: "bg-green-100 text-green-800 border border-green-200",
         cancelled: "bg-red-100 text-red-800 border border-red-200",
     };
