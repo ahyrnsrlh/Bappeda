@@ -26,11 +26,11 @@
                         >
                             <option value="">Semua Tim</option>
                             <option
-                                v-for="team in teams"
+                                v-for="team in (teams || [])"
                                 :key="team.id"
                                 :value="team.id"
                             >
-                                {{ team.name }}
+                                {{ team?.name || 'Unknown Team' }}
                             </option>
                         </select>
                     </div>
@@ -71,7 +71,7 @@
                 class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
             >
                 <div
-                    v-for="file in files.data"
+                    v-for="file in (files?.data || [])"
                     :key="file.id"
                     class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200"
                 >
@@ -107,10 +107,10 @@
                                 {{ file.formatted_size }}
                             </p>
                             <p class="text-xs text-gray-500">
-                                Oleh: {{ file.user.name }}
+                                Oleh: {{ file.user?.name || 'Unknown' }}
                             </p>
                             <p v-if="file.team" class="text-xs text-blue-600">
-                                {{ file.team.name }}
+                                {{ file.team?.name || 'No Team' }}
                             </p>
 
                             <!-- Type Badge -->
@@ -188,14 +188,14 @@
             >
                 <div class="flex-1 flex justify-between sm:hidden">
                     <Link
-                        v-if="files.prev_page_url"
+                        v-if="files?.prev_page_url"
                         :href="files.prev_page_url"
                         class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
                     >
                         Previous
                     </Link>
                     <Link
-                        v-if="files.next_page_url"
+                        v-if="files?.next_page_url"
                         :href="files.next_page_url"
                         class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
                     >
@@ -208,8 +208,8 @@
                 >
                     <div>
                         <p class="text-sm text-gray-700">
-                            Showing {{ files.from }} to {{ files.to }} of
-                            {{ files.total }} results
+                            Showing {{ files?.from || 0 }} to {{ files?.to || 0 }} of
+                            {{ files?.total || 0 }} results
                         </p>
                     </div>
                     <div>
@@ -217,14 +217,14 @@
                             class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
                         >
                             <Link
-                                v-if="files.prev_page_url"
+                                v-if="files?.prev_page_url"
                                 :href="files.prev_page_url"
                                 class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                             >
                                 Previous
                             </Link>
                             <Link
-                                v-if="files.next_page_url"
+                                v-if="files?.next_page_url"
                                 :href="files.next_page_url"
                                 class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                             >
@@ -244,8 +244,14 @@ import { Link, router, usePage } from "@inertiajs/vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
 
 const props = defineProps({
-    files: Object,
-    teams: Array,
+    files: {
+        type: Object,
+        default: () => ({ data: [] })
+    },
+    teams: {
+        type: Array,
+        default: () => []
+    },
 });
 
 const page = usePage();

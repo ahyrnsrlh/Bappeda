@@ -13,15 +13,16 @@ return new class extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->string('original_name');
-            $table->string('path');
+            $table->string('filename');
+            $table->string('file_path');
             $table->string('mime_type')->nullable();
-            $table->integer('size')->nullable();
+            $table->bigInteger('file_size')->nullable();
             $table->text('description')->nullable();
-            $table->enum('type', ['meeting_result', 'document', 'other'])->default('document');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->enum('type', ['meeting_result', 'document', 'other', 'meeting_note'])->default('document');
+            $table->foreignId('uploaded_by')->constrained('users')->onDelete('cascade');
             $table->foreignId('team_id')->nullable()->constrained()->onDelete('set null');
+            $table->unsignedBigInteger('meeting_note_id')->nullable();
             $table->boolean('is_archived')->default(false);
             $table->timestamps();
         });

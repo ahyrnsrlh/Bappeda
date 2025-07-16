@@ -1,7 +1,32 @@
 <template>
     <AppLayout>
         <div class="max-w-2xl mx-auto">
-            <div class="bg-white shadow rounded-lg">
+            <!-- Loading State -->
+            <div
+                v-if="!pageLoaded"
+                class="flex justify-center items-center h-64"
+            >
+                <div
+                    class="animate-spin rounded-full h-32 w-32 border-b-2 border-yellow-600"
+                ></div>
+            </div>
+
+            <!-- Main Content -->
+            <div v-else class="bg-white shadow rounded-lg">
+                <!-- Error Alert -->
+                <div v-if="$page.props.error" class="bg-red-50 border border-red-200 rounded-md p-4 mb-6">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-red-800">{{ $page.props.error }}</p>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="px-4 py-5 sm:p-6">
                     <h3
                         class="text-lg leading-6 font-medium text-gray-900 mb-6"
@@ -53,10 +78,9 @@
                                             />
                                         </label>
                                         <p class="pl-1">or drag and drop</p>
-                                    </div>
-                                    <p class="text-xs text-gray-500">
-                                        PNG, JPG, PDF, DOC, DOCX up to 50MB
-                                    </p>
+                                    </div>                            <p class="text-xs text-gray-500">
+                                PNG, JPG, PDF, DOC, DOCX up to 50MB
+                            </p>
                                 </div>
                             </div>
 
@@ -143,7 +167,7 @@
                                     Tim Default (berdasarkan user)
                                 </option>
                                 <option
-                                    v-for="team in teams"
+                                    v-for="team in (props.teams || [])"
                                     :key="team.id"
                                     :value="team.id"
                                 >
@@ -210,9 +234,28 @@
 <script setup>
 import { useForm, Link } from "@inertiajs/vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
+import { onMounted, ref } from "vue";
 
 const props = defineProps({
-    teams: Array,
+    teams: {
+        type: Array,
+        default: () => []
+    },
+});
+
+const pageLoaded = ref(false);
+
+// Debug log and error handling
+onMounted(() => {
+    try {
+        console.log("Files Create component mounted");
+        console.log("Teams prop:", props.teams);
+        console.log("Props:", props);
+        pageLoaded.value = true;
+    } catch (error) {
+        console.error("Error in onMounted:", error);
+        pageLoaded.value = true; // Still show page even if there's an error
+    }
 });
 
 const form = useForm({
@@ -224,6 +267,7 @@ const form = useForm({
 
 const handleFileChange = (event) => {
     form.file = event.target.files[0];
+    console.log("File selected:", form.file);
 };
 
 const formatFileSize = (bytes) => {
@@ -235,6 +279,17 @@ const formatFileSize = (bytes) => {
 };
 
 const submit = () => {
-    form.post("/files");
+    console.log("Form submit started", form.data());
+    form.post("/files", {
+        onSuccess: () => {
+            console.log("Upload successful");
+        },
+        onError: (errors) => {
+            console.log("Upload error:", errors);
+        },
+        onFinish: () => {
+            console.log("Upload finished");
+        },
+    });
 };
 </script>

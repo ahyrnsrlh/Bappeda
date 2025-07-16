@@ -19,10 +19,10 @@
                         <div>
                             <h1 class="text-3xl font-bold text-white mb-2">
                                 Selamat datang,
-                                {{ $page.props.auth.user.name }}! 👋
+                                {{ $page.props.auth.user?.name || 'User' }}! 👋
                             </h1>
                             <p class="text-yellow-100 text-lg">
-                                {{ getRoleLabel($page.props.auth.user.role) }}
+                                {{ getRoleLabel($page.props.auth.user?.role || '') }}
                             </p>
                             <p class="text-yellow-200 text-sm mt-1">
                                 {{ getCurrentDate() }}

@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('teams', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->unique();
-            $table->string('code')->unique(); // tim_1, tim_2, etc
-            $table->text('description')->nullable();
-            $table->timestamps();
+        Schema::table('files', function (Blueprint $table) {
+            $table->foreign('meeting_note_id')->references('id')->on('meeting_notes')->onDelete('cascade');
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('teams');
+        Schema::table('files', function (Blueprint $table) {
+            $table->dropForeign(['meeting_note_id']);
+        });
     }
 };

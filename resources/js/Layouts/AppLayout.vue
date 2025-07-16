@@ -60,7 +60,7 @@
                             >
                                 <span class="text-white text-sm font-semibold">
                                     {{
-                                        $page.props.auth.user.name
+                                        ($page.props.auth.user?.name || 'U')
                                             .charAt(0)
                                             .toUpperCase()
                                     }}
@@ -68,11 +68,11 @@
                             </div>
                             <div class="hidden md:block">
                                 <p class="text-sm font-medium text-gray-900">
-                                    {{ $page.props.auth.user.name }}
+                                    {{ $page.props.auth.user?.name || 'User' }}
                                 </p>
                                 <p class="text-xs text-gray-500">
                                     {{
-                                        getRoleLabel($page.props.auth.user.role)
+                                        getRoleLabel($page.props.auth.user?.role || '')
                                     }}
                                 </p>
                             </div>
