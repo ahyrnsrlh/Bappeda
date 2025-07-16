@@ -687,11 +687,11 @@ const getRoleLabel = (role) => {
     const labels = {
         kabid: "Kepala Bidang",
         KI: "Konsultan Individu",
-        tim_1: "Tim Kerja 1",
-        tim_2: "Tim Kerja 2",
-        tim_3: "Tim Kerja 3",
-        tim_4: "Tim Kerja 4",
-        tim_5: "Tim Kerja 5",
+        tim_1: "Tim Kerja Penanggulangan Kemiskinan",
+        tim_2: "Tim Kerja Kawasan Industri & PSN",
+        tim_3: "Tim Kerja Peluang Investasi",
+        tim_4: "Tim Kerja CSR/TJSL",
+        tim_5: "Tim Kerja DBH Perkebunan",
     };
     return labels[role] || role;
 };
