@@ -6,16 +6,22 @@ use App\Http\Controllers\MeetingScheduleController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\MeetingNoteController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
+use App\Models\Team;
 
-// Redirect root to dashboard
+// Landing page - show welcome page
 Route::get('/', function () {
-    return redirect('/dashboard');
-});
+    return Inertia::render('Welcome', [
+        'teams' => Team::all()
+    ]);
+})->name('home');
 
 // Authentication routes
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+    Route::post('/register', [AuthController::class, 'register']);
 });
 
 Route::middleware('auth')->group(function () {
