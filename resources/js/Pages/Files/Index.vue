@@ -5,6 +5,7 @@
             <div class="flex justify-between items-center">
                 <h2 class="text-2xl font-bold text-gray-900">Kelola File</h2>
                 <Link
+                    v-if="canUploadFile"
                     href="/files/create"
                     class="inline-flex items-center px-4 py-2 bg-yellow-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700"
                 >
@@ -239,7 +240,7 @@
 </template>
 
 <script setup>
-import { ref, reactive } from "vue";
+import { ref, reactive, computed } from "vue";
 import { Link, router, usePage } from "@inertiajs/vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
 
@@ -291,6 +292,11 @@ const canDeleteFile = (file) => {
     const user = page.props.auth.user;
     return user && (file.user_id === user.id || user.role === "KI");
 };
+
+const canUploadFile = computed(() => {
+    const user = page.props.auth.user;
+    return user && user.role !== "kabid";
+});
 
 const deleteFile = (file) => {
     if (confirm("Apakah Anda yakin ingin menghapus file ini?")) {

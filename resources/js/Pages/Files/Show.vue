@@ -260,8 +260,7 @@ const canDelete = computed(() => {
     const user = page.props.auth.user;
     return (
         user &&
-        (props.file.uploaded_by === user.id ||
-            ["KI", "kabid"].includes(user.role))
+        (props.file.uploaded_by === user.id || user.role === "KI")
     );
 });
 

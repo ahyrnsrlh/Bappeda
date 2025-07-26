@@ -33,8 +33,9 @@ Masing-masing role memiliki akses fitur sesuai diagram use case seperti:
 
 * Autentikasi (login khusus untuk kepala bidang)
 * Lihat jadwal rapat
-* Lihat semua file dari seluruh tim
+* Lihat semua file dari seluruh tim (READ-ONLY)
 * Unduh semua file dari semua tim (`<<extend>>`)
+* ❌ **Tidak dapat upload, edit, atau hapus file**
 
 #### 👤 2. Konsultan Individu (`role: KI`)
 
