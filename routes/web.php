@@ -75,13 +75,22 @@ Route::middleware('auth')->group(function () {
     // Files
     Route::prefix('files')->group(function () {
         Route::get('/', [FileController::class, 'index'])->name('files.index');
-        Route::get('/create', [FileController::class, 'create'])->name('files.create');
-        Route::post('/', [FileController::class, 'store'])->name('files.store');
+        Route::get('/create', [FileController::class, 'create'])
+            ->middleware('role:KI,tim_1,tim_2,tim_3,tim_4,tim_5')
+            ->name('files.create');
+        Route::post('/', [FileController::class, 'store'])
+            ->middleware('role:KI,tim_1,tim_2,tim_3,tim_4,tim_5')
+            ->name('files.store');
         Route::get('/{file}', [FileController::class, 'show'])->name('files.show');
-        Route::get('/{file}/edit', [FileController::class, 'edit'])->name('files.edit');
-        Route::put('/{file}', [FileController::class, 'update'])->name('files.update');
+        Route::get('/{file}/edit', [FileController::class, 'edit'])
+            ->middleware('role:KI,tim_1,tim_2,tim_3,tim_4,tim_5')
+            ->name('files.edit');
+        Route::put('/{file}', [FileController::class, 'update'])
+            ->middleware('role:KI,tim_1,tim_2,tim_3,tim_4,tim_5')
+            ->name('files.update');
         Route::get('/{file}/download', [FileController::class, 'download'])->name('files.download');
         Route::delete('/{file}', [FileController::class, 'destroy'])
+            ->middleware('role:KI,tim_1,tim_2,tim_3,tim_4,tim_5')
             ->name('files.destroy');
     });
 });

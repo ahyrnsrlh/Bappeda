@@ -20,8 +20,8 @@ Membangun aplikasi berbasis web dengan 3 role pengguna utama:
 Masing-masing role memiliki akses fitur sesuai diagram use case seperti:
 
 * Login role-based
-* Lihat & unggah jadwal rapat
-* Kelola file tim
+* Lihat jadwal rapat
+* Kelola file tim (sesuai role)
 * Unduh file
 * Arsipkan dokumen hasil rapat
 
