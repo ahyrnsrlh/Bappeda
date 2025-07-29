@@ -8,14 +8,7 @@
                 <div class="flex justify-between items-center py-4">
                     <div class="flex items-center space-x-4">
                         <div class="flex items-center">
-                            <div
-                                class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center shadow-lg"
-                            >
-                                <span class="text-xl font-bold text-white"
-                                    >B</span
-                                >
-                            </div>
-                            <div class="ml-4">
+                            <div>
                                 <h1 class="text-xl font-bold text-gray-900">
                                     EKONOMI BAPPEDA
                                 </h1>
@@ -76,28 +69,81 @@
                         <!-- Content -->
                         <div class="text-center lg:text-left space-y-8">
                             <div
-                                class="inline-flex items-center bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium mb-4"
+                                class="inline-flex items-center bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-full text-base font-semibold mb-4"
                             >
                                 <span class="mr-2">🏛️</span>
-                                BAPPEDA Provinsi Lampung
+                                Bidang Ekonomi BAPPEDA Provinsi Lampung
                             </div>
 
-                            <div class="space-y-4">
+                            <div class="space-y-6">
                                 <h1
                                     class="text-4xl md:text-6xl font-bold text-white leading-tight"
                                 >
-                                    Sistem Manajemen Rapat
-                                    <span class="text-yellow-200"
-                                        >Bidang Ekonomi</span
-                                    >
+                                    Portal Info Ekonomi
+                                    <span class="text-yellow-200">BAPPEDA</span>
                                 </h1>
-                                <p
-                                    class="text-xl md:text-2xl text-white/90 leading-relaxed"
-                                >
-                                    Platform terintegrasi untuk mengelola jadwal
-                                    rapat, notulensi, dan koordinasi tim bidang
-                                    perekonomian dan pembangunan.
-                                </p>
+                                <div class="space-y-4">
+                                    <p
+                                        class="text-xl md:text-2xl text-white/95 leading-relaxed font-medium"
+                                    >
+                                        "BERSAMA LAMPUNG MAJU MENUJU INDONESIA
+                                        EMAS"
+                                    </p>
+                                    <p
+                                        class="text-lg md:text-xl text-white/85 leading-relaxed"
+                                    >
+                                        Merancang kebijakan pembangunan ekonomi
+                                        daerah dengan fokus pada sektor
+                                        produktif:
+                                        <span class="font-semibold"
+                                            >pertanian, industri, perdagangan,
+                                            UMKM, ketenagakerjaan, dan
+                                            pariwisata</span
+                                        >
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Mission Points -->
+                            <div
+                                class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 space-y-4"
+                            >
+                                <h3 class="text-lg font-bold text-white mb-4">
+                                    Misi Kami:
+                                </h3>
+                                <div class="space-y-3 text-white/90">
+                                    <div class="flex items-start space-x-3">
+                                        <span
+                                            class="flex-shrink-0 w-6 h-6 bg-yellow-300 rounded-full flex items-center justify-center text-xs font-bold text-gray-800"
+                                            >1</span
+                                        >
+                                        <p class="text-sm leading-relaxed">
+                                            Mendorong Pertumbuhan Ekonomi yang
+                                            Inklusif, Mandiri, dan Inovatif
+                                        </p>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <span
+                                            class="flex-shrink-0 w-6 h-6 bg-yellow-300 rounded-full flex items-center justify-center text-xs font-bold text-gray-800"
+                                            >2</span
+                                        >
+                                        <p class="text-sm leading-relaxed">
+                                            Memperkuat Sumber Daya Manusia yang
+                                            Unggul dan Produktif
+                                        </p>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <span
+                                            class="flex-shrink-0 w-6 h-6 bg-yellow-300 rounded-full flex items-center justify-center text-xs font-bold text-gray-800"
+                                            >3</span
+                                        >
+                                        <p class="text-sm leading-relaxed">
+                                            Meningkatkan Kehidupan Masyarakat
+                                            Beradab, Berkeadilan, dan
+                                            Berkelanjutan
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
 
                             <div
@@ -149,48 +195,382 @@
             </div>
         </section>
 
-        <!-- Teams Section -->
-        <section
-            id="teams"
-            class="py-24 bg-gradient-to-br from-gray-50 to-gray-100"
-        >
+        <!-- Dinas Section -->
+        <section class="py-24 bg-gray-50">
             <div class="container mx-auto px-6">
                 <div class="max-w-7xl mx-auto">
                     <div class="text-center mb-16">
                         <div
-                            class="inline-flex items-center bg-gradient-to-r from-green-500 to-blue-600 text-white px-6 py-3 rounded-full text-sm font-semibold mb-6 shadow-lg"
+                            class="inline-flex items-center bg-gradient-to-r from-green-600 to-teal-600 text-white px-6 py-3 rounded-full text-sm font-semibold mb-6 shadow-lg"
                         >
-                            <span class="mr-2">👥</span>
-                            Tim Kerja
+                            <span class="mr-2">🏢</span>
+                            Dinas di Bawah Naungan BAPPEDA
                         </div>
                         <h2
                             class="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
                         >
-                            Tim Bidang Perekonomian
+                            Dinas Terkait Sektor Ekonomi
                         </h2>
+                        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                            Dinas-dinas yang berkoordinasi dengan BAPPEDA dalam perencanaan dan pelaksanaan pembangunan ekonomi daerah
+                        </p>
                     </div>
 
-                    <!-- Teams Grid -->
-                    <div
-                        class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8"
-                        v-if="teams && teams.length > 0"
-                    >
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- DINAS PMPTSP -->
+                        <div class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
+                            <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                <span class="text-3xl text-white">🏛️</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-3">
+                                DINAS PMPTSP
+                            </h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Penanaman Modal dan Pelayanan Terpadu Satu Pintu
+                            </p>
+                        </div>
+
+                        <!-- DINAS TENAGA KERJA -->
+                        <div class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
+                            <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                <span class="text-3xl text-white">👷</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-3">
+                                DINAS TENAGA KERJA
+                            </h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Ketenagakerjaan dan Transmigrasi
+                            </p>
+                        </div>
+
+                        <!-- DINAS PARIWISATA DAN EKRAF -->
+                        <div class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
+                            <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                <span class="text-3xl text-white">🏖️</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-3">
+                                DINAS PARIWISATA DAN EKRAF
+                            </h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Pariwisata dan Ekonomi Kreatif
+                            </p>
+                        </div>
+
+                        <!-- DINAS PERINDUSTRIAN DAN PERDAGANGAN -->
+                        <div class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
+                            <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                <span class="text-3xl text-white">🏭</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-3">
+                                DINAS PERINDUSTRIAN DAN PERDAGANGAN
+                            </h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Industri dan Perdagangan Daerah
+                            </p>
+                        </div>
+
+                        <!-- DINAS KOPERASI DAN UMKM -->
+                        <div class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
+                            <div class="w-20 h-20 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                <span class="text-3xl text-white">🏪</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-3">
+                                DINAS KOPERASI DAN UMKM
+                            </h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Koperasi dan Usaha Mikro Kecil Menengah
+                            </p>
+                        </div>
+
+                        <!-- DINAS KETAHANAN PANGAN TP DAN HORTI -->
+                        <div class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
+                            <div class="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                <span class="text-3xl text-white">🌾</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-3">
+                                DINAS KETAHANAN PANGAN TP DAN HORTI
+                            </h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Ketahanan Pangan, Tanaman Pangan dan Hortikultura
+                            </p>
+                        </div>
+
+                        <!-- DINAS PERKEBUNAN -->
+                        <div class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
+                            <div class="w-20 h-20 bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                <span class="text-3xl text-white">🌴</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-3">
+                                DINAS PERKEBUNAN
+                            </h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Perkebunan dan Kehutanan
+                            </p>
+                        </div>
+
+                        <!-- DINAS PETERNAKAN DAN KESWAN -->
+                        <div class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
+                            <div class="w-20 h-20 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                <span class="text-3xl text-white">🐄</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-3">
+                                DINAS PETERNAKAN DAN KESWAN
+                            </h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Peternakan dan Kesehatan Hewan
+                            </p>
+                        </div>
+
+                        <!-- DINAS KELAUTAN DAN PERIKANAN -->
+                        <div class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
+                            <div class="w-20 h-20 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                <span class="text-3xl text-white">🐟</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-3">
+                                DINAS KELAUTAN DAN PERIKANAN
+                            </h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Kelautan dan Perikanan Daerah
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Coordination Info -->
+                    <div class="mt-16 bg-white rounded-3xl p-8 md:p-12 border border-gray-200">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                                <span class="text-2xl text-white">🤝</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                                Koordinasi Antar Dinas
+                            </h3>
+                            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                                BAPPEDA berperan dalam mengkoordinasikan seluruh dinas terkait untuk memastikan sinergi dalam perencanaan dan pelaksanaan pembangunan ekonomi daerah yang berkelanjutan dan terintegrasi.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Staff Section -->
+        <section class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-16">
                         <div
-                            v-for="team in teams"
-                            :key="team.id"
-                            class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
+                            class="inline-flex items-center bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full text-sm font-semibold mb-6 shadow-lg"
                         >
-                            <div
-                                class="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300"
-                            >
+                            <span class="mr-2">👥</span>
+                            Anggota Bidang Perekonomian dan Pembangunan
+                        </div>
+                        <h2
+                            class="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
+                        >
+                            Tim BAPPEDA Provinsi Lampung
+                        </h2>
+                        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                            Tim profesional yang berdedikasi dalam perencanaan dan pembangunan ekonomi daerah
+                        </p>
+                    </div>
+
+                    <!-- Leadership Section -->
+                    <div class="mb-16">
+                        <h3 class="text-2xl font-bold text-gray-900 text-center mb-12">Pimpinan</h3>
+                        <div class="flex justify-center">
+                            <div class="max-w-sm bg-white rounded-3xl p-8 text-center shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200">
+                                <div class="w-32 h-32 rounded-full mx-auto mb-6 shadow-lg overflow-hidden">
+                                    <img src="/storage/foto-pegawai/RIDWAN SAIFUDDIN S.E., M.Si.png" alt="Ridwan Saifuddin" class="w-full h-full object-cover">
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-2">Ridwan Saifuddin, S.E., M.Si</h4>
+                                <p class="text-blue-600 font-semibold mb-2">Kabid Perencanaan Perekonomian</p>
+                                <p class="text-gray-600 text-sm">NIP. 19740918 200002 1 002<br>Pembina / IV a</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Staff Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                        <!-- Naomi Setyawati -->
+                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
+                            <div class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
+                                <img src="/storage/foto-pegawai/NAOMI SETYAWATI S.E.png" alt="Naomi Setyawati" class="w-full h-full object-cover">
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">Naomi Setyawati, S.E</h4>
+                            <p class="text-green-600 font-semibold text-sm mb-2">Fungsional Perencana Ahli Muda</p>
+                            <p class="text-gray-600 text-xs">NIP. 19771014 200312 2 005<br>Penata Tingkat I / III d</p>
+                        </div>
+
+                        <!-- Haryo Wicaksono -->
+                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
+                            <div class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
+                                <img src="/storage/foto-pegawai/HARYO WICAKSONO SE.png" alt="Haryo Wicaksono" class="w-full h-full object-cover">
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">Haryo Wicaksono, S.E</h4>
+                            <p class="text-blue-600 font-semibold text-sm mb-2">Fungsional Perencana Ahli Muda</p>
+                            <p class="text-gray-600 text-xs">NIP. 19780729 201001 1 007<br>Penata Tingkat I / III d</p>
+                        </div>
+
+                        <!-- Rehan -->
+                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
+                            <div class="w-24 h-24 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
                                 <span class="text-2xl text-white">👤</span>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-2">
-                                {{ team.name }}
-                            </h3>
-                            <p class="text-gray-600">
-                                {{ team.description || "Tim Kerja" }}
-                            </p>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">Rehan, S.E., M.Si</h4>
+                            <p class="text-purple-600 font-semibold text-sm mb-2">Fungsional Perencana Madya</p>
+                            <p class="text-gray-600 text-xs">NIP. 19730323 200212 1 011<br>Pembina Tingkat I / IV b</p>
+                        </div>
+
+                        <!-- Ahmad Zainullah -->
+                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
+                            <div class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
+                                <img src="/storage/foto-pegawai/AHMAD AMRULLAH S.T..png" alt="Ahmad Zainullah" class="w-full h-full object-cover">
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">Ahmad Zainullah, S.T</h4>
+                            <p class="text-orange-600 font-semibold text-sm mb-2">Analis Perencanaan dan Kerjasama</p>
+                            <p class="text-gray-600 text-xs">NIP. 19710713 200701 1 002<br>Penata Tingkat I / III d</p>
+                        </div>
+
+                        <!-- Era Jayanti -->
+                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
+                            <div class="w-24 h-24 bg-gradient-to-br from-pink-500 to-rose-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                <span class="text-2xl text-white">👤</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">Era Jayanti, S.STP., M.M</h4>
+                            <p class="text-pink-600 font-semibold text-sm mb-2">Fungsional Perencana Ahli Muda</p>
+                            <p class="text-gray-600 text-xs">NIP. 19860329 200802 2 002<br>Penata Tingkat I / III d</p>
+                        </div>
+
+                        <!-- Yunita Devi -->
+                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
+                            <div class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
+                                <img src="/storage/foto-pegawai/YUNITA DEWI S.P.png" alt="Yunita Devi" class="w-full h-full object-cover">
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">Yunita Devi, S.P</h4>
+                            <p class="text-teal-600 font-semibold text-sm mb-2">Fungsional Perencana Ahli Muda</p>
+                            <p class="text-gray-600 text-xs">NIP. 19800613 200501 2 006<br>Penata Tingkat I / III d</p>
+                        </div>
+
+                        <!-- Andre Victor Mushoni -->
+                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
+                            <div class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
+                                <img src="/storage/foto-pegawai/ANDRE VICTOR MUCHSIN S.E., M.M.png" alt="Andre Victor Mushoni" class="w-full h-full object-cover">
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">Andre Victor Mushoni, S.E., M.M</h4>
+                            <p class="text-indigo-600 font-semibold text-sm mb-2">Fungsional Perencana Ahli Muda</p>
+                            <p class="text-gray-600 text-xs">NIP. 19890929 201001 1 008<br>Penata Tingkat I / III d</p>
+                        </div>
+
+                        <!-- Widia Resti -->
+                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
+                            <div class="w-24 h-24 bg-gradient-to-br from-emerald-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                <span class="text-2xl text-white">👤</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">Widia Resti, S.KM., M.Ling</h4>
+                            <p class="text-emerald-600 font-semibold text-sm mb-2">Fungsional Perencana Ahli Muda</p>
+                            <p class="text-gray-600 text-xs">NIP. 19810125 200804 2 002<br>Penata / III c</p>
+                        </div>
+
+                        <!-- Cornelia Restianti -->
+                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
+                            <div class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
+                                <img src="/storage/foto-pegawai/Cornelia Restianti.jpg" alt="Cornelia Restianti" class="w-full h-full object-cover">
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">Cornelia Restianti, S.KM., M.Ling</h4>
+                            <p class="text-violet-600 font-semibold text-sm mb-2">Fungsional Perencana Ahli Muda</p>
+                            <p class="text-gray-600 text-xs">NIP. 19810125 200804 2 002<br>Penata / III c</p>
+                        </div>
+
+                        <!-- Kartini -->
+                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
+                            <div class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
+                                <img src="/storage/foto-pegawai/KARTINI S.H.png" alt="Kartini" class="w-full h-full object-cover">
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">Kartini, S.H</h4>
+                            <p class="text-red-600 font-semibold text-sm mb-2">Fungsional Perencana Ahli Pertama</p>
+                            <p class="text-gray-600 text-xs">NIP. 19730430 200701 2 007<br>Penata Muda Tingkat I / III b</p>
+                        </div>
+
+                        <!-- Rizki Winandia -->
+                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
+                            <div class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
+                                <img src="/storage/foto-pegawai/pak rizky.jpg" alt="Rizki Winandia" class="w-full h-full object-cover">
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">Rizki Winandia, S.E., M.E</h4>
+                            <p class="text-sky-600 font-semibold text-sm mb-2">Fungsional Perencana Ahli Pertama</p>
+                            <p class="text-gray-600 text-xs">NIP. 19891028 201501 1 004<br>Penata Muda Tingkat I / III b</p>
+                        </div>
+
+                        <!-- Dhifany Sari -->
+                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
+                            <div class="w-24 h-24 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                <span class="text-2xl text-white">👤</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">Dhifany Sari, S.S</h4>
+                            <p class="text-amber-600 font-semibold text-sm mb-2">Fungsional Perencana Ahli Pertama</p>
+                            <p class="text-gray-600 text-xs">NIP. 19920625 201502 2 005<br>Penata Muda / III a</p>
+                        </div>
+
+                        <!-- Puspita Rini -->
+                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
+                            <div class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
+                                <img src="/storage/foto-pegawai/puspita rini.jpg" alt="Puspita Rini" class="w-full h-full object-cover">
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">Puspita Rini, S.E</h4>
+                            <p class="text-lime-600 font-semibold text-sm mb-2">PTH</p>
+                            <p class="text-gray-600 text-xs">-</p>
+                        </div>
+
+                        <!-- Fakhira Hamidah Khaiumisa -->
+                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
+                            <div class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
+                                <img src="/storage/foto-pegawai/Fakhira Hamidah Khairunnisa S.P.jpg" alt="Fakhira Hamidah Khaiumisa" class="w-full h-full object-cover">
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">Fakhira Hamidah Khaiumisa, S.P</h4>
+                            <p class="text-rose-600 font-semibold text-sm mb-2">Konsultan Individu</p>
+                            <p class="text-gray-600 text-xs">-</p>
+                        </div>
+
+                        <!-- Nadila Putri Efendi -->
+                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
+                            <div class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
+                                <img src="/storage/foto-pegawai/Nadila Putri Efendi, S.Sos .JPG" alt="Nadila Putri Efendi" class="w-full h-full object-cover">
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">Nadila Putri Efendi, S.Sos</h4>
+                            <p class="text-cyan-600 font-semibold text-sm mb-2">Konsultan Individu</p>
+                            <p class="text-gray-600 text-xs">-</p>
+                        </div>
+
+                        <!-- Ibnu Trilaksono -->
+                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
+                            <div class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
+                                <img src="/storage/foto-pegawai/Ibnu Trilaksono S.Ak.jpg" alt="Ibnu Trilaksono" class="w-full h-full object-cover">
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">Ibnu Trilaksono, S.Ak</h4>
+                            <p class="text-slate-600 font-semibold text-sm mb-2">Konsultan Individu</p>
+                            <p class="text-gray-600 text-xs">-</p>
+                        </div>
+                    </div>
+
+                    <!-- Team Stats -->
+                    <div class="mt-16 bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-8 md:p-12">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+                            <div>
+                                <div class="text-3xl font-bold text-blue-600 mb-2">1</div>
+                                <p class="text-gray-700 font-semibold">Kepala Bidang</p>
+                            </div>
+                            <div>
+                                <div class="text-3xl font-bold text-purple-600 mb-2">11</div>
+                                <p class="text-gray-700 font-semibold">Fungsional Perencana</p>
+                            </div>
+                            <div>
+                                <div class="text-3xl font-bold text-green-600 mb-2">3</div>
+                                <p class="text-gray-700 font-semibold">Konsultan Individu</p>
+                            </div>
+                            <div>
+                                <div class="text-3xl font-bold text-orange-600 mb-2">1</div>
+                                <p class="text-gray-700 font-semibold">PTH</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -205,14 +585,7 @@
                         <!-- Brand Section -->
                         <div class="col-span-1 md:col-span-2">
                             <div class="flex items-center mb-6">
-                                <div
-                                    class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center shadow-lg"
-                                >
-                                    <span class="text-xl font-bold text-white"
-                                        >B</span
-                                    >
-                                </div>
-                                <div class="ml-4">
+                                <div>
                                     <h3 class="text-xl font-bold">
                                         EKONOMI BAPPEDA
                                     </h3>

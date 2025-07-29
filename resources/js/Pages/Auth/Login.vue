@@ -186,7 +186,7 @@
                         >
                             {{ status }}
                         </div>
-                        
+
                         <div
                             v-if="message"
                             class="text-blue-600 text-sm text-center bg-blue-50 p-3 rounded-lg"
@@ -258,10 +258,7 @@
                         <p class="text-2xl font-light mb-8 opacity-90">
                             PROVINSI LAMPUNG
                         </p>
-                        <div class="space-y-4 text-lg opacity-80">
-                            <p>Sistem Manajemen Rapat</p>
-                            <p>Bidang Perekonomian dan Pembangunan</p>
-                        </div>
+                
 
                         <!-- Decorative Icons -->
                         <div
