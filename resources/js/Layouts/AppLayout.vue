@@ -3,37 +3,16 @@
         <!-- Modern Navigation -->
         <nav class="bg-white shadow-lg border-b border-gray-200">
             <div class="flex">
-                <!-- Logo section aligned with sidebar -->
-                <div class="w-64 px-4 py-4">
+                <!-- Logo section -->
+                <div class="w-80 px-4 py-4">
                     <div class="flex items-center">
-                        <div
-                            class="w-10 h-10 rounded-xl flex items-center justify-center mr-3"
-                            style="
-                                background: linear-gradient(
-                                    135deg,
-                                    #eaaa00 0%,
-                                    #d69e00 100%
-                                );
-                            "
-                        >
-                            <svg
-                                class="w-6 h-6 text-white"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                                ></path>
-                            </svg>
-                        </div>
                         <div>
                             <h1 class="text-xl font-bold text-gray-900">
-                                BAPPEDA
+                                EKONOMI BAPPEDA
                             </h1>
+                            <p class="text-sm text-yellow-600 font-medium">
+                                PROVINSI LAMPUNG
+                            </p>
                             <p class="text-xs text-gray-500">
                                 Sistem Manajemen Rapat
                             </p>
@@ -41,7 +20,7 @@
                     </div>
                 </div>
 
-                <!-- Main nav content -->
+                <!-- User info -->
                 <div class="flex-1 flex justify-end items-center px-4 py-4">
                     <div
                         v-if="$page.props.auth.user"
@@ -49,18 +28,11 @@
                     >
                         <div class="flex items-center space-x-3">
                             <div
-                                class="w-8 h-8 rounded-full flex items-center justify-center"
-                                style="
-                                    background: linear-gradient(
-                                        135deg,
-                                        #eaaa00 0%,
-                                        #d69e00 100%
-                                    );
-                                "
+                                class="w-8 h-8 rounded-full bg-yellow-500 flex items-center justify-center"
                             >
                                 <span class="text-white text-sm font-semibold">
                                     {{
-                                        ($page.props.auth.user?.name || 'U')
+                                        ($page.props.auth.user?.name || "U")
                                             .charAt(0)
                                             .toUpperCase()
                                     }}
@@ -68,11 +40,13 @@
                             </div>
                             <div class="hidden md:block">
                                 <p class="text-sm font-medium text-gray-900">
-                                    {{ $page.props.auth.user?.name || 'User' }}
+                                    {{ $page.props.auth.user?.name || "User" }}
                                 </p>
                                 <p class="text-xs text-gray-500">
                                     {{
-                                        getRoleLabel($page.props.auth.user?.role || '')
+                                        getRoleLabel(
+                                            $page.props.auth.user?.role || ""
+                                        )
                                     }}
                                 </p>
                             </div>
@@ -80,10 +54,10 @@
                         <form @submit.prevent="logout" class="inline">
                             <button
                                 type="submit"
-                                class="ml-4 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-lg text-red-600 bg-red-50 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200"
+                                class="ml-4 px-3 py-2 text-sm text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors"
                             >
                                 <svg
-                                    class="w-4 h-4 mr-1"
+                                    class="w-4 h-4 mr-1 inline"
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
@@ -103,26 +77,23 @@
             </div>
         </nav>
 
-        <!-- Modern Sidebar -->
+        <!-- Layout -->
         <div class="flex">
+            <!-- Sidebar -->
             <aside
                 v-if="$page.props.auth.user"
                 class="w-64 bg-white shadow-lg border-r border-gray-200 min-h-screen"
             >
                 <nav class="mt-6 px-4">
                     <div class="space-y-2">
+                        <!-- Dashboard -->
                         <Link
                             href="/dashboard"
                             class="group flex items-center px-3 py-3 text-sm font-medium rounded-xl transition-all duration-200"
                             :class="
                                 $page.url === '/dashboard'
-                                    ? 'text-white shadow-lg'
+                                    ? 'bg-yellow-500 text-white shadow-lg'
                                     : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
-                            "
-                            :style="
-                                $page.url === '/dashboard'
-                                    ? 'background: linear-gradient(135deg, #EAAA00 0%, #D69E00 100%);'
-                                    : ''
                             "
                         >
                             <div
@@ -145,70 +116,82 @@
                             Dashboard
                         </Link>
 
-                        <Link
-                            href="/meetings"
-                            class="group flex items-center px-3 py-3 text-sm font-medium rounded-xl transition-all duration-200"
-                            :class="
-                                $page.url.startsWith('/meetings')
-                                    ? 'bg-gradient-to-r from-yellow-500 to-yellow-600 text-white shadow-lg'
-                                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
-                            "
-                        >
-                            <div
-                                class="mr-3 w-6 h-6 flex items-center justify-center"
+                        <!-- Agenda Rapat Section -->
+                        <div class="mb-4">
+                            <h3
+                                class="px-3 mb-2 text-xs font-semibold text-gray-400 uppercase tracking-wider"
                             >
-                                <svg
-                                    class="w-5 h-5"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2-2v16a2 2 0 002 2z"
-                                    />
-                                </svg>
-                            </div>
-                            Jadwal Rapat
-                        </Link>
+                                Agenda Rapat
+                            </h3>
 
-                        <Link
-                            href="/meeting-notes"
-                            class="group flex items-center px-3 py-3 text-sm font-medium rounded-xl transition-all duration-200"
-                            :class="
-                                $page.url.startsWith('/meeting-notes')
-                                    ? 'bg-gradient-to-r from-yellow-500 to-yellow-600 text-white shadow-lg'
-                                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
-                            "
-                        >
-                            <div
-                                class="mr-3 w-6 h-6 flex items-center justify-center"
+                            <!-- Jadwal Rapat -->
+                            <Link
+                                href="/meetings"
+                                class="group flex items-center px-3 py-3 text-sm font-medium rounded-xl transition-all duration-200 mb-1"
+                                :class="
+                                    $page.url.startsWith('/meetings')
+                                        ? 'bg-blue-500 text-white shadow-lg'
+                                        : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                                "
                             >
-                                <svg
-                                    class="w-5 h-5"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
+                                <div
+                                    class="mr-3 w-6 h-6 flex items-center justify-center"
                                 >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                                    />
-                                </svg>
-                            </div>
-                            Notulen Rapat
-                        </Link>
+                                    <svg
+                                        class="w-5 h-5"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2-2v16a2 2 0 002 2z"
+                                        />
+                                    </svg>
+                                </div>
+                                Jadwal Rapat
+                            </Link>
 
+                            <!-- Notulensi Rapat -->
+                            <Link
+                                href="/meeting-notes"
+                                class="group flex items-center px-3 py-3 text-sm font-medium rounded-xl transition-all duration-200"
+                                :class="
+                                    $page.url.startsWith('/meeting-notes')
+                                        ? 'bg-green-500 text-white shadow-lg'
+                                        : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                                "
+                            >
+                                <div
+                                    class="mr-3 w-6 h-6 flex items-center justify-center"
+                                >
+                                    <svg
+                                        class="w-5 h-5"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                                        />
+                                    </svg>
+                                </div>
+                                Notulensi Rapat
+                            </Link>
+                        </div>
+
+                        <!-- Tim Kerja -->
                         <Link
                             href="/files"
                             class="group flex items-center px-3 py-3 text-sm font-medium rounded-xl transition-all duration-200"
                             :class="
                                 $page.url.startsWith('/files')
-                                    ? 'bg-gradient-to-r from-yellow-500 to-yellow-600 text-white shadow-lg'
+                                    ? 'bg-purple-500 text-white shadow-lg'
                                     : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                             "
                         >
@@ -225,11 +208,42 @@
                                         stroke-linecap="round"
                                         stroke-linejoin="round"
                                         stroke-width="2"
-                                        d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+                                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"
                                     />
                                 </svg>
                             </div>
-                            Kelola File
+                            Tim Kerja
+                        </Link>
+
+                        <!-- User Approval (Kepala Bidang only) -->
+                        <Link
+                            v-if="$page.props.auth.user?.role === 'kabid'"
+                            href="/user-approval"
+                            class="group flex items-center px-3 py-3 text-sm font-medium rounded-xl transition-all duration-200"
+                            :class="
+                                $page.url.startsWith('/user-approval')
+                                    ? 'bg-indigo-500 text-white shadow-lg'
+                                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                            "
+                        >
+                            <div
+                                class="mr-3 w-6 h-6 flex items-center justify-center"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                    />
+                                </svg>
+                            </div>
+                            Persetujuan Akun
                         </Link>
                     </div>
                 </nav>
@@ -255,6 +269,7 @@ const logout = () => {
 const getRoleLabel = (role) => {
     const labels = {
         kabid: "Kepala Bidang",
+        wakabid: "Wakil Kepala Bidang",
         KI: "Konsultan Individu",
         tim_1: "Tim Kerja Penanggulangan Kemiskinan",
         tim_2: "Tim Kerja Kawasan Industri & PSN",

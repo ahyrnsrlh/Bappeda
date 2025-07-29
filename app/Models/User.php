@@ -23,6 +23,10 @@ class User extends Authenticatable
         'password',
         'role',
         'team_id',
+        'is_approved',
+        'approved_at',
+        'approved_by',
+        'approval_notes',
     ];
 
     /**
@@ -55,6 +59,14 @@ class User extends Authenticatable
     public function createdMeetingNotes()
     {
         return $this->hasMany(MeetingNote::class, 'created_by');
+    }
+
+    /**
+     * Get the user who approved this user.
+     */
+    public function approvedByUser()
+    {
+        return $this->belongsTo(User::class, 'approved_by');
     }
 
     /**
@@ -109,6 +121,8 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'approved_at' => 'datetime',
+            'is_approved' => 'boolean',
         ];
     }
 }

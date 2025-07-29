@@ -33,8 +33,10 @@ class FileController extends Controller
             
             // Filter berdasarkan role
             if (in_array($user->role, ['tim_1', 'tim_2', 'tim_3', 'tim_4', 'tim_5'])) {
-                $query->where('team_id', $user->team_id);
+                // Tim kerja bisa melihat semua file tim kerja, bukan hanya milik mereka
+                // Tidak ada filter khusus - mereka bisa lihat semua
             }
+            // Kabid dan KI bisa melihat semua file
             
             // Apply filters
             if ($request->team_id) {
@@ -157,12 +159,8 @@ class FileController extends Controller
     {
         $user = Auth::user();
         
-        // Check if user can access this file
-        if (in_array($user->role, ['tim_1', 'tim_2', 'tim_3', 'tim_4', 'tim_5'])) {
-            if ($file->team_id !== $user->team_id) {
-                abort(403, 'Unauthorized access to file');
-            }
-        }
+        // Semua user bisa download file (kabid, KI, dan tim kerja)
+        // Tidak ada pembatasan akses untuk download
         
         if (!Storage::disk('public')->exists($file->file_path)) {
             abort(404, 'File not found');
@@ -178,9 +176,14 @@ class FileController extends Controller
      */
     public function edit(File $file)
     {
-        // Only the uploader or KI can edit
-        if ($file->uploaded_by !== Auth::id() && Auth::user()->role !== 'KI') {
-            abort(403, 'Unauthorized');
+        $user = Auth::user();
+        
+        // Tim kerja hanya bisa edit file mereka sendiri
+        // KI bisa edit semua file
+        if (in_array($user->role, ['tim_1', 'tim_2', 'tim_3', 'tim_4', 'tim_5'])) {
+            if ($file->uploaded_by !== $user->id) {
+                abort(403, 'Anda hanya dapat mengedit file yang Anda upload sendiri');
+            }
         }
         
         $teams = Team::all();

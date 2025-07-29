@@ -19,10 +19,8 @@ class MeetingScheduleController extends Controller
         
         $query = MeetingSchedule::with(['creator', 'notes']);
         
-        // KI only sees meetings they created
-        if ($user->role === 'KI') {
-            $query->where('created_by', $user->id);
-        }
+        // Semua user bisa melihat semua meeting schedule
+        // Tidak ada filter berdasarkan role untuk viewing
         
         $meetings = $query->orderBy('meeting_date', 'desc')->paginate(10);
         
@@ -56,9 +54,10 @@ class MeetingScheduleController extends Controller
             'participant_teams' => 'nullable|array',
             'status' => 'required|in:scheduled,completed,cancelled',
             'notes' => 'nullable|string',
+            'invitation_file' => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:10240', // 10MB
         ]);
 
-        MeetingSchedule::create([
+        $meetingData = [
             'title' => $request->title,
             'agenda' => $request->agenda,
             'meeting_date' => $request->meeting_date,
@@ -67,7 +66,20 @@ class MeetingScheduleController extends Controller
             'status' => $request->status,
             'notes' => $request->notes,
             'created_by' => Auth::id(),
-        ]);
+        ];
+
+        // Handle invitation file upload
+        if ($request->hasFile('invitation_file')) {
+            $file = $request->file('invitation_file');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $filePath = $file->storeAs('meeting-invitations', $fileName, 'public');
+            
+            $meetingData['invitation_file_path'] = $filePath;
+            $meetingData['invitation_original_name'] = $file->getClientOriginalName();
+            $meetingData['invitation_file_size'] = $file->getSize();
+        }
+
+        MeetingSchedule::create($meetingData);
 
         return redirect()->route('meetings.index')
             ->with('success', 'Jadwal rapat berhasil dibuat.');

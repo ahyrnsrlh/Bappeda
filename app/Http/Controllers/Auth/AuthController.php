@@ -15,7 +15,9 @@ class AuthController extends Controller
 {
     public function showLogin()
     {
-        return Inertia::render('Auth/Login');
+        return Inertia::render('Auth/Login', [
+            'message' => session('message'),
+        ]);
     }
 
     public function login(Request $request)
@@ -25,9 +27,21 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        if (Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
-            $request->session()->regenerate();
+        $credentials = $request->only('email', 'password');
+        
+        // Cek apakah user ada dan password benar
+        if (Auth::attempt($credentials, $request->boolean('remember'))) {
+            $user = Auth::user();
             
+            // Cek apakah user sudah diapprove
+            if (!$user->is_approved) {
+                Auth::logout();
+                throw ValidationException::withMessages([
+                    'email' => 'Akun Anda belum disetujui oleh Kepala Bidang. Silakan tunggu persetujuan untuk dapat mengakses sistem.',
+                ]);
+            }
+            
+            $request->session()->regenerate();
             return redirect()->intended('/dashboard');
         }
 
@@ -51,21 +65,31 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|in:kabid,KI,tim_1,tim_2,tim_3,tim_4,tim_5',
+            'role' => 'required|in:kabid,wakabid,KI,tim_1,tim_2,tim_3,tim_4,tim_5',
             'team_id' => 'nullable|exists:teams,id',
         ]);
 
+        // Tentukan apakah user perlu approval
+        $needsApproval = !in_array($request->role, ['kabid']); // kabid tidak perlu approval
+        
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => $request->role,
             'team_id' => $request->team_id,
+            'is_approved' => !$needsApproval, // kabid langsung approved
+            'approved_at' => !$needsApproval ? now() : null,
         ]);
 
-        Auth::login($user);
-
-        return redirect('/dashboard');
+        if ($needsApproval) {
+            // Jangan langsung login, redirect ke halaman menunggu approval
+            return redirect('/login')->with('message', 'Akun Anda telah dibuat. Silakan tunggu persetujuan dari Kepala Bidang untuk dapat mengakses sistem.');
+        } else {
+            // Kabid langsung login
+            Auth::login($user);
+            return redirect('/dashboard');
+        }
     }
 
     public function logout(Request $request)

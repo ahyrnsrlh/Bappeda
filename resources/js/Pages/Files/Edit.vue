@@ -184,7 +184,7 @@ const form = reactive({
 const submit = () => {
     processing.value = true;
 
-    router.put(`/files/${props.file.id}`, form, {
+    router.put(`/file-management/${props.file.id}`, form, {
         onFinish: () => {
             processing.value = false;
         },

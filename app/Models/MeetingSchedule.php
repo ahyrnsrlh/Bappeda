@@ -16,12 +16,18 @@ class MeetingSchedule extends Model
         'description',
         'meeting_date',
         'location',
+        'participant_teams',
         'status',
+        'notes',
         'created_by',
+        'invitation_file_path',
+        'invitation_original_name',
+        'invitation_file_size',
     ];
 
     protected $casts = [
         'meeting_date' => 'datetime',
+        'participant_teams' => 'array',
     ];
 
     /**

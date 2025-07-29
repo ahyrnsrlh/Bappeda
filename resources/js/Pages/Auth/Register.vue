@@ -61,6 +61,7 @@
                         >
                             <option value="">Pilih Role</option>
                             <option value="kabid">Kepala Bidang</option>
+                            <option value="wakabid">Wakil Kepala Bidang</option>
                             <option value="KI">Koordinator Internal</option>
                             <option value="tim_1">Tim Penanggulangan Kemiskinan</option>
                             <option value="tim_2">Tim Kawasan Industri & PSN</option>

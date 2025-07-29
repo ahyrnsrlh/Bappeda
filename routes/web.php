@@ -5,6 +5,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MeetingScheduleController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\MeetingNoteController;
+use App\Http\Controllers\TeamController;
+use App\Http\Controllers\UserApprovalController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\Team;
@@ -72,9 +74,17 @@ Route::middleware('auth')->group(function () {
             ->name('meeting-notes.destroy');
     });
     
-    // Files
-    Route::prefix('files')->group(function () {
-        Route::get('/', [FileController::class, 'index'])->name('files.index');
+    // Files (now points to Teams)
+    Route::get('/files', [TeamController::class, 'index'])->name('files.index');
+    
+    // Teams
+    Route::prefix('teams')->group(function () {
+        Route::get('/', [TeamController::class, 'index'])->name('teams.index');
+        Route::get('/{team}/files', [TeamController::class, 'files'])->name('teams.files');
+    });
+    
+    // File Management
+    Route::prefix('file-management')->group(function () {
         Route::get('/create', [FileController::class, 'create'])
             ->middleware('role:KI,tim_1,tim_2,tim_3,tim_4,tim_5')
             ->name('files.create');
@@ -92,5 +102,12 @@ Route::middleware('auth')->group(function () {
         Route::delete('/{file}', [FileController::class, 'destroy'])
             ->middleware('role:KI,tim_1,tim_2,tim_3,tim_4,tim_5')
             ->name('files.destroy');
+    });
+
+    // User Approval (Kepala Bidang only)
+    Route::middleware('role:kabid')->group(function () {
+        Route::get('/user-approval', [UserApprovalController::class, 'index'])->name('user-approval.index');
+        Route::post('/user-approval/update', [UserApprovalController::class, 'update'])->name('user-approval.update');
+        Route::post('/user-approval/revoke', [UserApprovalController::class, 'revoke'])->name('user-approval.revoke');
     });
 });

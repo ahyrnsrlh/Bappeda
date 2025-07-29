@@ -136,9 +136,6 @@
                                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                             >
                                 <option value="">Pilih tipe file</option>
-                                <option value="meeting_note">
-                                    Notulen Rapat
-                                </option>
                                 <option value="document">Dokumen</option>
                                 <option value="other">Lainnya</option>
                             </select>
@@ -280,7 +277,7 @@ const formatFileSize = (bytes) => {
 
 const submit = () => {
     console.log("Form submit started", form.data());
-    form.post("/files", {
+    form.post("/file-management", {
         onSuccess: () => {
             console.log("Upload successful");
         },

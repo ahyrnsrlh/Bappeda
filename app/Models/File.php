@@ -38,6 +38,14 @@ class File extends Model
     /**
      * Get the user that uploaded the file (alias).
      */
+    public function uploader()
+    {
+        return $this->belongsTo(User::class, 'uploaded_by');
+    }
+
+    /**
+     * Get the user that uploaded the file (alias).
+     */
     public function user()
     {
         return $this->belongsTo(User::class, 'uploaded_by');

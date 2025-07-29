@@ -3,10 +3,10 @@
         <div class="space-y-6">
             <!-- Header -->
             <div class="flex justify-between items-center">
-                <h2 class="text-2xl font-bold text-gray-900">Kelola File</h2>
+                <h2 class="text-2xl font-bold text-gray-900">Tim Kerja</h2>
                 <Link
                     v-if="canUploadFile"
-                    href="/files/create"
+                    href="/file-management/create"
                     class="inline-flex items-center px-4 py-2 bg-yellow-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700"
                 >
                     Upload File
@@ -126,17 +126,25 @@
                         <!-- Actions -->
                         <div class="mt-4 flex justify-center space-x-2">
                             <a
-                                :href="`/files/${file.id}/download`"
+                                :href="`/file-management/${file.id}/download`"
                                 class="inline-flex items-center px-2 py-1 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50"
                             >
                                 Download
                             </a>
 
                             <Link
-                                :href="`/files/${file.id}`"
+                                :href="`/file-management/${file.id}`"
                                 class="inline-flex items-center px-2 py-1 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50"
                             >
                                 Detail
+                            </Link>
+
+                            <Link
+                                v-if="canEditFile(file)"
+                                :href="`/file-management/${file.id}/edit`"
+                                class="inline-flex items-center px-2 py-1 border border-blue-300 shadow-sm text-xs font-medium rounded text-blue-700 bg-white hover:bg-blue-50"
+                            >
+                                Edit
                             </Link>
 
                             <button
@@ -174,7 +182,7 @@
                 </p>
                 <div class="mt-6">
                     <Link
-                        href="/files/create"
+                        href="/file-management/create"
                         class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700"
                     >
                         Upload File
@@ -288,19 +296,48 @@ const getTypeLabel = (type) => {
     return labels[type] || type;
 };
 
+const canEditFile = (file) => {
+    const user = page.props.auth.user;
+    if (!user) return false;
+    
+    // KI bisa edit semua file
+    if (user.role === 'KI') return true;
+    
+    // Tim kerja hanya bisa edit file mereka sendiri
+    if (['tim_1', 'tim_2', 'tim_3', 'tim_4', 'tim_5'].includes(user.role)) {
+        return file.uploaded_by === user.id;
+    }
+    
+    // Kabid tidak bisa edit file
+    return false;
+};
+
 const canDeleteFile = (file) => {
     const user = page.props.auth.user;
-    return user && (file.user_id === user.id || user.role === "KI");
+    if (!user) return false;
+    
+    // KI bisa delete semua file
+    if (user.role === 'KI') return true;
+    
+    // Tim kerja hanya bisa delete file mereka sendiri
+    if (['tim_1', 'tim_2', 'tim_3', 'tim_4', 'tim_5'].includes(user.role)) {
+        return file.uploaded_by === user.id;
+    }
+    
+    // Kabid tidak bisa delete file
+    return false;
 };
 
 const canUploadFile = computed(() => {
     const user = page.props.auth.user;
+    // Kabid tidak bisa upload file, hanya lihat dan download
+    // KI dan tim kerja bisa upload file
     return user && user.role !== "kabid";
 });
 
 const deleteFile = (file) => {
     if (confirm("Apakah Anda yakin ingin menghapus file ini?")) {
-        router.delete(`/files/${file.id}`);
+        router.delete(`/file-management/${file.id}`);
     }
 };
 </script>
