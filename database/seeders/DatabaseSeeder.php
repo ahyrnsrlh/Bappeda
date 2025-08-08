@@ -17,11 +17,11 @@ class DatabaseSeeder extends Seeder
     {
         // Create Teams
         $teams = [
-            ['name' => 'Tim Kerja 1', 'code' => 'tim_1', 'description' => 'Tim Kerja pertama'],
-            ['name' => 'Tim Kerja 2', 'code' => 'tim_2', 'description' => 'Tim Kerja kedua'],
-            ['name' => 'Tim Kerja 3', 'code' => 'tim_3', 'description' => 'Tim Kerja ketiga'],
-            ['name' => 'Tim Kerja 4', 'code' => 'tim_4', 'description' => 'Tim Kerja keempat'],
-            ['name' => 'Tim Kerja 5', 'code' => 'tim_5', 'description' => 'Tim Kerja kelima'],
+            ['name' => 'Tim Kerja Penanggulangan Kemiskinan', 'code' => 'tim_1', 'description' => 'Tim Kerja Penanggulangan Kemiskinan'],
+            ['name' => 'Tim Kerja Kawasan Industri & PSN', 'code' => 'tim_2', 'description' => 'Tim Kerja Kawasan Industri & PSN (Proyek Strategis Nasional)'],
+            ['name' => 'Tim Kerja Peluang Investasi', 'code' => 'tim_3', 'description' => 'Tim Kerja Peluang Investasi'],
+            ['name' => 'Tim Kerja CSR/TJSL', 'code' => 'tim_4', 'description' => 'Tim Kerja CSR/TJSL (Corporate Social Responsibility / Tanggung Jawab Sosial dan Lingkungan)'],
+            ['name' => 'Tim Kerja DBH Perkebunan', 'code' => 'tim_5', 'description' => 'Tim Kerja DBH (Dana Bagi Hasil) Perkebunan'],
         ];
 
         foreach ($teams as $teamData) {

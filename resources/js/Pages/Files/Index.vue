@@ -27,11 +27,11 @@
                         >
                             <option value="">Semua Tim</option>
                             <option
-                                v-for="team in (teams || [])"
+                                v-for="team in teams || []"
                                 :key="team.id"
                                 :value="team.id"
                             >
-                                {{ team?.name || 'Unknown Team' }}
+                                {{ team?.name || "Unknown Team" }}
                             </option>
                         </select>
                     </div>
@@ -72,7 +72,7 @@
                 class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
             >
                 <div
-                    v-for="file in (files?.data || [])"
+                    v-for="file in files?.data || []"
                     :key="file.id"
                     class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200"
                 >
@@ -108,10 +108,10 @@
                                 {{ file.formatted_size }}
                             </p>
                             <p class="text-xs text-gray-500">
-                                Oleh: {{ file.user?.name || 'Unknown' }}
+                                Oleh: {{ file.user?.name || "Unknown" }}
                             </p>
                             <p v-if="file.team" class="text-xs text-blue-600">
-                                {{ file.team?.name || 'No Team' }}
+                                {{ file.team?.name || "No Team" }}
                             </p>
 
                             <!-- Type Badge -->
@@ -217,7 +217,8 @@
                 >
                     <div>
                         <p class="text-sm text-gray-700">
-                            Showing {{ files?.from || 0 }} to {{ files?.to || 0 }} of
+                            Showing {{ files?.from || 0 }} to
+                            {{ files?.to || 0 }} of
                             {{ files?.total || 0 }} results
                         </p>
                     </div>
@@ -255,11 +256,11 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 const props = defineProps({
     files: {
         type: Object,
-        default: () => ({ data: [] })
+        default: () => ({ data: [] }),
     },
     teams: {
         type: Array,
-        default: () => []
+        default: () => [],
     },
 });
 
@@ -299,15 +300,15 @@ const getTypeLabel = (type) => {
 const canEditFile = (file) => {
     const user = page.props.auth.user;
     if (!user) return false;
-    
+
     // KI bisa edit semua file
-    if (user.role === 'KI') return true;
-    
+    if (user.role === "KI") return true;
+
     // Tim kerja hanya bisa edit file mereka sendiri
-    if (['tim_1', 'tim_2', 'tim_3', 'tim_4', 'tim_5'].includes(user.role)) {
+    if (["tim_1", "tim_2", "tim_3", "tim_4", "tim_5"].includes(user.role)) {
         return file.uploaded_by === user.id;
     }
-    
+
     // Kabid tidak bisa edit file
     return false;
 };
@@ -315,15 +316,15 @@ const canEditFile = (file) => {
 const canDeleteFile = (file) => {
     const user = page.props.auth.user;
     if (!user) return false;
-    
+
     // KI bisa delete semua file
-    if (user.role === 'KI') return true;
-    
+    if (user.role === "KI") return true;
+
     // Tim kerja hanya bisa delete file mereka sendiri
-    if (['tim_1', 'tim_2', 'tim_3', 'tim_4', 'tim_5'].includes(user.role)) {
+    if (["tim_1", "tim_2", "tim_3", "tim_4", "tim_5"].includes(user.role)) {
         return file.uploaded_by === user.id;
     }
-    
+
     // Kabid tidak bisa delete file
     return false;
 };

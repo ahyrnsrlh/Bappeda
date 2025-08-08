@@ -109,12 +109,6 @@
                                             </p>
                                         </div>
                                     </div>
-
-                                    <div v-if="meeting.agenda" class="mt-2">
-                                        <p class="text-sm text-gray-600">
-                                            {{ meeting.agenda }}
-                                        </p>
-                                    </div>
                                 </div>
 
                                 <!-- Actions -->
@@ -266,6 +260,7 @@ const canDeleteMeeting = (meeting) => {
 
 const formatDate = (date) => {
     return new Date(date).toLocaleDateString("id-ID", {
+        timeZone: "Asia/Jakarta",
         year: "numeric",
         month: "long",
         day: "numeric",

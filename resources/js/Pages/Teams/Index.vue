@@ -39,7 +39,7 @@
                                 <h3
                                     class="text-lg font-semibold text-gray-900 group-hover:text-yellow-600"
                                 >
-                                    Tim 1
+                                    Tim Kerja Penanggulangan Kemiskinan
                                 </h3>
                                 <p class="text-sm text-gray-500">
                                     {{ teamCounts.tim_1 || 0 }} file
@@ -47,7 +47,7 @@
                             </div>
                         </div>
                         <p class="text-gray-600 text-sm leading-relaxed">
-                            Penanggulangan Kemiskinan
+                            Fokus pada program-program pengentasan kemiskinan
                         </p>
                     </div>
                 </Link>
@@ -80,7 +80,7 @@
                                 <h3
                                     class="text-lg font-semibold text-gray-900 group-hover:text-yellow-600"
                                 >
-                                    Tim 2
+                                    Tim Kerja Kawasan Industri & PSN
                                 </h3>
                                 <p class="text-sm text-gray-500">
                                     {{ teamCounts.tim_2 || 0 }} file
@@ -88,7 +88,7 @@
                             </div>
                         </div>
                         <p class="text-gray-600 text-sm leading-relaxed">
-                            Kawasan Industri & PSN
+                            Proyek Strategis Nasional & Kawasan Industri
                         </p>
                     </div>
                 </Link>
@@ -121,7 +121,7 @@
                                 <h3
                                     class="text-lg font-semibold text-gray-900 group-hover:text-yellow-600"
                                 >
-                                    Tim 3
+                                    Tim Kerja Peluang Investasi
                                 </h3>
                                 <p class="text-sm text-gray-500">
                                     {{ teamCounts.tim_3 || 0 }} file
@@ -129,7 +129,7 @@
                             </div>
                         </div>
                         <p class="text-gray-600 text-sm leading-relaxed">
-                            Peluang Investasi
+                            Pengembangan peluang investasi daerah
                         </p>
                     </div>
                 </Link>
@@ -162,7 +162,7 @@
                                 <h3
                                     class="text-lg font-semibold text-gray-900 group-hover:text-yellow-600"
                                 >
-                                    Tim 4
+                                    Tim Kerja CSR/TJSL
                                 </h3>
                                 <p class="text-sm text-gray-500">
                                     {{ teamCounts.tim_4 || 0 }} file
@@ -170,7 +170,7 @@
                             </div>
                         </div>
                         <p class="text-gray-600 text-sm leading-relaxed">
-                            CSR/TJSL
+                            Corporate Social Responsibility & TJSL
                         </p>
                     </div>
                 </Link>
@@ -203,7 +203,7 @@
                                 <h3
                                     class="text-lg font-semibold text-gray-900 group-hover:text-yellow-600"
                                 >
-                                    Tim 5
+                                    Tim Kerja DBH Perkebunan
                                 </h3>
                                 <p class="text-sm text-gray-500">
                                     {{ teamCounts.tim_5 || 0 }} file
@@ -211,49 +211,7 @@
                             </div>
                         </div>
                         <p class="text-gray-600 text-sm leading-relaxed">
-                            DBH Perkebunan
-                        </p>
-                    </div>
-                </Link>
-
-                <!-- All Files (untuk role KI dan kabid) -->
-                <Link
-                    v-if="canViewAllFiles"
-                    :href="route('files.index')"
-                    class="group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 hover:border-yellow-300"
-                >
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <div
-                                class="w-12 h-12 bg-gradient-to-br from-gray-500 to-gray-600 rounded-lg flex items-center justify-center mr-4"
-                            >
-                                <svg
-                                    class="w-6 h-6 text-white"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                                    ></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <h3
-                                    class="text-lg font-semibold text-gray-900 group-hover:text-yellow-600"
-                                >
-                                    Semua File
-                                </h3>
-                                <p class="text-sm text-gray-500">
-                                    {{ totalFiles || 0 }} file
-                                </p>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 text-sm leading-relaxed">
-                            Lihat semua file dari seluruh tim
+                            Dana Bagi Hasil Perkebunan
                         </p>
                     </div>
                 </Link>
@@ -272,16 +230,7 @@ const props = defineProps({
         type: Object,
         default: () => ({}),
     },
-    totalFiles: {
-        type: Number,
-        default: 0,
-    },
 });
 
 const page = usePage();
-
-const canViewAllFiles = computed(() => {
-    const userRole = page.props.auth.user?.role;
-    return userRole === "KI" || userRole === "kabid";
-});
 </script>

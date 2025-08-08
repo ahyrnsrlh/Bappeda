@@ -618,12 +618,6 @@
                                 >
                                     Jadwal Rapat
                                 </Link>
-                                <Link
-                                    href="/meeting-notes"
-                                    class="block text-gray-400 hover:text-white transition-colors"
-                                >
-                                    Notulensi
-                                </Link>
                             </div>
                         </div>
 

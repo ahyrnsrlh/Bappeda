@@ -104,34 +104,6 @@
                                 </p>
                             </div>
 
-                            <!-- Agenda -->
-                            <div>
-                                <label
-                                    for="agenda"
-                                    class="block text-sm font-medium text-gray-700"
-                                >
-                                    Agenda Rapat
-                                </label>
-                                <div class="mt-1">
-                                    <textarea
-                                        id="agenda"
-                                        v-model="form.agenda"
-                                        rows="4"
-                                        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                        :class="{
-                                            'border-red-300': errors.agenda,
-                                        }"
-                                        placeholder="Jelaskan agenda rapat yang akan dibahas..."
-                                    ></textarea>
-                                </div>
-                                <p
-                                    v-if="errors.agenda"
-                                    class="mt-2 text-sm text-red-600"
-                                >
-                                    {{ errors.agenda }}
-                                </p>
-                            </div>
-
                             <!-- Participants -->
                             <div>
                                 <label
@@ -274,11 +246,13 @@ const processing = ref(false);
 const formatDatetimeLocal = (date) => {
     if (!date) return "";
     const d = new Date(date);
-    const year = d.getFullYear();
-    const month = String(d.getMonth() + 1).padStart(2, "0");
-    const day = String(d.getDate()).padStart(2, "0");
-    const hours = String(d.getHours()).padStart(2, "0");
-    const minutes = String(d.getMinutes()).padStart(2, "0");
+    // Ensure we're working with Jakarta timezone
+    const jakartaTime = new Date(d.toLocaleString("en-US", {timeZone: "Asia/Jakarta"}));
+    const year = jakartaTime.getFullYear();
+    const month = String(jakartaTime.getMonth() + 1).padStart(2, "0");
+    const day = String(jakartaTime.getDate()).padStart(2, "0");
+    const hours = String(jakartaTime.getHours()).padStart(2, "0");
+    const minutes = String(jakartaTime.getMinutes()).padStart(2, "0");
     return `${year}-${month}-${day}T${hours}:${minutes}`;
 };
 
@@ -286,7 +260,6 @@ const form = reactive({
     title: props.meeting.title || "",
     meeting_date: formatDatetimeLocal(props.meeting.meeting_date),
     location: props.meeting.location || "",
-    agenda: props.meeting.agenda || "",
     participant_teams: props.meeting.participant_teams || [],
     status: props.meeting.status || "scheduled",
     notes: props.meeting.notes || "",

@@ -4,7 +4,6 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MeetingScheduleController;
 use App\Http\Controllers\FileController;
-use App\Http\Controllers\MeetingNoteController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserApprovalController;
 use Illuminate\Support\Facades\Route;
@@ -53,34 +52,11 @@ Route::middleware('auth')->group(function () {
             ->name('meetings.destroy');
     });
     
-    // Meeting Notes
-    Route::prefix('meeting-notes')->group(function () {
-        Route::get('/', [MeetingNoteController::class, 'index'])->name('meeting-notes.index');
-        Route::get('/create', [MeetingNoteController::class, 'create'])
-            ->middleware('role:KI,kabid')
-            ->name('meeting-notes.create');
-        Route::post('/', [MeetingNoteController::class, 'store'])
-            ->middleware('role:KI,kabid')
-            ->name('meeting-notes.store');
-        Route::get('/{note}', [MeetingNoteController::class, 'show'])->name('meeting-notes.show');
-        Route::get('/{note}/edit', [MeetingNoteController::class, 'edit'])
-            ->name('meeting-notes.edit');
-        Route::put('/{note}', [MeetingNoteController::class, 'update'])
-            ->name('meeting-notes.update');
-        Route::patch('/{note}/archive', [MeetingNoteController::class, 'toggleArchive'])
-            ->middleware('role:KI,kabid')
-            ->name('meeting-notes.archive');
-        Route::delete('/{note}', [MeetingNoteController::class, 'destroy'])
-            ->name('meeting-notes.destroy');
-    });
-    
-    // Files (now points to Teams)
-    Route::get('/files', [TeamController::class, 'index'])->name('files.index');
-    
     // Teams
     Route::prefix('teams')->group(function () {
         Route::get('/', [TeamController::class, 'index'])->name('teams.index');
         Route::get('/{team}/files', [TeamController::class, 'files'])->name('teams.files');
+        Route::get('/{team}/folders/{folder}', [TeamController::class, 'showFolder'])->name('teams.folders');
     });
     
     // File Management

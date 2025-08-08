@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\File;
 use App\Models\MeetingSchedule;
-use App\Models\MeetingNote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -35,7 +34,6 @@ class DashboardController extends Controller
             'totalMeetings' => 0,
             'totalFiles' => 0,
             'upcomingMeetings' => 0,
-            'totalNotes' => 0,
         ];
         
         if ($user->role === 'kabid') {
@@ -45,7 +43,6 @@ class DashboardController extends Controller
             $stats['upcomingMeetings'] = MeetingSchedule::where('meeting_date', '>', now())
                 ->where('status', 'scheduled')
                 ->count();
-            $stats['totalNotes'] = MeetingNote::count();
         } elseif ($user->role === 'KI') {
             // Konsultan Individu can see their created meetings and all files
             $stats['totalMeetings'] = MeetingSchedule::where('created_by', $user->id)->count();
@@ -54,7 +51,6 @@ class DashboardController extends Controller
                 ->where('meeting_date', '>', now())
                 ->where('status', 'scheduled')
                 ->count();
-            $stats['totalNotes'] = MeetingNote::where('created_by', $user->id)->count();
         } else {
             // Tim Kerja can see all meetings and team files
             $stats['totalMeetings'] = MeetingSchedule::count();
@@ -62,7 +58,6 @@ class DashboardController extends Controller
             $stats['upcomingMeetings'] = MeetingSchedule::where('meeting_date', '>', now())
                 ->where('status', 'scheduled')
                 ->count();
-            $stats['totalNotes'] = MeetingNote::count();
         }
         
         return $stats;

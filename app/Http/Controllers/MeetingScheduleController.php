@@ -48,7 +48,6 @@ class MeetingScheduleController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'agenda' => 'nullable|string',
             'meeting_date' => 'required|date|after:now',
             'location' => 'nullable|string|max:255',
             'participant_teams' => 'nullable|array',
@@ -59,7 +58,6 @@ class MeetingScheduleController extends Controller
 
         $meetingData = [
             'title' => $request->title,
-            'agenda' => $request->agenda,
             'meeting_date' => $request->meeting_date,
             'location' => $request->location,
             'participant_teams' => $request->participant_teams,
@@ -135,7 +133,6 @@ class MeetingScheduleController extends Controller
         
         $request->validate([
             'title' => 'required|string|max:255',
-            'agenda' => 'nullable|string',
             'description' => 'nullable|string',
             'meeting_date' => 'required|date',
             'location' => 'nullable|string|max:255',

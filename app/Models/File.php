@@ -17,6 +17,7 @@ class File extends Model
         'mime_type',
         'description',
         'type',
+        'folder_type',
         'uploaded_by',
         'team_id',
         'meeting_note_id',

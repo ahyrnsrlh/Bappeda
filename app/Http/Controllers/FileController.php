@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class FileController extends Controller
@@ -80,13 +81,15 @@ class FileController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
         try {
             $teams = Team::all();
             
             return Inertia::render('Files/Create', [
                 'teams' => $teams,
+                'selectedTeam' => $request->team,
+                'selectedFolder' => $request->folder,
             ]);
         } catch (\Exception $e) {
             Log::error('Error in FileController@create: ' . $e->getMessage());
@@ -104,31 +107,117 @@ class FileController extends Controller
     public function store(Request $request)
     {
         try {
-            $request->validate([
-                'file' => 'required|file|max:51200', // 50MB max (fixed from 10MB)
-                'description' => 'nullable|string|max:500',
-                'type' => 'required|in:document,meeting_note,other',
-                'team_id' => 'nullable|exists:teams,id',
-            ]);
+            // Check if this is a notulen upload
+            if ($request->folder_type === 'notulen' && $request->has('title')) {
+                // Notulen upload validation
+                $request->validate([
+                    'title' => 'required|string|max:255',
+                    'content' => 'required|string',
+                    'attachments' => 'nullable|array',
+                    'attachments.*' => 'file|max:10240', // 10MB max per file
+                    'team_id' => 'nullable|exists:teams,id',
+                    'folder_type' => 'required|in:data,notulen',
+                ]);
 
-            $file = $request->file('file');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $path = $file->storeAs('files', $filename, 'public');
+                $teamId = $request->team_id ?: Auth::user()->team_id;
+                $uploadedFiles = [];
 
-            File::create([
-                'original_name' => $file->getClientOriginalName(),
-                'filename' => $filename,
-                'file_path' => $path,
-                'file_size' => $file->getSize(),
-                'mime_type' => $file->getMimeType(),
-                'description' => $request->description,
-                'type' => $request->type,
-                'uploaded_by' => Auth::id(),
-                'team_id' => $request->team_id ?: Auth::user()->team_id,
-            ]);
+                // Handle file attachments if any
+                if ($request->hasFile('attachments')) {
+                    foreach ($request->file('attachments') as $file) {
+                        $filename = time() . '_' . uniqid() . '_' . $file->getClientOriginalName();
+                        $path = $file->storeAs('files', $filename, 'public');
 
-            return redirect()->route('files.index')
-                ->with('success', 'File berhasil diunggah.');
+                        $uploadedFile = File::create([
+                            'original_name' => $file->getClientOriginalName(),
+                            'filename' => $filename,
+                            'file_path' => $path,
+                            'file_size' => $file->getSize(),
+                            'mime_type' => $file->getMimeType(),
+                            'description' => "Lampiran notulen: " . $request->title,
+                            'type' => 'document',
+                            'folder_type' => 'notulen',
+                            'uploaded_by' => Auth::id(),
+                            'team_id' => $teamId,
+                        ]);
+
+                        $uploadedFiles[] = $uploadedFile;
+                    }
+                }
+
+                // Create a main notulen file with content
+                $contentFilename = time() . '_notulen_' . Str::slug($request->title) . '.txt';
+                $contentPath = 'files/' . $contentFilename;
+                
+                // Save content as text file
+                Storage::disk('public')->put($contentPath, 
+                    "NOTULEN RAPAT\n" . 
+                    "================\n\n" .
+                    "Judul: " . $request->title . "\n" .
+                    "Tanggal: " . now()->format('d F Y H:i') . "\n" .
+                    "Dibuat oleh: " . Auth::user()->name . "\n\n" .
+                    "ISI NOTULEN:\n" .
+                    "============\n\n" .
+                    $request->content . "\n\n" .
+                    "Lampiran: " . count($uploadedFiles) . " file(s)"
+                );
+
+                $mainFile = File::create([
+                    'original_name' => $request->title . '.txt',
+                    'filename' => $contentFilename,
+                    'file_path' => $contentPath,
+                    'file_size' => strlen($request->content),
+                    'mime_type' => 'text/plain',
+                    'description' => $request->title,
+                    'type' => 'document',
+                    'folder_type' => 'notulen',
+                    'uploaded_by' => Auth::id(),
+                    'team_id' => $teamId,
+                ]);
+
+                return redirect()->route('files.index')
+                    ->with('success', 'Notulen berhasil disimpan dengan ' . count($uploadedFiles) . ' lampiran.');
+
+            } else {
+                // Regular file upload validation
+                $request->validate([
+                    'file' => 'required|file|max:51200', // 50MB max (fixed from 10MB)
+                    'description' => 'nullable|string|max:500',
+                    'type' => 'required|in:document,meeting_note,other',
+                    'team_id' => 'nullable|exists:teams,id',
+                    'folder_type' => 'required|in:data,notulen',
+                ]);
+
+                $file = $request->file('file');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $path = $file->storeAs('files', $filename, 'public');
+
+                File::create([
+                    'original_name' => $file->getClientOriginalName(),
+                    'filename' => $filename,
+                    'file_path' => $path,
+                    'file_size' => $file->getSize(),
+                    'mime_type' => $file->getMimeType(),
+                    'description' => $request->description,
+                    'type' => $request->type,
+                    'folder_type' => $request->folder_type,
+                    'uploaded_by' => Auth::id(),
+                    'team_id' => $request->team_id ?: Auth::user()->team_id,
+                ]);
+
+                // Redirect based on context
+                if ($request->team && $request->folder_type) {
+                    // Convert team role to team code for redirect
+                    $teamCode = $request->team;
+                    if (str_starts_with($teamCode, 'tim_')) {
+                        return redirect()->route('teams.folders', [$teamCode, $request->folder_type])
+                            ->with('success', 'File berhasil diunggah.');
+                    }
+                }
+
+                return redirect()->route('files.index')
+                    ->with('success', 'File berhasil diunggah.');
+            }
                 
         } catch (\Illuminate\Validation\ValidationException $e) {
             Log::error('Validation error in FileController@store: ' . json_encode($e->errors()));

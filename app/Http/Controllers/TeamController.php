@@ -25,12 +25,8 @@ class TeamController extends Controller
             $teamCounts[$team] = File::whereIn('uploaded_by', $teamUsers)->count();
         }
         
-        // Total semua file
-        $totalFiles = File::count();
-        
         return Inertia::render('Teams/Index', [
-            'teamCounts' => $teamCounts,
-            'totalFiles' => $totalFiles
+            'teamCounts' => $teamCounts
         ]);
     }
     
@@ -45,19 +41,39 @@ class TeamController extends Controller
         if (!in_array($team, $validTeams)) {
             abort(404);
         }
+            
+        return Inertia::render('Teams/Files', [
+            'team' => $team
+        ]);
+    }
+    
+    /**
+     * Display specific folder for a team
+     */
+    public function showFolder(Request $request, $team, $folder)
+    {
+        // Validasi team yang valid
+        $validTeams = ['tim_1', 'tim_2', 'tim_3', 'tim_4', 'tim_5'];
+        $validFolders = ['data', 'notulen'];
+        
+        if (!in_array($team, $validTeams) || !in_array($folder, $validFolders)) {
+            abort(404);
+        }
         
         // Ambil user dari tim tersebut
         $teamUsers = User::where('role', $team)->pluck('id');
         
-        // Ambil file yang diupload oleh tim tersebut
+        // Ambil file yang diupload oleh tim tersebut berdasarkan folder
         $files = File::with('uploader')
             ->whereIn('uploaded_by', $teamUsers)
+            ->where('folder_type', $folder)
             ->latest()
             ->get();
             
-        return Inertia::render('Teams/Files', [
+        return Inertia::render('Teams/Folder', [
             'files' => $files,
-            'team' => $team
+            'team' => $team,
+            'folder' => $folder
         ]);
     }
 }
