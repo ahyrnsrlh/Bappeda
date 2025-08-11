@@ -19,6 +19,34 @@
                         </div>
                     </div>
 
+                    <!-- Navigation Links -->
+                    <div class="hidden md:flex items-center space-x-8">
+                        <button
+                            @click="scrollToSection('hero')"
+                            class="text-gray-700 hover:text-yellow-600 font-medium transition-colors duration-200"
+                        >
+                            Beranda
+                        </button>
+                        <button
+                            @click="scrollToSection('dinas')"
+                            class="text-gray-700 hover:text-yellow-600 font-medium transition-colors duration-200"
+                        >
+                            Dinas Terkait
+                        </button>
+                        <button
+                            @click="scrollToSection('staff')"
+                            class="text-gray-700 hover:text-yellow-600 font-medium transition-colors duration-200"
+                        >
+                            Tim Kami
+                        </button>
+                        <button
+                            @click="scrollToSection('contact')"
+                            class="text-gray-700 hover:text-yellow-600 font-medium transition-colors duration-200"
+                        >
+                            Kontak
+                        </button>
+                    </div>
+
                     <div class="flex items-center space-x-4">
                         <template v-if="$page.props.auth?.user">
                             <Link
@@ -49,19 +77,17 @@
 
         <!-- Hero Section -->
         <section
-            class="pt-24 pb-20 bg-gradient-to-br from-yellow-400 via-orange-400 to-red-400 relative overflow-hidden"
+            id="hero"
+            class="pt-24 pb-20 bg-white relative overflow-hidden"
+            style="
+                background-image: url('/storage/sigerr.png');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+            "
         >
-            <div class="absolute inset-0 opacity-30">
-                <div
-                    class="absolute top-20 left-10 w-32 h-32 bg-white rounded-full blur-2xl"
-                ></div>
-                <div
-                    class="absolute bottom-20 right-20 w-40 h-40 bg-white rounded-full blur-2xl"
-                ></div>
-                <div
-                    class="absolute top-1/2 left-1/4 w-24 h-24 bg-white rounded-full blur-xl"
-                ></div>
-            </div>
+            <!-- Logo overlay with opacity -->
+            <div class="absolute inset-0 bg-white/80"></div>
 
             <div class="container mx-auto px-6 py-20 relative z-10">
                 <div class="max-w-7xl mx-auto">
@@ -69,7 +95,7 @@
                         <!-- Content -->
                         <div class="text-center lg:text-left space-y-8">
                             <div
-                                class="inline-flex items-center bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-full text-base font-semibold mb-4"
+                                class="inline-flex items-center bg-gray-100 border border-gray-200 text-gray-800 px-6 py-3 rounded-full text-base font-semibold mb-4"
                             >
                                 <span class="mr-2">🏛️</span>
                                 Bidang Ekonomi BAPPEDA Provinsi Lampung
@@ -77,25 +103,26 @@
 
                             <div class="space-y-6">
                                 <h1
-                                    class="text-4xl md:text-6xl font-bold text-white leading-tight"
+                                    class="text-4xl md:text-6xl font-bold text-gray-900 leading-tight"
                                 >
                                     Portal Info Ekonomi
-                                    <span class="text-yellow-200">BAPPEDA</span>
+                                    <span class="text-yellow-600">BAPPEDA</span>
                                 </h1>
                                 <div class="space-y-4">
                                     <p
-                                        class="text-xl md:text-2xl text-white/95 leading-relaxed font-medium"
+                                        class="text-xl md:text-2xl text-gray-800 leading-relaxed font-medium"
                                     >
                                         "BERSAMA LAMPUNG MAJU MENUJU INDONESIA
                                         EMAS"
                                     </p>
                                     <p
-                                        class="text-lg md:text-xl text-white/85 leading-relaxed"
+                                        class="text-lg md:text-xl text-gray-700 leading-relaxed"
                                     >
                                         Merancang kebijakan pembangunan ekonomi
                                         daerah dengan fokus pada sektor
                                         produktif:
-                                        <span class="font-semibold"
+                                        <span
+                                            class="font-semibold text-gray-900"
                                             >pertanian, industri, perdagangan,
                                             UMKM, ketenagakerjaan, dan
                                             pariwisata</span
@@ -106,15 +133,17 @@
 
                             <!-- Mission Points -->
                             <div
-                                class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 space-y-4"
+                                class="bg-gray-50 border border-gray-200 rounded-2xl p-6 space-y-4"
                             >
-                                <h3 class="text-lg font-bold text-white mb-4">
+                                <h3
+                                    class="text-lg font-bold text-gray-900 mb-4"
+                                >
                                     Misi Kami:
                                 </h3>
-                                <div class="space-y-3 text-white/90">
+                                <div class="space-y-3 text-gray-800">
                                     <div class="flex items-start space-x-3">
                                         <span
-                                            class="flex-shrink-0 w-6 h-6 bg-yellow-300 rounded-full flex items-center justify-center text-xs font-bold text-gray-800"
+                                            class="flex-shrink-0 w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center text-xs font-bold text-white"
                                             >1</span
                                         >
                                         <p class="text-sm leading-relaxed">
@@ -124,7 +153,7 @@
                                     </div>
                                     <div class="flex items-start space-x-3">
                                         <span
-                                            class="flex-shrink-0 w-6 h-6 bg-yellow-300 rounded-full flex items-center justify-center text-xs font-bold text-gray-800"
+                                            class="flex-shrink-0 w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center text-xs font-bold text-white"
                                             >2</span
                                         >
                                         <p class="text-sm leading-relaxed">
@@ -134,7 +163,7 @@
                                     </div>
                                     <div class="flex items-start space-x-3">
                                         <span
-                                            class="flex-shrink-0 w-6 h-6 bg-yellow-300 rounded-full flex items-center justify-center text-xs font-bold text-gray-800"
+                                            class="flex-shrink-0 w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center text-xs font-bold text-white"
                                             >3</span
                                         >
                                         <p class="text-sm leading-relaxed">
@@ -152,7 +181,7 @@
                                 <template v-if="$page.props.auth?.user">
                                     <Link
                                         href="/dashboard"
-                                        class="px-8 py-4 bg-white text-yellow-600 rounded-xl font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                                        class="px-8 py-4 bg-yellow-500 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl hover:scale-105 hover:bg-yellow-600 transition-all duration-300"
                                     >
                                         Masuk ke Dashboard
                                     </Link>
@@ -160,34 +189,11 @@
                                 <template v-else>
                                     <Link
                                         href="/register"
-                                        class="px-8 py-4 bg-white text-yellow-600 rounded-xl font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                                        class="px-8 py-4 bg-yellow-500 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl hover:scale-105 hover:bg-yellow-600 transition-all duration-300"
                                     >
                                         Mulai Sekarang
                                     </Link>
                                 </template>
-                                <button
-                                    @click="scrollToSection('about')"
-                                    class="px-8 py-4 border-2 border-white text-white rounded-xl font-semibold hover:bg-white hover:text-yellow-600 transition-all duration-300"
-                                >
-                                    Pelajari Lebih Lanjut
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Image placeholder -->
-                        <div class="flex justify-center lg:justify-end">
-                            <div class="relative">
-                                <div
-                                    class="w-96 h-96 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center"
-                                >
-                                    <div
-                                        class="w-64 h-64 bg-white/30 rounded-xl flex items-center justify-center"
-                                    >
-                                        <div class="text-6xl text-white">
-                                            📊
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -196,7 +202,7 @@
         </section>
 
         <!-- Dinas Section -->
-        <section class="py-24 bg-gray-50">
+        <section id="dinas" class="py-24 bg-gray-50">
             <div class="container mx-auto px-6">
                 <div class="max-w-7xl mx-auto">
                     <div class="text-center mb-16">
@@ -212,14 +218,22 @@
                             Dinas Terkait Sektor Ekonomi
                         </h2>
                         <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                            Dinas-dinas yang berkoordinasi dengan BAPPEDA dalam perencanaan dan pelaksanaan pembangunan ekonomi daerah
+                            Dinas-dinas yang berkoordinasi dengan BAPPEDA dalam
+                            perencanaan dan pelaksanaan pembangunan ekonomi
+                            daerah
                         </p>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                    >
                         <!-- DINAS PMPTSP -->
-                        <div class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
-                            <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <div
+                            class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
+                        >
+                            <div
+                                class="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300"
+                            >
                                 <span class="text-3xl text-white">🏛️</span>
                             </div>
                             <h3 class="text-lg font-bold text-gray-900 mb-3">
@@ -231,8 +245,12 @@
                         </div>
 
                         <!-- DINAS TENAGA KERJA -->
-                        <div class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
-                            <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <div
+                            class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
+                        >
+                            <div
+                                class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300"
+                            >
                                 <span class="text-3xl text-white">👷</span>
                             </div>
                             <h3 class="text-lg font-bold text-gray-900 mb-3">
@@ -244,8 +262,12 @@
                         </div>
 
                         <!-- DINAS PARIWISATA DAN EKRAF -->
-                        <div class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
-                            <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <div
+                            class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
+                        >
+                            <div
+                                class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300"
+                            >
                                 <span class="text-3xl text-white">🏖️</span>
                             </div>
                             <h3 class="text-lg font-bold text-gray-900 mb-3">
@@ -257,8 +279,12 @@
                         </div>
 
                         <!-- DINAS PERINDUSTRIAN DAN PERDAGANGAN -->
-                        <div class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
-                            <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <div
+                            class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
+                        >
+                            <div
+                                class="w-20 h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300"
+                            >
                                 <span class="text-3xl text-white">🏭</span>
                             </div>
                             <h3 class="text-lg font-bold text-gray-900 mb-3">
@@ -270,8 +296,12 @@
                         </div>
 
                         <!-- DINAS KOPERASI DAN UMKM -->
-                        <div class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
-                            <div class="w-20 h-20 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <div
+                            class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
+                        >
+                            <div
+                                class="w-20 h-20 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300"
+                            >
                                 <span class="text-3xl text-white">🏪</span>
                             </div>
                             <h3 class="text-lg font-bold text-gray-900 mb-3">
@@ -283,21 +313,30 @@
                         </div>
 
                         <!-- DINAS KETAHANAN PANGAN TP DAN HORTI -->
-                        <div class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
-                            <div class="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <div
+                            class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
+                        >
+                            <div
+                                class="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300"
+                            >
                                 <span class="text-3xl text-white">🌾</span>
                             </div>
                             <h3 class="text-lg font-bold text-gray-900 mb-3">
                                 DINAS KETAHANAN PANGAN TP DAN HORTI
                             </h3>
                             <p class="text-gray-600 text-sm leading-relaxed">
-                                Ketahanan Pangan, Tanaman Pangan dan Hortikultura
+                                Ketahanan Pangan, Tanaman Pangan dan
+                                Hortikultura
                             </p>
                         </div>
 
                         <!-- DINAS PERKEBUNAN -->
-                        <div class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
-                            <div class="w-20 h-20 bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <div
+                            class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
+                        >
+                            <div
+                                class="w-20 h-20 bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300"
+                            >
                                 <span class="text-3xl text-white">🌴</span>
                             </div>
                             <h3 class="text-lg font-bold text-gray-900 mb-3">
@@ -309,8 +348,12 @@
                         </div>
 
                         <!-- DINAS PETERNAKAN DAN KESWAN -->
-                        <div class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
-                            <div class="w-20 h-20 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <div
+                            class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
+                        >
+                            <div
+                                class="w-20 h-20 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300"
+                            >
                                 <span class="text-3xl text-white">🐄</span>
                             </div>
                             <h3 class="text-lg font-bold text-gray-900 mb-3">
@@ -322,8 +365,12 @@
                         </div>
 
                         <!-- DINAS KELAUTAN DAN PERIKANAN -->
-                        <div class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
-                            <div class="w-20 h-20 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <div
+                            class="group bg-white rounded-2xl p-8 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
+                        >
+                            <div
+                                class="w-20 h-20 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300"
+                            >
                                 <span class="text-3xl text-white">🐟</span>
                             </div>
                             <h3 class="text-lg font-bold text-gray-900 mb-3">
@@ -336,16 +383,23 @@
                     </div>
 
                     <!-- Coordination Info -->
-                    <div class="mt-16 bg-white rounded-3xl p-8 md:p-12 border border-gray-200">
+                    <div
+                        class="mt-16 bg-white rounded-3xl p-8 md:p-12 border border-gray-200"
+                    >
                         <div class="text-center">
-                            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <div
+                                class="w-16 h-16 bg-gradient-to-br from-green-500 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-6"
+                            >
                                 <span class="text-2xl text-white">🤝</span>
                             </div>
                             <h3 class="text-2xl font-bold text-gray-900 mb-4">
                                 Koordinasi Antar Dinas
                             </h3>
                             <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                                BAPPEDA berperan dalam mengkoordinasikan seluruh dinas terkait untuk memastikan sinergi dalam perencanaan dan pelaksanaan pembangunan ekonomi daerah yang berkelanjutan dan terintegrasi.
+                                BAPPEDA berperan dalam mengkoordinasikan seluruh
+                                dinas terkait untuk memastikan sinergi dalam
+                                perencanaan dan pelaksanaan pembangunan ekonomi
+                                daerah yang berkelanjutan dan terintegrasi.
                             </p>
                         </div>
                     </div>
@@ -354,7 +408,7 @@
         </section>
 
         <!-- Staff Section -->
-        <section class="py-24 bg-white">
+        <section id="staff" class="py-24 bg-white">
             <div class="container mx-auto px-6">
                 <div class="max-w-7xl mx-auto">
                     <div class="text-center mb-16">
@@ -367,209 +421,473 @@
                         <h2
                             class="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
                         >
-                            Tim BAPPEDA Provinsi Lampung
+                            Struktur BAPPEDA Provinsi Lampung
                         </h2>
                         <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                            Tim profesional yang berdedikasi dalam perencanaan dan pembangunan ekonomi daerah
+                            Tim profesional yang berdedikasi dalam perencanaan
+                            dan pembangunan ekonomi daerah
                         </p>
                     </div>
 
                     <!-- Leadership Section -->
                     <div class="mb-16">
-                        <h3 class="text-2xl font-bold text-gray-900 text-center mb-12">Pimpinan</h3>
+                        <h3
+                            class="text-2xl font-bold text-gray-900 text-center mb-12"
+                        >
+                            Pimpinan
+                        </h3>
                         <div class="flex justify-center">
-                            <div class="max-w-sm bg-white rounded-3xl p-8 text-center shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200">
-                                <div class="w-32 h-32 rounded-full mx-auto mb-6 shadow-lg overflow-hidden">
-                                    <img src="/storage/foto-pegawai/RIDWAN SAIFUDDIN S.E., M.Si.png" alt="Ridwan Saifuddin" class="w-full h-full object-cover">
+                            <div
+                                class="max-w-sm bg-white rounded-3xl p-8 text-center shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200"
+                            >
+                                <div
+                                    class="w-32 h-32 rounded-full mx-auto mb-6 shadow-lg overflow-hidden"
+                                >
+                                    <img
+                                        src="/storage/foto-pegawai/RIDWAN SAIFUDDIN S.E., M.Si.png"
+                                        alt="Ridwan Saifuddin"
+                                        class="w-full h-full object-cover"
+                                    />
                                 </div>
-                                <h4 class="text-xl font-bold text-gray-900 mb-2">Ridwan Saifuddin, S.E., M.Si</h4>
-                                <p class="text-blue-600 font-semibold mb-2">Kabid Perencanaan Perekonomian</p>
-                                <p class="text-gray-600 text-sm">NIP. 19740918 200002 1 002<br>Pembina / IV a</p>
+                                <h4
+                                    class="text-xl font-bold text-gray-900 mb-2"
+                                >
+                                    Ridwan Saifuddin, S.E., M.Si
+                                </h4>
+                                <p class="text-blue-600 font-semibold mb-2">
+                                    Kabid Perencanaan Perekonomian
+                                </p>
+                                <p class="text-gray-600 text-sm">
+                                    NIP. 19740918 200002 1 002<br />Pembina / IV
+                                    a
+                                </p>
                             </div>
                         </div>
                     </div>
 
                     <!-- Staff Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                        <!-- Naomi Setyawati -->
-                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
-                            <div class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
-                                <img src="/storage/foto-pegawai/NAOMI SETYAWATI S.E.png" alt="Naomi Setyawati" class="w-full h-full object-cover">
-                            </div>
-                            <h4 class="text-lg font-bold text-gray-900 mb-2">Naomi Setyawati, S.E</h4>
-                            <p class="text-green-600 font-semibold text-sm mb-2">Fungsional Perencana Ahli Muda</p>
-                            <p class="text-gray-600 text-xs">NIP. 19771014 200312 2 005<br>Penata Tingkat I / III d</p>
-                        </div>
-
-                        <!-- Haryo Wicaksono -->
-                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
-                            <div class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
-                                <img src="/storage/foto-pegawai/HARYO WICAKSONO SE.png" alt="Haryo Wicaksono" class="w-full h-full object-cover">
-                            </div>
-                            <h4 class="text-lg font-bold text-gray-900 mb-2">Haryo Wicaksono, S.E</h4>
-                            <p class="text-blue-600 font-semibold text-sm mb-2">Fungsional Perencana Ahli Muda</p>
-                            <p class="text-gray-600 text-xs">NIP. 19780729 201001 1 007<br>Penata Tingkat I / III d</p>
-                        </div>
-
-                        <!-- Rehan -->
-                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
-                            <div class="w-24 h-24 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+                    >
+                        <!-- Rehan - Fungsional Perencana Madya -->
+                        <div
+                            class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
+                        >
+                            <div
+                                class="w-24 h-24 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300"
+                            >
                                 <span class="text-2xl text-white">👤</span>
                             </div>
-                            <h4 class="text-lg font-bold text-gray-900 mb-2">Rehan, S.E., M.Si</h4>
-                            <p class="text-purple-600 font-semibold text-sm mb-2">Fungsional Perencana Madya</p>
-                            <p class="text-gray-600 text-xs">NIP. 19730323 200212 1 011<br>Pembina Tingkat I / IV b</p>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">
+                                Kaizan, S.P., M.Si
+                            </h4>
+                            <p
+                                class="text-purple-600 font-semibold text-sm mb-2"
+                            >
+                                Fungsional Perencana Madya
+                            </p>
+                            <p class="text-gray-600 text-xs">
+                                NIP. 19730323 200212 1 011<br />Pembina Tingkat
+                                I / IV b
+                            </p>
                         </div>
 
-                        <!-- Ahmad Zainullah -->
-                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
-                            <div class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
-                                <img src="/storage/foto-pegawai/AHMAD AMRULLAH S.T..png" alt="Ahmad Zainullah" class="w-full h-full object-cover">
+                        <!-- Naomi Setyawati - Fungsional Perencana Ahli Muda -->
+                        <div
+                            class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
+                        >
+                            <div
+                                class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden"
+                            >
+                                <img
+                                    src="/storage/foto-pegawai/NAOMI SETYAWATI S.E.png"
+                                    alt="Naomi Setyawati"
+                                    class="w-full h-full object-cover"
+                                />
                             </div>
-                            <h4 class="text-lg font-bold text-gray-900 mb-2">Ahmad Zainullah, S.T</h4>
-                            <p class="text-orange-600 font-semibold text-sm mb-2">Analis Perencanaan dan Kerjasama</p>
-                            <p class="text-gray-600 text-xs">NIP. 19710713 200701 1 002<br>Penata Tingkat I / III d</p>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">
+                                Naomi Setyawati, S.E
+                            </h4>
+                            <p
+                                class="text-green-600 font-semibold text-sm mb-2"
+                            >
+                                Fungsional Perencana Ahli Muda
+                            </p>
+                            <p class="text-gray-600 text-xs">
+                                NIP. 19771014 200312 2 005<br />Penata Tingkat I
+                                / III d
+                            </p>
                         </div>
 
-                        <!-- Era Jayanti -->
-                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
-                            <div class="w-24 h-24 bg-gradient-to-br from-pink-500 to-rose-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <!-- Haryo Wicaksono - Fungsional Perencana Ahli Muda -->
+                        <div
+                            class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
+                        >
+                            <div
+                                class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden"
+                            >
+                                <img
+                                    src="/storage/foto-pegawai/HARYO WICAKSONO SE.png"
+                                    alt="Haryo Wicaksono"
+                                    class="w-full h-full object-cover"
+                                />
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">
+                                Haryo Wicaksono, S.E
+                            </h4>
+                            <p class="text-blue-600 font-semibold text-sm mb-2">
+                                Fungsional Perencana Ahli Muda
+                            </p>
+                            <p class="text-gray-600 text-xs">
+                                NIP. 19780729 201001 1 007<br />Penata Tingkat I
+                                / III d
+                            </p>
+                        </div>
+
+                        <!-- Era Jayanti - Fungsional Perencana Ahli Muda -->
+                        <div
+                            class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
+                        >
+                            <div
+                                class="w-24 h-24 bg-gradient-to-br from-pink-500 to-rose-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300"
+                            >
                                 <span class="text-2xl text-white">👤</span>
                             </div>
-                            <h4 class="text-lg font-bold text-gray-900 mb-2">Era Jayanti, S.STP., M.M</h4>
-                            <p class="text-pink-600 font-semibold text-sm mb-2">Fungsional Perencana Ahli Muda</p>
-                            <p class="text-gray-600 text-xs">NIP. 19860329 200802 2 002<br>Penata Tingkat I / III d</p>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">
+                                Era Jayanti, S.STP., M.M
+                            </h4>
+                            <p class="text-pink-600 font-semibold text-sm mb-2">
+                                Fungsional Perencana Ahli Muda
+                            </p>
+                            <p class="text-gray-600 text-xs">
+                                NIP. 19860329 200802 2 002<br />Penata Tingkat I
+                                / III d
+                            </p>
                         </div>
 
-                        <!-- Yunita Devi -->
-                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
-                            <div class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
-                                <img src="/storage/foto-pegawai/YUNITA DEWI S.P.png" alt="Yunita Devi" class="w-full h-full object-cover">
+                        <!-- Yunita Devi - Fungsional Perencana Ahli Muda -->
+                        <div
+                            class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
+                        >
+                            <div
+                                class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden"
+                            >
+                                <img
+                                    src="/storage/foto-pegawai/YUNITA DEWI S.P.png"
+                                    alt="Yunita Devi"
+                                    class="w-full h-full object-cover"
+                                />
                             </div>
-                            <h4 class="text-lg font-bold text-gray-900 mb-2">Yunita Devi, S.P</h4>
-                            <p class="text-teal-600 font-semibold text-sm mb-2">Fungsional Perencana Ahli Muda</p>
-                            <p class="text-gray-600 text-xs">NIP. 19800613 200501 2 006<br>Penata Tingkat I / III d</p>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">
+                                Yunita Dewi, S.P
+                            </h4>
+                            <p class="text-teal-600 font-semibold text-sm mb-2">
+                                Fungsional Perencana Ahli Muda
+                            </p>
+                            <p class="text-gray-600 text-xs">
+                                NIP. 19800613 200501 2 006<br />Penata Tingkat I
+                                / III d
+                            </p>
                         </div>
 
-                        <!-- Andre Victor Mushoni -->
-                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
-                            <div class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
-                                <img src="/storage/foto-pegawai/ANDRE VICTOR MUCHSIN S.E., M.M.png" alt="Andre Victor Mushoni" class="w-full h-full object-cover">
+                        <!-- Andre Victor Mushoni - Fungsional Perencana Ahli Muda -->
+                        <div
+                            class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
+                        >
+                            <div
+                                class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden"
+                            >
+                                <img
+                                    src="/storage/foto-pegawai/ANDRE VICTOR MUCHSIN S.E., M.M.png"
+                                    alt="Andre Victor Mushoni"
+                                    class="w-full h-full object-cover"
+                                />
                             </div>
-                            <h4 class="text-lg font-bold text-gray-900 mb-2">Andre Victor Mushoni, S.E., M.M</h4>
-                            <p class="text-indigo-600 font-semibold text-sm mb-2">Fungsional Perencana Ahli Muda</p>
-                            <p class="text-gray-600 text-xs">NIP. 19890929 201001 1 008<br>Penata Tingkat I / III d</p>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">
+                                Andre Victor Mushoni, S.E., M.M
+                            </h4>
+                            <p
+                                class="text-indigo-600 font-semibold text-sm mb-2"
+                            >
+                                Fungsional Perencana Ahli Muda
+                            </p>
+                            <p class="text-gray-600 text-xs">
+                                NIP. 19890929 201001 1 008<br />Penata Tingkat I
+                                / III d
+                            </p>
                         </div>
 
-                        <!-- Widia Resti -->
-                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
-                            <div class="w-24 h-24 bg-gradient-to-br from-emerald-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <!-- Kornelia Restianti - Fungsional Perencana Ahli Muda -->
+                        <div
+                            class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
+                        >
+                            <div
+                                class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden"
+                            >
+                                <img
+                                    src="/storage/foto-pegawai/Cornelia Restianti.jpg"
+                                    alt="Cornelia Restianti"
+                                    class="w-full h-full object-cover"
+                                />
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">
+                                Kornella Restianti, S.KM., M.Ling
+                            </h4>
+                            <p
+                                class="text-violet-600 font-semibold text-sm mb-2"
+                            >
+                                Fungsional Perencana Ahli Muda
+                            </p>
+                            <p class="text-gray-600 text-xs">
+                                NIP. 19810125 200804 2 002<br />Penata / III c
+                            </p>
+                        </div>
+
+                        <!-- Kartini - Fungsional Perencana Ahli Pertama -->
+                        <div
+                            class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
+                        >
+                            <div
+                                class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden"
+                            >
+                                <img
+                                    src="/storage/foto-pegawai/KARTINI S.H.png"
+                                    alt="Kartini"
+                                    class="w-full h-full object-cover"
+                                />
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">
+                                Kartini, S.H
+                            </h4>
+                            <p class="text-red-600 font-semibold text-sm mb-2">
+                                Fungsional Perencana Ahli Pertama
+                            </p>
+                            <p class="text-gray-600 text-xs">
+                                NIP. 19730430 200701 2 007<br />Penata Muda
+                                Tingkat I / III b
+                            </p>
+                        </div>
+
+                        <!-- Rizki Winandia - Fungsional Perencana Ahli Pertama -->
+                        <div
+                            class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
+                        >
+                            <div
+                                class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden"
+                            >
+                                <img
+                                    src="/storage/foto-pegawai/pak rizky.jpg"
+                                    alt="Rizki Winandia"
+                                    class="w-full h-full object-cover"
+                                />
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">
+                                Rizki Winanda, S.E., M.E
+                            </h4>
+                            <p class="text-sky-600 font-semibold text-sm mb-2">
+                                Fungsional Perencana Ahli Pertama
+                            </p>
+                            <p class="text-gray-600 text-xs">
+                                NIP. 19891028 201501 1 004<br />Penata Muda
+                                Tingkat I / III b
+                            </p>
+                        </div>
+
+                        <!-- Dhifany Sari - Fungsional Perencana Ahli Pertama -->
+                        <div
+                            class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
+                        >
+                            <div
+                                class="w-24 h-24 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300"
+                            >
                                 <span class="text-2xl text-white">👤</span>
                             </div>
-                            <h4 class="text-lg font-bold text-gray-900 mb-2">Widia Resti, S.KM., M.Ling</h4>
-                            <p class="text-emerald-600 font-semibold text-sm mb-2">Fungsional Perencana Ahli Muda</p>
-                            <p class="text-gray-600 text-xs">NIP. 19810125 200804 2 002<br>Penata / III c</p>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">
+                                Rita Mustika Sari, S.Si
+                            </h4>
+                            <p
+                                class="text-amber-600 font-semibold text-sm mb-2"
+                            >
+                                Fungsional Perencana Ahli Pertama
+                            </p>
+                            <p class="text-gray-600 text-xs">
+                                NIP. 19920625 201502 2 005<br />Penata Muda /
+                                III a
+                            </p>
                         </div>
 
-                        <!-- Cornelia Restianti -->
-                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
-                            <div class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
-                                <img src="/storage/foto-pegawai/Cornelia Restianti.jpg" alt="Cornelia Restianti" class="w-full h-full object-cover">
+                        <!-- Ahmad Zainullah - Penelaah Teknis Kebijakan (separate card below Ahli Pertama) -->
+                        <div
+                            class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
+                        >
+                            <div
+                                class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden"
+                            >
+                                <img
+                                    src="/storage/foto-pegawai/AHMAD AMRULLAH S.T..png"
+                                    alt="Ahmad Zainullah"
+                                    class="w-full h-full object-cover"
+                                />
                             </div>
-                            <h4 class="text-lg font-bold text-gray-900 mb-2">Cornelia Restianti, S.KM., M.Ling</h4>
-                            <p class="text-violet-600 font-semibold text-sm mb-2">Fungsional Perencana Ahli Muda</p>
-                            <p class="text-gray-600 text-xs">NIP. 19810125 200804 2 002<br>Penata / III c</p>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">
+                                Ahmad Amrullah, S.T
+                            </h4>
+                            <p
+                                class="text-orange-600 font-semibold text-sm mb-2"
+                            >
+                                Penelaah Teknis Kebijakan
+                            </p>
+                            <p class="text-gray-600 text-xs">
+                                NIP. 19710713 200701 1 002<br />Penata Tingkat I
+                                / III d
+                            </p>
                         </div>
 
-                        <!-- Kartini -->
-                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
-                            <div class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
-                                <img src="/storage/foto-pegawai/KARTINI S.H.png" alt="Kartini" class="w-full h-full object-cover">
+                        <!-- Fakhira Hamidah Khaiumisa - Konsultan Individu -->
+                        <div
+                            class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
+                        >
+                            <div
+                                class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden"
+                            >
+                                <img
+                                    src="/storage/foto-pegawai/Fakhira Hamidah Khairunnisa S.P.jpg"
+                                    alt="Fakhira Hamidah Khaiumisa"
+                                    class="w-full h-full object-cover"
+                                />
                             </div>
-                            <h4 class="text-lg font-bold text-gray-900 mb-2">Kartini, S.H</h4>
-                            <p class="text-red-600 font-semibold text-sm mb-2">Fungsional Perencana Ahli Pertama</p>
-                            <p class="text-gray-600 text-xs">NIP. 19730430 200701 2 007<br>Penata Muda Tingkat I / III b</p>
-                        </div>
-
-                        <!-- Rizki Winandia -->
-                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
-                            <div class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
-                                <img src="/storage/foto-pegawai/pak rizky.jpg" alt="Rizki Winandia" class="w-full h-full object-cover">
-                            </div>
-                            <h4 class="text-lg font-bold text-gray-900 mb-2">Rizki Winandia, S.E., M.E</h4>
-                            <p class="text-sky-600 font-semibold text-sm mb-2">Fungsional Perencana Ahli Pertama</p>
-                            <p class="text-gray-600 text-xs">NIP. 19891028 201501 1 004<br>Penata Muda Tingkat I / III b</p>
-                        </div>
-
-                        <!-- Dhifany Sari -->
-                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
-                            <div class="w-24 h-24 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                                <span class="text-2xl text-white">👤</span>
-                            </div>
-                            <h4 class="text-lg font-bold text-gray-900 mb-2">Dhifany Sari, S.S</h4>
-                            <p class="text-amber-600 font-semibold text-sm mb-2">Fungsional Perencana Ahli Pertama</p>
-                            <p class="text-gray-600 text-xs">NIP. 19920625 201502 2 005<br>Penata Muda / III a</p>
-                        </div>
-
-                        <!-- Puspita Rini -->
-                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
-                            <div class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
-                                <img src="/storage/foto-pegawai/puspita rini.jpg" alt="Puspita Rini" class="w-full h-full object-cover">
-                            </div>
-                            <h4 class="text-lg font-bold text-gray-900 mb-2">Puspita Rini, S.E</h4>
-                            <p class="text-lime-600 font-semibold text-sm mb-2">PTH</p>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">
+                                Fakhira Hamidah Khairunnisa, S.P
+                            </h4>
+                            <p class="text-rose-600 font-semibold text-sm mb-2">
+                                Konsultan Individu
+                            </p>
                             <p class="text-gray-600 text-xs">-</p>
                         </div>
 
-                        <!-- Fakhira Hamidah Khaiumisa -->
-                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
-                            <div class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
-                                <img src="/storage/foto-pegawai/Fakhira Hamidah Khairunnisa S.P.jpg" alt="Fakhira Hamidah Khaiumisa" class="w-full h-full object-cover">
+                        <!-- Nadila Putri Efendi - Konsultan Individu -->
+                        <div
+                            class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
+                        >
+                            <div
+                                class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden"
+                            >
+                                <img
+                                    src="/storage/foto-pegawai/Nadila Putri Efendi, S.Sos .JPG"
+                                    alt="Nadila Putri Efendi"
+                                    class="w-full h-full object-cover"
+                                />
                             </div>
-                            <h4 class="text-lg font-bold text-gray-900 mb-2">Fakhira Hamidah Khaiumisa, S.P</h4>
-                            <p class="text-rose-600 font-semibold text-sm mb-2">Konsultan Individu</p>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">
+                                Nadila Putri Efendi, S.Sos
+                            </h4>
+                            <p class="text-cyan-600 font-semibold text-sm mb-2">
+                                Konsultan Individu
+                            </p>
                             <p class="text-gray-600 text-xs">-</p>
                         </div>
 
-                        <!-- Nadila Putri Efendi -->
-                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
-                            <div class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
-                                <img src="/storage/foto-pegawai/Nadila Putri Efendi, S.Sos .JPG" alt="Nadila Putri Efendi" class="w-full h-full object-cover">
+                        <!-- Ibnu Trilaksono - Konsultan Individu -->
+                        <div
+                            class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
+                        >
+                            <div
+                                class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden"
+                            >
+                                <img
+                                    src="/storage/foto-pegawai/Ibnu Trilaksono S.Ak.jpg"
+                                    alt="Ibnu Trilaksono"
+                                    class="w-full h-full object-cover"
+                                />
                             </div>
-                            <h4 class="text-lg font-bold text-gray-900 mb-2">Nadila Putri Efendi, S.Sos</h4>
-                            <p class="text-cyan-600 font-semibold text-sm mb-2">Konsultan Individu</p>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">
+                                Ibnu Trilaksono, S.Ak
+                            </h4>
+                            <p
+                                class="text-slate-600 font-semibold text-sm mb-2"
+                            >
+                                Konsultan Individu
+                            </p>
                             <p class="text-gray-600 text-xs">-</p>
                         </div>
 
-                        <!-- Ibnu Trilaksono -->
-                        <div class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200">
-                            <div class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
-                                <img src="/storage/foto-pegawai/Ibnu Trilaksono S.Ak.jpg" alt="Ibnu Trilaksono" class="w-full h-full object-cover">
+                        <!-- Puspita Rini - P3K -->
+                        <div
+                            class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
+                        >
+                            <div
+                                class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden"
+                            >
+                                <img
+                                    src="/storage/foto-pegawai/puspita rini.jpg"
+                                    alt="Puspita Rini"
+                                    class="w-full h-full object-cover"
+                                />
                             </div>
-                            <h4 class="text-lg font-bold text-gray-900 mb-2">Ibnu Trilaksono, S.Ak</h4>
-                            <p class="text-slate-600 font-semibold text-sm mb-2">Konsultan Individu</p>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">
+                                Puspita Rini, S.E
+                            </h4>
+                            <p class="text-lime-600 font-semibold text-sm mb-2">
+                                P3K
+                            </p>
                             <p class="text-gray-600 text-xs">-</p>
                         </div>
                     </div>
 
                     <!-- Team Stats -->
-                    <div class="mt-16 bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-8 md:p-12">
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+                    <div
+                        class="mt-16 bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-8 md:p-12"
+                    >
+                        <div
+                            class="grid grid-cols-1 md:grid-cols-5 gap-8 text-center"
+                        >
                             <div>
-                                <div class="text-3xl font-bold text-blue-600 mb-2">1</div>
-                                <p class="text-gray-700 font-semibold">Kepala Bidang</p>
+                                <div
+                                    class="text-3xl font-bold text-blue-600 mb-2"
+                                >
+                                    1
+                                </div>
+                                <p class="text-gray-700 font-semibold">
+                                    Kepala Bidang
+                                </p>
                             </div>
                             <div>
-                                <div class="text-3xl font-bold text-purple-600 mb-2">11</div>
-                                <p class="text-gray-700 font-semibold">Fungsional Perencana</p>
+                                <div
+                                    class="text-3xl font-bold text-purple-600 mb-2"
+                                >
+                                    11
+                                </div>
+                                <p class="text-gray-700 font-semibold">
+                                    Fungsional Perencana
+                                </p>
                             </div>
                             <div>
-                                <div class="text-3xl font-bold text-green-600 mb-2">3</div>
-                                <p class="text-gray-700 font-semibold">Konsultan Individu</p>
+                                <div
+                                    class="text-3xl font-bold text-teal-600 mb-2"
+                                >
+                                    1
+                                </div>
+                                <p class="text-gray-700 font-semibold">
+                                    Penelaah Teknis Kebijakan
+                                </p>
                             </div>
                             <div>
-                                <div class="text-3xl font-bold text-orange-600 mb-2">1</div>
-                                <p class="text-gray-700 font-semibold">PTH</p>
+                                <div
+                                    class="text-3xl font-bold text-green-600 mb-2"
+                                >
+                                    3
+                                </div>
+                                <p class="text-gray-700 font-semibold">
+                                    Konsultan Individu
+                                </p>
+                            </div>
+                            <div>
+                                <div
+                                    class="text-3xl font-bold text-orange-600 mb-2"
+                                >
+                                    1
+                                </div>
+                                <p class="text-gray-700 font-semibold">P3K</p>
                             </div>
                         </div>
                     </div>
@@ -578,7 +896,7 @@
         </section>
 
         <!-- Footer -->
-        <footer class="bg-gray-900 text-white py-16">
+        <footer id="contact" class="bg-gray-900 text-white py-16">
             <div class="container mx-auto px-6">
                 <div class="max-w-7xl mx-auto">
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-8">

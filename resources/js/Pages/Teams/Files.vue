@@ -71,7 +71,9 @@
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-4">
                                 <div class="flex-shrink-0">
-                                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                    <div
+                                        class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center"
+                                    >
                                         <svg
                                             class="w-6 h-6 text-blue-600"
                                             fill="none"
@@ -88,15 +90,20 @@
                                     </div>
                                 </div>
                                 <div class="flex-1">
-                                    <h3 class="text-lg font-semibold text-gray-900 group-hover:text-blue-600">
+                                    <h3
+                                        class="text-lg font-semibold text-gray-900 group-hover:text-blue-600"
+                                    >
                                         📁 Data
                                     </h3>
                                     <p class="text-sm text-gray-500">
-                                        Folder untuk menyimpan data dan dokumen tim
+                                        Folder untuk menyimpan data dan dokumen
+                                        tim
                                     </p>
                                 </div>
                             </div>
-                            <div class="flex items-center text-gray-400 group-hover:text-blue-600">
+                            <div
+                                class="flex items-center text-gray-400 group-hover:text-blue-600"
+                            >
                                 <svg
                                     class="w-5 h-5"
                                     fill="none"
@@ -124,7 +131,9 @@
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-4">
                                 <div class="flex-shrink-0">
-                                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                    <div
+                                        class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center"
+                                    >
                                         <svg
                                             class="w-6 h-6 text-green-600"
                                             fill="none"
@@ -141,15 +150,20 @@
                                     </div>
                                 </div>
                                 <div class="flex-1">
-                                    <h3 class="text-lg font-semibold text-gray-900 group-hover:text-green-600">
+                                    <h3
+                                        class="text-lg font-semibold text-gray-900 group-hover:text-green-600"
+                                    >
                                         📝 Notulen
                                     </h3>
                                     <p class="text-sm text-gray-500">
-                                        Folder untuk menyimpan notulen rapat dan hasil kegiatan
+                                        Folder untuk menyimpan notulen rapat dan
+                                        hasil kegiatan
                                     </p>
                                 </div>
                             </div>
-                            <div class="flex items-center text-gray-400 group-hover:text-green-600">
+                            <div
+                                class="flex items-center text-gray-400 group-hover:text-green-600"
+                            >
                                 <svg
                                     class="w-5 h-5"
                                     fill="none"

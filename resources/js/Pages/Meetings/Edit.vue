@@ -247,7 +247,9 @@ const formatDatetimeLocal = (date) => {
     if (!date) return "";
     const d = new Date(date);
     // Ensure we're working with Jakarta timezone
-    const jakartaTime = new Date(d.toLocaleString("en-US", {timeZone: "Asia/Jakarta"}));
+    const jakartaTime = new Date(
+        d.toLocaleString("en-US", { timeZone: "Asia/Jakarta" })
+    );
     const year = jakartaTime.getFullYear();
     const month = String(jakartaTime.getMonth() + 1).padStart(2, "0");
     const day = String(jakartaTime.getDate()).padStart(2, "0");
