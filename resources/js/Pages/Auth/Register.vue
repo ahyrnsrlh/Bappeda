@@ -1,18 +1,14 @@
 <template>
     <div
-        class="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#EAAA00] to-[#FCD34D] py-12 px-4 sm:px-6 lg:px-8"
+        class="min-h-screen flex items-center justify-center bg-white"
     >
         <div class="max-w-md w-full space-y-8">
             <div class="text-center">
-                <div
-                    class="mx-auto h-20 w-20 bg-white rounded-full flex items-center justify-center shadow-lg"
-                >
-                    <span class="text-3xl font-bold text-[#EAAA00]">B</span>
-                </div>
-                <h2 class="mt-6 text-3xl font-bold text-white">
+               
+                <h2 class="mt-6 text-3xl font-bold text-[#EAAA00]">
                     Daftar Akun Baru
                 </h2>
-                <p class="mt-2 text-sm text-white/80">
+                <p class="mt-2 text-sm text-[#EAAA00]">
                     BAPPEDA Provinsi Lampung
                 </p>
             </div>

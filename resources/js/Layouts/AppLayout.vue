@@ -8,14 +8,12 @@
                     <div class="flex items-center">
                         <div>
                             <h1 class="text-xl font-bold text-gray-900">
-                                EKONOMI BAPPEDA
+                                BAPPEDA
                             </h1>
                             <p class="text-sm text-yellow-600 font-medium">
                                 PROVINSI LAMPUNG
                             </p>
-                            <p class="text-xs text-gray-500">
-                                Sistem Manajemen Rapat
-                            </p>
+                            <p class="text-xs text-gray-500"></p>
                         </div>
                     </div>
                 </div>
@@ -93,7 +91,7 @@
                             :class="
                                 $page.url === '/dashboard'
                                     ? 'bg-yellow-500 text-white shadow-lg'
-                                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                                    : 'text-gray-600 hover:bg-yellow-100 hover:text-yellow-800'
                             "
                         >
                             <div
@@ -118,11 +116,7 @@
 
                         <!-- Agenda Rapat Section -->
                         <div class="mb-4">
-                            <h3
-                                class="px-3 mb-2 text-xs font-semibold text-gray-400 uppercase tracking-wider"
-                            >
-                                Kegiatan
-                            </h3>
+                            
 
                             <!-- Agenda Kegiatan -->
                             <Link
@@ -130,8 +124,8 @@
                                 class="group flex items-center px-3 py-3 text-sm font-medium rounded-xl transition-all duration-200 mb-1"
                                 :class="
                                     $page.url.startsWith('/meetings')
-                                        ? 'bg-blue-500 text-white shadow-lg'
-                                        : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                                        ? 'bg-yellow-500 text-white shadow-lg'
+                                        : 'text-gray-600 hover:bg-yellow-100 hover:text-yellow-800'
                                 "
                             >
                                 <div
@@ -161,8 +155,8 @@
                             class="group flex items-center px-3 py-3 text-sm font-medium rounded-xl transition-all duration-200"
                             :class="
                                 $page.url.startsWith('/teams')
-                                    ? 'bg-purple-500 text-white shadow-lg'
-                                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                                    ? 'bg-yellow-500 text-white shadow-lg'
+                                    : 'text-gray-600 hover:bg-yellow-100 hover:text-yellow-800'
                             "
                         >
                             <div
@@ -192,8 +186,8 @@
                             class="group flex items-center px-3 py-3 text-sm font-medium rounded-xl transition-all duration-200"
                             :class="
                                 $page.url.startsWith('/user-approval')
-                                    ? 'bg-indigo-500 text-white shadow-lg'
-                                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                                    ? 'bg-yellow-500 text-white shadow-lg'
+                                    : 'text-gray-600 hover:bg-yellow-100 hover:text-yellow-800'
                             "
                         >
                             <div

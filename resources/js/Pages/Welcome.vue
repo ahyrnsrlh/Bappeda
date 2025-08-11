@@ -31,19 +31,19 @@
                             @click="scrollToSection('dinas')"
                             class="text-gray-700 hover:text-yellow-600 font-medium transition-colors duration-200"
                         >
-                            Dinas Terkait
+                            Tentang
                         </button>
                         <button
                             @click="scrollToSection('staff')"
                             class="text-gray-700 hover:text-yellow-600 font-medium transition-colors duration-200"
                         >
-                            Tim Kami
+                            Struktur Organisasi
                         </button>
                         <button
                             @click="scrollToSection('contact')"
                             class="text-gray-700 hover:text-yellow-600 font-medium transition-colors duration-200"
                         >
-                            Kontak
+                            Link Terkait
                         </button>
                     </div>
 
@@ -953,11 +953,29 @@
 
                         <!-- Contact -->
                         <div>
-                            <h4 class="text-lg font-semibold mb-6">Kontak</h4>
+                            <h4 class="text-lg font-semibold mb-6">Link Terkait</h4>
                             <div class="space-y-3 text-gray-400">
-                                <p>BAPPEDA Provinsi Lampung</p>
-                                <p>Bandar Lampung</p>
-                                <p>Provinsi Lampung</p>
+                                <a 
+                                    href="https://bappeda.lampungprov.go.id" 
+                                    target="_blank" 
+                                    class="block hover:text-yellow-400 transition-colors duration-200"
+                                >
+                                    BAPPEDA Prov Lampung
+                                </a>
+                                <a 
+                                    href="https://lampung.bps.go.id/id" 
+                                    target="_blank" 
+                                    class="block hover:text-yellow-400 transition-colors duration-200"
+                                >
+                                    BPS Prov Lampung
+                                </a>
+                                <a 
+                                    href="https://data.go.id" 
+                                    target="_blank" 
+                                    class="block hover:text-yellow-400 transition-colors duration-200"
+                                >
+                                    Satu Data Indonesia
+                                </a>
                             </div>
                         </div>
                     </div>

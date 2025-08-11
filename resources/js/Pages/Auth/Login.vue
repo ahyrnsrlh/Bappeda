@@ -8,18 +8,14 @@
                 <div class="text-center">
                     <!-- Logo Section -->
                     <div class="flex justify-center mb-6">
-                        <div
-                            class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-xl"
-                        >
-                            <span class="text-2xl font-bold text-white">E</span>
-                        </div>
+                        
                     </div>
 
                     <h2 class="text-3xl font-bold text-gray-900 mb-2">
                         Selamat Datang
                     </h2>
                     <p class="text-gray-600 mb-8">
-                        Masuk ke Sistem Ekonomi BAPPEDA Provinsi Lampung
+                        Masuk ke Sistem BAPPEDA Provinsi Lampung
                     </p>
                 </div>
 
@@ -229,61 +225,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Right Side - Decorative -->
-        <div class="hidden lg:block relative w-0 flex-1">
-            <div
-                class="absolute inset-0 h-full w-full bg-gradient-to-br from-yellow-400 via-orange-400 to-red-400"
-            >
-                <!-- Background Pattern -->
-                <div class="absolute inset-0 opacity-20">
-                    <div
-                        class="absolute top-20 left-10 w-32 h-32 bg-white rounded-full blur-2xl"
-                    ></div>
-                    <div
-                        class="absolute bottom-20 right-20 w-40 h-40 bg-white rounded-full blur-2xl"
-                    ></div>
-                    <div
-                        class="absolute top-1/2 left-1/4 w-24 h-24 bg-white rounded-full blur-xl"
-                    ></div>
-                </div>
-
-                <!-- Content -->
-                <div
-                    class="relative h-full flex items-center justify-center p-12"
-                >
-                    <div class="text-center text-white max-w-lg">
-                        <h1 class="text-5xl font-bold mb-6">EKONOMI BAPPEDA</h1>
-                        <p class="text-2xl font-light mb-8 opacity-90">
-                            PROVINSI LAMPUNG
-                        </p>
-                
-
-                        <!-- Decorative Icons -->
-                        <div
-                            class="mt-12 flex justify-center space-x-8 opacity-60"
-                        >
-                            <div
-                                class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center"
-                            >
-                                <span class="text-2xl">📊</span>
-                            </div>
-                            <div
-                                class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center"
-                            >
-                                <span class="text-2xl">📈</span>
-                            </div>
-                            <div
-                                class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center"
-                            >
-                                <span class="text-2xl">🏛️</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </div>     
     </div>
 </template>
 <script setup>
