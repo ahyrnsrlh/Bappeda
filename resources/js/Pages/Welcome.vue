@@ -81,13 +81,13 @@
             class="pt-24 pb-20 bg-white relative overflow-hidden"
             style="
                 background-image: url('/storage/sigerr.png');
-                background-size: cover;
+                background-size: contain;
                 background-position: center;
                 background-repeat: no-repeat;
             "
         >
-            <!-- Logo overlay with opacity -->
-            <div class="absolute inset-0 bg-white/80"></div>
+            <!-- Logo overlay with reduced opacity for better visibility -->
+            <div class="absolute inset-0 bg-white/40"></div>
 
             <div class="container mx-auto px-6 py-20 relative z-10">
                 <div class="max-w-7xl mx-auto">
@@ -469,14 +469,18 @@
                     <div
                         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
                     >
-                        <!-- Rehan - Fungsional Perencana Madya -->
+                        <!-- Kaizan - Fungsional Perencana Madya -->
                         <div
                             class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
                         >
                             <div
-                                class="w-24 h-24 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300"
+                                class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden"
                             >
-                                <span class="text-2xl text-white">👤</span>
+                                <img
+                                    src="/storage/foto-pegawai/KAIZAN SP.,M.Si.png"
+                                    alt="Kaizan"
+                                    class="w-full h-full object-cover"
+                                />
                             </div>
                             <h4 class="text-lg font-bold text-gray-900 mb-2">
                                 Kaizan, S.P., M.Si
@@ -549,9 +553,13 @@
                             class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
                         >
                             <div
-                                class="w-24 h-24 bg-gradient-to-br from-pink-500 to-rose-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300"
+                                class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden"
                             >
-                                <span class="text-2xl text-white">👤</span>
+                                <img
+                                    src="/storage/foto-pegawai/era jayanti.JPG"
+                                    alt="Era Jayanti"
+                                    class="w-full h-full object-cover"
+                                />
                             </div>
                             <h4 class="text-lg font-bold text-gray-900 mb-2">
                                 Era Jayanti, S.STP., M.M
@@ -604,7 +612,7 @@
                                 />
                             </div>
                             <h4 class="text-lg font-bold text-gray-900 mb-2">
-                                Andre Victor Mushoni, S.E., M.M
+                                Andre Victor Muchsin, S.E., M.M
                             </h4>
                             <p
                                 class="text-indigo-600 font-semibold text-sm mb-2"
@@ -693,14 +701,18 @@
                             </p>
                         </div>
 
-                        <!-- Dhifany Sari - Fungsional Perencana Ahli Pertama -->
+                        <!-- Rita Mustika Sari - Fungsional Perencana Ahli Pertama -->
                         <div
                             class="group bg-white rounded-2xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gray-200"
                         >
                             <div
-                                class="w-24 h-24 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300"
+                                class="w-24 h-24 rounded-full mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden"
                             >
-                                <span class="text-2xl text-white">👤</span>
+                                <img
+                                    src="/storage/foto-pegawai/RITA MUSTIKA SARI S.Si.png"
+                                    alt="Rita Mustika Sari"
+                                    class="w-full h-full object-cover"
+                                />
                             </div>
                             <h4 class="text-lg font-bold text-gray-900 mb-2">
                                 Rita Mustika Sari, S.Si
