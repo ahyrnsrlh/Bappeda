@@ -917,7 +917,7 @@
                             <div class="flex items-center mb-6">
                                 <div>
                                     <h3 class="text-xl font-bold">
-                                        BAPPEDA
+                                        `BAPPEDA
                                     </h3>
                                     <p class="text-white font-medium">
                                         PROVINSI LAMPUNG
