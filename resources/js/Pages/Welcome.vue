@@ -908,7 +908,7 @@
         </section>
 
         <!-- Footer -->
-        <footer id="contact" class="bg-gray-900 text-white py-16">
+        <footer id="contact" class="bg-yellow-600 text-white py-16">
             <div class="container mx-auto px-6">
                 <div class="max-w-7xl mx-auto">
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -917,14 +917,14 @@
                             <div class="flex items-center mb-6">
                                 <div>
                                     <h3 class="text-xl font-bold">
-                                        EKONOMI BAPPEDA
+                                        BAPPEDA
                                     </h3>
-                                    <p class="text-yellow-400 font-medium">
+                                    <p class="text-white font-medium">
                                         PROVINSI LAMPUNG
                                     </p>
                                 </div>
                             </div>
-                            <p class="text-gray-400 leading-relaxed mb-6">
+                            <p class="text-white leading-relaxed mb-6">
                                 Sistem Manajemen Rapat Bidang Perekonomian dan
                                 Pembangunan BAPPEDA Provinsi Lampung
                             </p>
@@ -938,13 +938,13 @@
                             <div class="space-y-3">
                                 <Link
                                     href="/dashboard"
-                                    class="block text-gray-400 hover:text-white transition-colors"
+                                    class="block text-white hover:text-white transition-colors"
                                 >
                                     Dashboard
                                 </Link>
                                 <Link
                                     href="/meetings"
-                                    class="block text-gray-400 hover:text-white transition-colors"
+                                    class="block text-white hover:text-white transition-colors"
                                 >
                                     Jadwal Rapat
                                 </Link>
@@ -953,25 +953,27 @@
 
                         <!-- Contact -->
                         <div>
-                            <h4 class="text-lg font-semibold mb-6">Link Terkait</h4>
-                            <div class="space-y-3 text-gray-400">
-                                <a 
-                                    href="https://bappeda.lampungprov.go.id" 
-                                    target="_blank" 
+                            <h4 class="text-lg font-semibold mb-6">
+                                Link Terkait
+                            </h4>
+                            <div class="space-y-3 text-white">
+                                <a
+                                    href="https://bappeda.lampungprov.go.id"
+                                    target="_blank"
                                     class="block hover:text-yellow-400 transition-colors duration-200"
                                 >
                                     BAPPEDA Prov Lampung
                                 </a>
-                                <a 
-                                    href="https://lampung.bps.go.id/id" 
-                                    target="_blank" 
+                                <a
+                                    href="https://lampung.bps.go.id/id"
+                                    target="_blank"
                                     class="block hover:text-yellow-400 transition-colors duration-200"
                                 >
                                     BPS Prov Lampung
                                 </a>
-                                <a 
-                                    href="https://data.go.id" 
-                                    target="_blank" 
+                                <a
+                                    href="https://data.go.id"
+                                    target="_blank"
                                     class="block hover:text-yellow-400 transition-colors duration-200"
                                 >
                                     Satu Data Indonesia
@@ -981,7 +983,7 @@
                     </div>
 
                     <div
-                        class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400"
+                        class="border-t border-white mt-12 pt-8 text-center text-white"
                     >
                         <p>
                             &copy; 2025 BAPPEDA Provinsi Lampung. All rights

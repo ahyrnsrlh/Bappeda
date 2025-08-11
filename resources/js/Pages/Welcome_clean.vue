@@ -10,7 +10,7 @@
                         <div class="flex items-center">
                             <div>
                                 <h1 class="text-xl font-bold text-gray-900">
-                                    EKONOMI BAPPEDA
+                                    BAPPEDA
                                 </h1>
                                 <p class="text-sm text-yellow-600 font-medium">
                                     PROVINSI LAMPUNG
@@ -358,7 +358,7 @@
         </section>
 
         <!-- Footer -->
-        <footer class="bg-gray-900 text-white py-16">
+        <footer class="bg-yellow-400 text-white py-16">
             <div class="container mx-auto px-6">
                 <div class="max-w-7xl mx-auto">
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -369,7 +369,7 @@
                                     <h3 class="text-xl font-bold">
                                         EKONOMI BAPPEDA
                                     </h3>
-                                    <p class="text-yellow-400 font-medium">
+                                    <p class="text-white font-medium">
                                         PROVINSI LAMPUNG
                                     </p>
                                 </div>
