@@ -514,7 +514,7 @@
                         </Link>
 
                         <Link
-                            href="/files/create"
+                            href="/file-management/create"
                             class="group relative overflow-hidden bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white rounded-xl p-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
                         >
                             <div class="flex items-center justify-center mb-2">

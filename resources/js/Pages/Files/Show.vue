@@ -29,7 +29,7 @@
                     </Link>
 
                     <a
-                        :href="`/files/${file.id}/download`"
+                        :href="route('files.download', file.id)"
                         class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700"
                     >
                         <svg
@@ -50,7 +50,7 @@
 
                     <Link
                         v-if="canEdit"
-                        :href="`/files/${file.id}/edit`"
+                        :href="route('files.edit', file.id)"
                         class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700"
                     >
                         Edit
@@ -220,7 +220,7 @@
                     <div class="flex space-x-3">
                         <Link
                             v-if="canEdit"
-                            :href="`/files/${file.id}/edit`"
+                            :href="route('files.edit', file.id)"
                             class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
                         >
                             Edit File
@@ -258,10 +258,7 @@ const canEdit = computed(() => {
 
 const canDelete = computed(() => {
     const user = page.props.auth.user;
-    return (
-        user &&
-        (props.file.uploaded_by === user.id || user.role === "KI")
-    );
+    return user && (props.file.uploaded_by === user.id || user.role === "KI");
 });
 
 const isImage = computed(() => {
@@ -298,7 +295,7 @@ const getTypeLabel = (type) => {
 
 const deleteFile = () => {
     if (confirm("Apakah Anda yakin ingin menghapus file ini?")) {
-        router.delete(`/files/${props.file.id}`);
+        router.delete(route("files.destroy", props.file.id));
     }
 };
 </script>

@@ -86,9 +86,33 @@ class FileController extends Controller
         try {
             $teams = Team::all();
             
+            // Convert team code to team ID if provided
+            $selectedTeamId = null;
+            if ($request->team) {
+                // Try to find team by code (new format first)
+                $selectedTeam = Team::where('code', $request->team)->first();
+                
+                // If not found and it's legacy code, map to new code
+                if (!$selectedTeam) {
+                    $legacyMapping = [
+                        'tim_1' => 'tim_kemiskinan',
+                        'tim_2' => 'tim_industri_psn', 
+                        'tim_3' => 'tim_investasi',
+                        'tim_4' => 'tim_csr',
+                        'tim_5' => 'tim_dbh'
+                    ];
+                    
+                    if (isset($legacyMapping[$request->team])) {
+                        $selectedTeam = Team::where('code', $legacyMapping[$request->team])->first();
+                    }
+                }
+                
+                $selectedTeamId = $selectedTeam ? $selectedTeam->id : null;
+            }
+            
             return Inertia::render('Files/Create', [
                 'teams' => $teams,
-                'selectedTeam' => $request->team,
+                'selectedTeam' => $selectedTeamId,
                 'selectedFolder' => $request->folder,
             ]);
         } catch (\Exception $e) {
@@ -175,7 +199,7 @@ class FileController extends Controller
                     'team_id' => $teamId,
                 ]);
 
-                return redirect()->route('files.index')
+                return redirect()->route('dashboard')
                     ->with('success', 'Notulen berhasil disimpan dengan ' . count($uploadedFiles) . ' lampiran.');
 
             } else {
@@ -192,6 +216,8 @@ class FileController extends Controller
                 $filename = time() . '_' . $file->getClientOriginalName();
                 $path = $file->storeAs('files', $filename, 'public');
 
+                $teamId = $request->team_id ?: Auth::user()->team_id;
+
                 File::create([
                     'original_name' => $file->getClientOriginalName(),
                     'filename' => $filename,
@@ -202,20 +228,40 @@ class FileController extends Controller
                     'type' => $request->type,
                     'folder_type' => $request->folder_type,
                     'uploaded_by' => Auth::id(),
-                    'team_id' => $request->team_id ?: Auth::user()->team_id,
+                    'team_id' => $teamId,
                 ]);
 
-                // Redirect based on context
-                if ($request->team && $request->folder_type) {
-                    // Convert team role to team code for redirect
-                    $teamCode = $request->team;
-                    if (str_starts_with($teamCode, 'tim_')) {
-                        return redirect()->route('teams.folders', [$teamCode, $request->folder_type])
-                            ->with('success', 'File berhasil diunggah.');
+                // Redirect back to the team folder if we can derive it
+                $teamCode = null;
+                if ($teamId) {
+                    $team = Team::find($teamId);
+                    if ($team) {
+                        $teamCode = $team->code;
+                        // For legacy compatibility, check if this team code needs to be mapped to legacy format
+                        $newToLegacyMapping = [
+                            'tim_kemiskinan' => 'tim_1',
+                            'tim_industri_psn' => 'tim_2', 
+                            'tim_investasi' => 'tim_3',
+                            'tim_csr' => 'tim_4',
+                            'tim_dbh' => 'tim_5'
+                        ];
+                        
+                        // Use the team code that was passed in the request if available (maintains URL consistency)
+                        if ($request->has('original_team_code')) {
+                            $teamCode = $request->original_team_code;
+                        } else if (isset($newToLegacyMapping[$team->code])) {
+                            // Default to new format but allow legacy if that was the entry point
+                            $teamCode = $team->code;
+                        }
                     }
                 }
 
-                return redirect()->route('files.index')
+                if ($teamCode && $request->folder_type) {
+                    return redirect()->route('teams.folders', [$teamCode, $request->folder_type])
+                        ->with('success', 'File berhasil diunggah.');
+                }
+
+                return redirect()->route('dashboard')
                     ->with('success', 'File berhasil diunggah.');
             }
                 
@@ -305,7 +351,7 @@ class FileController extends Controller
             'team_id' => $request->team_id,
         ]);
 
-        return redirect()->route('files.index')
+        return redirect()->route('dashboard')
             ->with('success', 'File berhasil diperbarui.');
     }
 
@@ -328,7 +374,7 @@ class FileController extends Controller
         
         $file->delete();
 
-        return redirect()->route('files.index')
+        return redirect()->route('dashboard')
             ->with('success', 'File berhasil dihapus.');
     }
 }

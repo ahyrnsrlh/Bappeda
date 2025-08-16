@@ -212,7 +212,9 @@
                                 >
                                     File Undangan Rapat (opsional)
                                 </label>
-                                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                                <div
+                                    class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md"
+                                >
                                     <div class="space-y-1 text-center">
                                         <svg
                                             class="mx-auto h-12 w-12 text-gray-400"
@@ -238,11 +240,15 @@
                                                     name="invitation_file"
                                                     type="file"
                                                     class="sr-only"
-                                                    @change="handleInvitationFileChange"
+                                                    @change="
+                                                        handleInvitationFileChange
+                                                    "
                                                     accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
                                                 />
                                             </label>
-                                            <p class="pl-1">atau drag and drop</p>
+                                            <p class="pl-1">
+                                                atau drag and drop
+                                            </p>
                                         </div>
                                         <p class="text-xs text-gray-500">
                                             PDF, DOC, DOCX, JPG, PNG hingga 10MB
@@ -268,7 +274,9 @@
                                                 d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                                             />
                                         </svg>
-                                        <span class="ml-2 text-sm text-gray-700">
+                                        <span
+                                            class="ml-2 text-sm text-gray-700"
+                                        >
                                             {{ form.invitation_file.name }}
                                         </span>
                                         <button
@@ -276,8 +284,18 @@
                                             @click="removeInvitationFile"
                                             class="ml-auto text-red-500 hover:text-red-700"
                                         >
-                                            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                            <svg
+                                                class="h-4 w-4"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M6 18L18 6M6 6l12 12"
+                                                />
                                             </svg>
                                         </button>
                                     </div>
@@ -343,19 +361,26 @@ const handleInvitationFileChange = (event) => {
     if (file) {
         // Validate file size (10MB)
         if (file.size > 10 * 1024 * 1024) {
-            alert('Ukuran file tidak boleh lebih dari 10MB');
+            alert("Ukuran file tidak boleh lebih dari 10MB");
             return;
         }
-        
+
         // Validate file type
-        const allowedTypes = ['application/pdf', 'application/msword', 
-                             'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-                             'image/jpeg', 'image/jpg', 'image/png'];
+        const allowedTypes = [
+            "application/pdf",
+            "application/msword",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "image/jpeg",
+            "image/jpg",
+            "image/png",
+        ];
         if (!allowedTypes.includes(file.type)) {
-            alert('Tipe file tidak didukung. Gunakan PDF, DOC, DOCX, JPG, atau PNG');
+            alert(
+                "Tipe file tidak didukung. Gunakan PDF, DOC, DOCX, JPG, atau PNG"
+            );
             return;
         }
-        
+
         form.invitation_file = file;
     }
 };
@@ -363,9 +388,9 @@ const handleInvitationFileChange = (event) => {
 const removeInvitationFile = () => {
     form.invitation_file = null;
     // Reset file input
-    const fileInput = document.getElementById('invitation_file');
+    const fileInput = document.getElementById("invitation_file");
     if (fileInput) {
-        fileInput.value = '';
+        fileInput.value = "";
     }
 };
 
@@ -373,18 +398,20 @@ const submit = () => {
     processing.value = true;
 
     // Pastikan participant_teams adalah array
-    const participantTeams = Array.isArray(form.participant_teams) ? form.participant_teams : [];
+    const participantTeams = Array.isArray(form.participant_teams)
+        ? form.participant_teams
+        : [];
 
     // Create FormData for file upload
     const formData = new FormData();
-    Object.keys(form).forEach(key => {
-        if (key === 'participant_teams') {
+    Object.keys(form).forEach((key) => {
+        if (key === "participant_teams") {
             // Kirim sebagai array, bukan JSON string
             participantTeams.forEach((teamId, index) => {
                 formData.append(`participant_teams[${index}]`, teamId);
             });
-        } else if (key === 'invitation_file' && form[key]) {
-            formData.append('invitation_file', form[key]);
+        } else if (key === "invitation_file" && form[key]) {
+            formData.append("invitation_file", form[key]);
         } else if (form[key] !== null) {
             formData.append(key, form[key]);
         }

@@ -180,7 +180,12 @@
                                 </div>
                                 <div class="flex space-x-2">
                                     <a
-                                        :href="`/files/${attachment.id}/download`"
+                                        :href="
+                                            route(
+                                                'files.download',
+                                                attachment.id
+                                            )
+                                        "
                                         class="inline-flex items-center px-3 py-1 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
                                     >
                                         <svg

@@ -222,7 +222,12 @@
                                                     />
                                                 </svg>
                                                 <a
-                                                    :href="`/files/${attachment.id}/download`"
+                                                    :href="
+                                                        route(
+                                                            'files.download',
+                                                            attachment.id
+                                                        )
+                                                    "
                                                     class="hover:underline"
                                                 >
                                                     {{

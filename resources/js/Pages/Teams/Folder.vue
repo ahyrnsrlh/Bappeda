@@ -34,7 +34,9 @@
                             <span class="mr-2">{{ teamName }}</span>
                             <span class="text-gray-400">→</span>
                             <span class="ml-2">{{ folderDisplayName }}</span>
-                            <span class="ml-4 text-sm bg-gray-100 px-2 py-1 rounded-full">
+                            <span
+                                class="ml-4 text-sm bg-gray-100 px-2 py-1 rounded-full"
+                            >
                                 {{ files.length }} file ditemukan
                             </span>
                         </p>
@@ -182,7 +184,7 @@
                             <div class="flex items-center space-x-2">
                                 <!-- Download button -->
                                 <a
-                                    :href="`/files/${file.id}/download`"
+                                    :href="route('files.download', file.id)"
                                     class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-green-600 bg-green-50 rounded-lg hover:bg-green-100 transition-colors duration-200"
                                     download
                                 >
@@ -234,10 +236,7 @@
             </div>
 
             <!-- Empty state -->
-            <div
-                v-else
-                class="bg-white rounded-xl shadow-lg p-12 text-center"
-            >
+            <div v-else class="bg-white rounded-xl shadow-lg p-12 text-center">
                 <div class="w-16 h-16 mx-auto mb-4">
                     <svg
                         class="w-full h-full text-gray-400"
@@ -308,6 +307,12 @@ const page = usePage();
 
 const teamName = computed(() => {
     const teamNames = {
+        tim_kemiskinan: "Tim Kerja Penanggulangan Kemiskinan",
+        tim_industri_psn: "Tim Kerja Kawasan Industri & PSN",
+        tim_investasi: "Tim Kerja Peluang Investasi",
+        tim_csr: "Tim Kerja CSR/TJSL",
+        tim_dbh: "Tim Kerja DBH Perkebunan",
+        // Support legacy codes for backward compatibility
         tim_1: "Tim Kerja Penanggulangan Kemiskinan",
         tim_2: "Tim Kerja Kawasan Industri & PSN",
         tim_3: "Tim Kerja Peluang Investasi",
@@ -328,7 +333,17 @@ const folderDisplayName = computed(() => {
 const canUpload = computed(() => {
     const userRole = page.props.auth.user?.role;
     // KI bisa upload ke semua tim, tim hanya bisa upload ke tim sendiri
-    return userRole === "KI" || userRole === props.team;
+    // Support both legacy (tim_1, tim_2, etc.) and new codes (tim_kemiskinan, etc.)
+    const teamRoleMapping = {
+        tim_kemiskinan: 'tim_1',
+        tim_industri_psn: 'tim_2', 
+        tim_investasi: 'tim_3',
+        tim_csr: 'tim_4',
+        tim_dbh: 'tim_5'
+    };
+    
+    const mappedTeamRole = teamRoleMapping[props.team] || props.team;
+    return userRole === "KI" || userRole === mappedTeamRole;
 });
 
 const canManageFile = (file) => {
@@ -336,7 +351,9 @@ const canManageFile = (file) => {
     // User bisa mengelola file miliknya sendiri atau KI bisa mengelola semua file
     return (
         user &&
-        (file.uploaded_by === user.id || user.role === "KI" || user.role === "kabid")
+        (file.uploaded_by === user.id ||
+            user.role === "KI" ||
+            user.role === "kabid")
     );
 };
 
@@ -361,7 +378,11 @@ const getTeamLabel = (role) => {
 };
 
 const deleteFile = (file) => {
-    if (confirm(`Apakah Anda yakin ingin menghapus file "${file.original_name}"?`)) {
+    if (
+        confirm(
+            `Apakah Anda yakin ingin menghapus file "${file.original_name}"?`
+        )
+    ) {
         router.delete(`/file-management/${file.id}`, {
             onSuccess: () => {
                 // File deleted successfully

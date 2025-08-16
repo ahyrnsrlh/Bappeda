@@ -38,7 +38,7 @@
                     <!-- Upload button (hanya untuk tim sendiri atau KI) -->
                     <div v-if="canUpload" class="flex items-center space-x-3">
                         <Link
-                            :href="route('files.create')"
+                            :href="route('files.create', { team: team })"
                             class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white font-medium rounded-lg hover:from-yellow-600 hover:to-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition-all duration-200 shadow-lg hover:shadow-xl"
                         >
                             <svg
@@ -202,6 +202,12 @@ const page = usePage();
 
 const teamName = computed(() => {
     const teamNames = {
+        tim_kemiskinan: "Tim Kerja Penanggulangan Kemiskinan",
+        tim_industri_psn: "Tim Kerja Kawasan Industri & PSN",
+        tim_investasi: "Tim Kerja Peluang Investasi",
+        tim_csr: "Tim Kerja CSR/TJSL",
+        tim_dbh: "Tim Kerja DBH Perkebunan",
+        // Support legacy codes for backward compatibility
         tim_1: "Tim Kerja Penanggulangan Kemiskinan",
         tim_2: "Tim Kerja Kawasan Industri & PSN",
         tim_3: "Tim Kerja Peluang Investasi",
@@ -214,6 +220,16 @@ const teamName = computed(() => {
 const canUpload = computed(() => {
     const userRole = page.props.auth.user?.role;
     // KI bisa upload ke semua tim, tim hanya bisa upload ke tim sendiri
-    return userRole === "KI" || userRole === props.team;
+    // Support both legacy (tim_1, tim_2, etc.) and new codes (tim_kemiskinan, etc.)
+    const teamRoleMapping = {
+        tim_kemiskinan: "tim_1",
+        tim_industri_psn: "tim_2",
+        tim_investasi: "tim_3",
+        tim_csr: "tim_4",
+        tim_dbh: "tim_5",
+    };
+
+    const mappedTeamRole = teamRoleMapping[props.team] || props.team;
+    return userRole === "KI" || userRole === mappedTeamRole;
 });
 </script>

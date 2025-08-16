@@ -44,7 +44,9 @@
                     <h3
                         class="text-lg leading-6 font-medium text-gray-900 mb-6"
                     >
-                        <span v-if="form.folder_type === 'notulen'">Upload Notulen Rapat</span>
+                        <span v-if="form.folder_type === 'notulen'"
+                            >Upload Notulen Rapat</span
+                        >
                         <span v-else>Upload File Baru</span>
                     </h3>
 
@@ -79,14 +81,18 @@
                         </div>
 
                         <!-- Notulen-specific fields -->
-                        <div v-if="form.folder_type === 'notulen'" class="space-y-6">
+                        <div
+                            v-if="form.folder_type === 'notulen'"
+                            class="space-y-6"
+                        >
                             <!-- Title -->
                             <div>
                                 <label
                                     for="title"
                                     class="block text-sm font-medium text-gray-700"
                                 >
-                                    Judul Notulen <span class="text-red-500">*</span>
+                                    Judul Notulen
+                                    <span class="text-red-500">*</span>
                                 </label>
                                 <div class="mt-1">
                                     <input
@@ -115,7 +121,8 @@
                                     for="content"
                                     class="block text-sm font-medium text-gray-700"
                                 >
-                                    Isi Notulen <span class="text-red-500">*</span>
+                                    Isi Notulen
+                                    <span class="text-red-500">*</span>
                                 </label>
                                 <div class="mt-1">
                                     <textarea
@@ -125,7 +132,8 @@
                                         required
                                         class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                                         :class="{
-                                            'border-red-300': form.errors.content,
+                                            'border-red-300':
+                                                form.errors.content,
                                         }"
                                         placeholder="Tuliskan isi notulen rapat secara detail..."
                                     ></textarea>
@@ -181,7 +189,9 @@
                                                         type="file"
                                                         multiple
                                                         class="sr-only"
-                                                        @change="handleFileUpload"
+                                                        @change="
+                                                            handleFileUpload
+                                                        "
                                                         accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png,.gif"
                                                     />
                                                 </label>
@@ -211,7 +221,9 @@
                                         class="border border-gray-200 rounded-md divide-y divide-gray-200"
                                     >
                                         <li
-                                            v-for="(file, index) in selectedFiles"
+                                            v-for="(
+                                                file, index
+                                            ) in selectedFiles"
                                             :key="index"
                                             class="pl-3 pr-4 py-3 flex items-center justify-between text-sm"
                                         >
@@ -239,7 +251,11 @@
                                                 <span
                                                     class="ml-2 text-gray-400 text-xs"
                                                 >
-                                                    ({{ formatFileSize(file.size) }})
+                                                    ({{
+                                                        formatFileSize(
+                                                            file.size
+                                                        )
+                                                    }})
                                                 </span>
                                             </div>
                                             <div class="ml-4 flex-shrink-0">
@@ -331,9 +347,10 @@
                                                 d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
                                             />
                                         </svg>
-                                        <span class="ml-2 text-sm text-gray-900">{{
-                                            form.file.name
-                                        }}</span>
+                                        <span
+                                            class="ml-2 text-sm text-gray-900"
+                                            >{{ form.file.name }}</span
+                                        >
                                         <span class="ml-2 text-sm text-gray-500"
                                             >({{
                                                 formatFileSize(form.file.size)
@@ -444,14 +461,22 @@
                                 type="submit"
                                 :disabled="form.processing"
                                 class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50"
-                                :class="form.folder_type === 'notulen' ? 'bg-green-600 hover:bg-green-700 focus:ring-green-500' : 'bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500'"
+                                :class="
+                                    form.folder_type === 'notulen'
+                                        ? 'bg-green-600 hover:bg-green-700 focus:ring-green-500'
+                                        : 'bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500'
+                                "
                             >
                                 <span v-if="form.processing">
-                                    <span v-if="form.folder_type === 'notulen'">Menyimpan Notulen...</span>
+                                    <span v-if="form.folder_type === 'notulen'"
+                                        >Menyimpan Notulen...</span
+                                    >
                                     <span v-else>Mengupload...</span>
                                 </span>
                                 <span v-else>
-                                    <span v-if="form.folder_type === 'notulen'">Simpan Notulen</span>
+                                    <span v-if="form.folder_type === 'notulen'"
+                                        >Simpan Notulen</span
+                                    >
                                     <span v-else>Upload File</span>
                                 </span>
                             </button>
@@ -505,12 +530,12 @@ const form = useForm({
     file: null,
     type: "",
     description: "",
-    
+
     // Notulen-specific fields
     title: "",
     content: "",
     attachments: [],
-    
+
     // Common fields
     team_id: props.selectedTeam || "",
     folder_type: props.selectedFolder || "",
@@ -549,20 +574,20 @@ const formatFileSize = (bytes) => {
 
 const submit = () => {
     console.log("Form submit started", form.data());
-    
-    if (form.folder_type === 'notulen') {
+
+    if (form.folder_type === "notulen") {
         // Submit as notulen with multiple files
         const formData = new FormData();
         formData.append("title", form.title);
         formData.append("content", form.content);
         formData.append("team_id", form.team_id);
         formData.append("folder_type", form.folder_type);
-        
+
         // Append files
         selectedFiles.value.forEach((file, index) => {
             formData.append(`attachments[${index}]`, file);
         });
-        
+
         form.post("/file-management", {
             data: formData,
             forceFormData: true,
