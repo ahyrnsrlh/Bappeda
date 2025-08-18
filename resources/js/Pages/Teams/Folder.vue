@@ -5,7 +5,7 @@
             <div class="mb-8">
                 <div class="flex items-center mb-4">
                     <Link
-                        :href="`/teams/${team}/files`"
+                        :href="route('teams.files', team)"
                         class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors duration-200 mr-4"
                     >
                         <svg
@@ -45,7 +45,7 @@
                     <div class="flex items-center space-x-3">
                         <Link
                             v-if="canUpload"
-                            :href="`/file-management/create?team=${team}&folder=${folder}`"
+                            :href="route('files.create', { team: team, folder: folder })"
                             class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white font-medium rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all duration-200 shadow-lg"
                         >
                             <svg
@@ -260,7 +260,7 @@
                 </p>
                 <Link
                     v-if="canUpload"
-                    :href="`/file-management/create?team=${team}&folder=${folder}`"
+                    :href="route('files.create', { team: team, folder: folder })"
                     class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white font-medium rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all duration-200"
                 >
                     <svg

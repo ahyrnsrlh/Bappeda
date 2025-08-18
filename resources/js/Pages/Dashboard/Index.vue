@@ -570,7 +570,7 @@
                         </Link>
 
                         <Link
-                            href="/files"
+                            :href="route('files.index')"
                             class="group relative overflow-hidden bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white rounded-xl p-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
                         >
                             <div class="flex items-center justify-center mb-2">

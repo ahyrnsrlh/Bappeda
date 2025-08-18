@@ -5,7 +5,7 @@
             <div class="mb-8">
                 <div class="flex items-center mb-4">
                     <Link
-                        href="/teams"
+                        :href="route('teams.index')"
                         class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors duration-200 mr-4"
                     >
                         <svg
@@ -64,7 +64,7 @@
             <div class="bg-white rounded-xl shadow-lg overflow-hidden">
                 <!-- Data Folder -->
                 <Link
-                    :href="`/teams/${team}/folders/data`"
+                    :href="route('teams.folders', [team, 'data'])"
                     class="group border-b border-gray-200 hover:bg-gray-50 transition-colors duration-200 block"
                 >
                     <div class="px-6 py-4">
@@ -124,7 +124,7 @@
 
                 <!-- Notulen Folder -->
                 <Link
-                    :href="`/teams/${team}/folders/notulen`"
+                    :href="route('teams.folders', [team, 'notulen'])"
                     class="group hover:bg-gray-50 transition-colors duration-200 block"
                 >
                     <div class="px-6 py-4">

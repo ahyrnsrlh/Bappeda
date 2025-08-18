@@ -6,7 +6,7 @@
                 <h2 class="text-2xl font-bold text-gray-900">Tim Kerja</h2>
                 <Link
                     v-if="canUploadFile"
-                    href="/file-management/create"
+                    :href="route('files.create')"
                     class="inline-flex items-center px-4 py-2 bg-yellow-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700"
                 >
                     Upload File
@@ -56,13 +56,35 @@
                         <label class="block text-sm font-medium text-gray-700"
                             >Pencarian</label
                         >
-                        <input
-                            v-model="filters.search"
-                            @input="applyFilters"
-                            type="text"
-                            placeholder="Cari nama file..."
-                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                        />
+                        <div class="relative mt-1">
+                            <input
+                                v-model="filters.search"
+                                @input="debouncedSearch"
+                                type="text"
+                                placeholder="Cari nama file atau deskripsi..."
+                                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 pr-10"
+                            />
+                            <button
+                                v-if="filters.search"
+                                @click="clearSearch"
+                                class="absolute inset-y-0 right-0 flex items-center pr-3"
+                                type="button"
+                            >
+                                <svg
+                                    class="h-4 w-4 text-gray-400 hover:text-gray-600"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -249,7 +271,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from "vue";
+import { ref, reactive, computed, onMounted } from "vue";
 import { Link, router, usePage } from "@inertiajs/vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
 
@@ -262,14 +284,20 @@ const props = defineProps({
         type: Array,
         default: () => [],
     },
+    filters: {
+        type: Object,
+        default: () => ({}),
+    },
 });
 
 const page = usePage();
+let searchTimeout = null;
 
+// Initialize filters with passed values or defaults
 const filters = reactive({
-    team_id: "",
-    type: "",
-    search: "",
+    team_id: props.filters?.team_id || "",
+    type: props.filters?.type || "",
+    search: props.filters?.search || "",
 });
 
 const applyFilters = () => {
@@ -277,6 +305,23 @@ const applyFilters = () => {
         preserveState: true,
         replace: true,
     });
+};
+
+// Debounced search function
+const debouncedSearch = () => {
+    if (searchTimeout) {
+        clearTimeout(searchTimeout);
+    }
+    
+    searchTimeout = setTimeout(() => {
+        applyFilters();
+    }, 500); // 500ms delay
+};
+
+// Clear search function
+const clearSearch = () => {
+    filters.search = "";
+    applyFilters();
 };
 
 const getTypeBadgeClass = (type) => {

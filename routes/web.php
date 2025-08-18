@@ -62,23 +62,28 @@ Route::middleware('auth')->group(function () {
     // File Management
     Route::prefix('file-management')->group(function () {
         Route::get('/create', [FileController::class, 'create'])
-            ->middleware('role:KI,tim_1,tim_2,tim_3,tim_4,tim_5')
+            ->middleware('role:KI,tim_1,tim_2,tim_3,tim_4,tim_5,tim_kemiskinan,tim_industri_psn,tim_investasi,tim_csr,tim_dbh')
             ->name('files.create');
         Route::post('/', [FileController::class, 'store'])
-            ->middleware('role:KI,tim_1,tim_2,tim_3,tim_4,tim_5')
+            ->middleware('role:KI,tim_1,tim_2,tim_3,tim_4,tim_5,tim_kemiskinan,tim_industri_psn,tim_investasi,tim_csr,tim_dbh')
             ->name('files.store');
         Route::get('/{file}', [FileController::class, 'show'])->name('files.show');
         Route::get('/{file}/edit', [FileController::class, 'edit'])
-            ->middleware('role:KI,tim_1,tim_2,tim_3,tim_4,tim_5')
+            ->middleware('role:KI,tim_1,tim_2,tim_3,tim_4,tim_5,tim_kemiskinan,tim_industri_psn,tim_investasi,tim_csr,tim_dbh')
             ->name('files.edit');
         Route::put('/{file}', [FileController::class, 'update'])
-            ->middleware('role:KI,tim_1,tim_2,tim_3,tim_4,tim_5')
+            ->middleware('role:KI,tim_1,tim_2,tim_3,tim_4,tim_5,tim_kemiskinan,tim_industri_psn,tim_investasi,tim_csr,tim_dbh')
             ->name('files.update');
         Route::get('/{file}/download', [FileController::class, 'download'])->name('files.download');
         Route::delete('/{file}', [FileController::class, 'destroy'])
-            ->middleware('role:KI,tim_1,tim_2,tim_3,tim_4,tim_5')
+            ->middleware('role:KI,tim_1,tim_2,tim_3,tim_4,tim_5,tim_kemiskinan,tim_industri_psn,tim_investasi,tim_csr,tim_dbh')
             ->name('files.destroy');
     });
+    
+    // Files index route (Kelola File from dashboard)
+    Route::get('/files', [FileController::class, 'index'])
+        ->middleware('role:KI,tim_1,tim_2,tim_3,tim_4,tim_5,tim_kemiskinan,tim_industri_psn,tim_investasi,tim_csr,tim_dbh,kabid')
+        ->name('files.index');
 
     // User Approval (Kepala Bidang only)
     Route::middleware('role:kabid')->group(function () {

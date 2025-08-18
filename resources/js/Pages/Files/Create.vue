@@ -442,6 +442,12 @@
                                 </option>
                             </select>
                             <div
+                                v-if="form.team_id === '' && props.selectedTeam"
+                                class="text-blue-600 text-sm mt-1"
+                            >
+                                Tim yang dipilih: {{ getSelectedTeamName() }}
+                            </div>
+                            <div
                                 v-if="form.errors.team_id"
                                 class="text-red-600 text-sm mt-1"
                             >
@@ -572,8 +578,22 @@ const formatFileSize = (bytes) => {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
 };
 
+const getSelectedTeamName = () => {
+    if (props.selectedTeam) {
+        const team = props.teams.find(t => t.id === props.selectedTeam);
+        return team ? team.name : 'Tim tidak ditemukan';
+    }
+    return '';
+};
+
 const submit = () => {
     console.log("Form submit started", form.data());
+    
+    // Ensure team_id is set if selectedTeam is available but form.team_id is empty
+    if (!form.team_id && props.selectedTeam) {
+        form.team_id = props.selectedTeam;
+        console.log("Auto-assigned team_id:", form.team_id);
+    }
 
     if (form.folder_type === "notulen") {
         // Submit as notulen with multiple files
@@ -588,7 +608,7 @@ const submit = () => {
             formData.append(`attachments[${index}]`, file);
         });
 
-        form.post("/file-management", {
+        form.post(route('files.store'), {
             data: formData,
             forceFormData: true,
             onSuccess: () => {
@@ -603,7 +623,7 @@ const submit = () => {
         });
     } else {
         // Submit as regular file
-        form.post("/file-management", {
+        form.post(route('files.store'), {
             onSuccess: () => {
                 console.log("Upload successful");
             },

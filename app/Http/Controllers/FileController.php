@@ -33,7 +33,7 @@ class FileController extends Controller
             $query = File::with(['uploadedBy', 'team']);
             
             // Filter berdasarkan role
-            if (in_array($user->role, ['tim_1', 'tim_2', 'tim_3', 'tim_4', 'tim_5'])) {
+            if (in_array($user->role, ['tim_1', 'tim_2', 'tim_3', 'tim_4', 'tim_5', 'tim_kemiskinan', 'tim_industri_psn', 'tim_investasi', 'tim_csr', 'tim_dbh'])) {
                 // Tim kerja bisa melihat semua file tim kerja, bukan hanya milik mereka
                 // Tidak ada filter khusus - mereka bisa lihat semua
             }
@@ -49,10 +49,19 @@ class FileController extends Controller
             }
             
             if ($request->search) {
-                $query->where(function($q) use ($request) {
-                    $q->where('original_name', 'like', '%' . $request->search . '%')
-                      ->orWhere('description', 'like', '%' . $request->search . '%');
-                });
+                $searchTerm = trim($request->search);
+                if ($searchTerm) {
+                    $query->where(function($q) use ($searchTerm) {
+                        $q->where('original_name', 'like', '%' . $searchTerm . '%')
+                          ->orWhere('description', 'like', '%' . $searchTerm . '%')
+                          ->orWhereHas('uploader', function($userQuery) use ($searchTerm) {
+                              $userQuery->where('name', 'like', '%' . $searchTerm . '%');
+                          })
+                          ->orWhereHas('team', function($teamQuery) use ($searchTerm) {
+                              $teamQuery->where('name', 'like', '%' . $searchTerm . '%');
+                          });
+                    });
+                }
             }
             
             $files = $query->orderBy('created_at', 'desc')->paginate(10);
@@ -63,6 +72,11 @@ class FileController extends Controller
             return Inertia::render('Files/Index', [
                 'files' => $files,
                 'teams' => $teams,
+                'filters' => [
+                    'search' => $request->search,
+                    'team_id' => $request->team_id,
+                    'type' => $request->type,
+                ],
             ]);
             
         } catch (\Exception $e) {
@@ -86,7 +100,7 @@ class FileController extends Controller
         try {
             $teams = Team::all();
             
-            // Convert team code to team ID if provided
+                        // Convert team code to team ID if provided
             $selectedTeamId = null;
             if ($request->team) {
                 // Try to find team by code (new format first)
@@ -108,6 +122,31 @@ class FileController extends Controller
                 }
                 
                 $selectedTeamId = $selectedTeam ? $selectedTeam->id : null;
+            } else {
+                // If no team specified, auto-select based on user role
+                $user = Auth::user();
+                if (in_array($user->role, ['tim_1', 'tim_2', 'tim_3', 'tim_4', 'tim_5'])) {
+                    $roleToTeamMapping = [
+                        'tim_1' => 'tim_kemiskinan',
+                        'tim_2' => 'tim_industri_psn', 
+                        'tim_3' => 'tim_investasi',
+                        'tim_4' => 'tim_csr',
+                        'tim_5' => 'tim_dbh'
+                    ];
+                    
+                    $teamCode = $roleToTeamMapping[$user->role] ?? null;
+                    if ($teamCode) {
+                        $team = Team::where('code', $teamCode)->first();
+                        $selectedTeamId = $team ? $team->id : null;
+                    }
+                } else if (in_array($user->role, ['tim_kemiskinan', 'tim_industri_psn', 'tim_investasi', 'tim_csr', 'tim_dbh'])) {
+                    // Direct role to team mapping for new format
+                    $team = Team::where('code', $user->role)->first();
+                    $selectedTeamId = $team ? $team->id : null;
+                } else if ($user->team_id) {
+                    // Fallback to user's direct team_id
+                    $selectedTeamId = $user->team_id;
+                }
             }
             
             return Inertia::render('Files/Create', [
@@ -131,6 +170,14 @@ class FileController extends Controller
     public function store(Request $request)
     {
         try {
+            Log::info('FileController@store called', [
+                'user_id' => Auth::id(),
+                'user_role' => Auth::user()->role,
+                'request_data' => $request->except(['file', 'attachments']),
+                'has_file' => $request->hasFile('file'),
+                'has_attachments' => $request->hasFile('attachments')
+            ]);
+            
             // Check if this is a notulen upload
             if ($request->folder_type === 'notulen' && $request->has('title')) {
                 // Notulen upload validation
@@ -143,7 +190,39 @@ class FileController extends Controller
                     'folder_type' => 'required|in:data,notulen',
                 ]);
 
-                $teamId = $request->team_id ?: Auth::user()->team_id;
+                // Handle team assignment for notulen
+                $teamId = $request->team_id;
+                
+                // If no team_id provided, try to get it from user's role
+                if (!$teamId) {
+                    $user = Auth::user();
+                    if (in_array($user->role, ['tim_1', 'tim_2', 'tim_3', 'tim_4', 'tim_5'])) {
+                        // Map user role to team (legacy format)
+                        $roleToTeamMapping = [
+                            'tim_1' => 'tim_kemiskinan',
+                            'tim_2' => 'tim_industri_psn', 
+                            'tim_3' => 'tim_investasi',
+                            'tim_4' => 'tim_csr',
+                            'tim_5' => 'tim_dbh'
+                        ];
+                        
+                        $teamCode = $roleToTeamMapping[$user->role] ?? null;
+                        if ($teamCode) {
+                            $team = Team::where('code', $teamCode)->first();
+                            $teamId = $team ? $team->id : null;
+                        }
+                    } else if (in_array($user->role, ['tim_kemiskinan', 'tim_industri_psn', 'tim_investasi', 'tim_csr', 'tim_dbh'])) {
+                        // Direct role to team mapping for new format
+                        $team = Team::where('code', $user->role)->first();
+                        $teamId = $team ? $team->id : null;
+                    }
+                    
+                    // Fallback to user's team_id if available
+                    if (!$teamId) {
+                        $teamId = $user->team_id;
+                    }
+                }
+                
                 $uploadedFiles = [];
 
                 // Handle file attachments if any
@@ -216,7 +295,44 @@ class FileController extends Controller
                 $filename = time() . '_' . $file->getClientOriginalName();
                 $path = $file->storeAs('files', $filename, 'public');
 
-                $teamId = $request->team_id ?: Auth::user()->team_id;
+                // Handle team assignment
+                $teamId = $request->team_id;
+                
+                // If no team_id provided, try to get it from user's role
+                if (!$teamId) {
+                    $user = Auth::user();
+                    if (in_array($user->role, ['tim_1', 'tim_2', 'tim_3', 'tim_4', 'tim_5'])) {
+                        // Map user role to team (legacy format)
+                        $roleToTeamMapping = [
+                            'tim_1' => 'tim_kemiskinan',
+                            'tim_2' => 'tim_industri_psn', 
+                            'tim_3' => 'tim_investasi',
+                            'tim_4' => 'tim_csr',
+                            'tim_5' => 'tim_dbh'
+                        ];
+                        
+                        $teamCode = $roleToTeamMapping[$user->role] ?? null;
+                        if ($teamCode) {
+                            $team = Team::where('code', $teamCode)->first();
+                            $teamId = $team ? $team->id : null;
+                        }
+                    } else if (in_array($user->role, ['tim_kemiskinan', 'tim_industri_psn', 'tim_investasi', 'tim_csr', 'tim_dbh'])) {
+                        // Direct role to team mapping for new format
+                        $team = Team::where('code', $user->role)->first();
+                        $teamId = $team ? $team->id : null;
+                    }
+                    
+                    // Fallback to user's team_id if available
+                    if (!$teamId) {
+                        $teamId = $user->team_id;
+                    }
+                }
+                
+                Log::info('Team assignment result', [
+                    'selected_team_id' => $teamId,
+                    'user_role' => Auth::user()->role,
+                    'request_team_id' => $request->team_id
+                ]);
 
                 File::create([
                     'original_name' => $file->getClientOriginalName(),
@@ -232,36 +348,15 @@ class FileController extends Controller
                 ]);
 
                 // Redirect back to the team folder if we can derive it
-                $teamCode = null;
-                if ($teamId) {
+                if ($teamId && $request->folder_type) {
                     $team = Team::find($teamId);
                     if ($team) {
-                        $teamCode = $team->code;
-                        // For legacy compatibility, check if this team code needs to be mapped to legacy format
-                        $newToLegacyMapping = [
-                            'tim_kemiskinan' => 'tim_1',
-                            'tim_industri_psn' => 'tim_2', 
-                            'tim_investasi' => 'tim_3',
-                            'tim_csr' => 'tim_4',
-                            'tim_dbh' => 'tim_5'
-                        ];
-                        
-                        // Use the team code that was passed in the request if available (maintains URL consistency)
-                        if ($request->has('original_team_code')) {
-                            $teamCode = $request->original_team_code;
-                        } else if (isset($newToLegacyMapping[$team->code])) {
-                            // Default to new format but allow legacy if that was the entry point
-                            $teamCode = $team->code;
-                        }
+                        return redirect()->route('teams.folders', [$team->code, $request->folder_type])
+                            ->with('success', 'File berhasil diunggah.');
                     }
                 }
 
-                if ($teamCode && $request->folder_type) {
-                    return redirect()->route('teams.folders', [$teamCode, $request->folder_type])
-                        ->with('success', 'File berhasil diunggah.');
-                }
-
-                return redirect()->route('dashboard')
+                return redirect()->route('files.index')
                     ->with('success', 'File berhasil diunggah.');
             }
                 
