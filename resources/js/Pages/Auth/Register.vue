@@ -75,9 +75,8 @@
                             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#EAAA00] focus:border-transparent"
                         >
                             <option value="">Pilih Role</option>
-                            <option value="kabid">Kepala Bidang</option>
-                            <option value="wakabid">Wakil Kepala Bidang</option>
-                            <option value="KI">Koordinator Internal</option>
+                            <option value="kabid">Kepala Bidang</option>                            
+                            <option value="KI">Konsultan Individu</option>
                             <option value="tim_1">
                                 Tim Penanggulangan Kemiskinan
                             </option>
