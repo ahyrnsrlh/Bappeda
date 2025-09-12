@@ -17,7 +17,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('role', ['kabid', 'KI', 'tim_1', 'tim_2', 'tim_3', 'tim_4', 'tim_5'])->default('tim_1');
+            $table->enum('role', [
+                'kabid', 'KI',
+                'tim_1', 'tim_2', 'tim_3', 'tim_4', 'tim_5',
+                'tim_kemiskinan', 'tim_industri_psn', 'tim_investasi', 'tim_csr', 'tim_dbh'
+            ])->default('tim_1');
             $table->foreignId('team_id')->nullable()->constrained()->onDelete('set null');
             $table->rememberToken();
             $table->timestamps();

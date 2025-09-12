@@ -36,6 +36,11 @@ class MeetingNoteController extends Controller
      */
     public function create(Request $request)
     {
+        // Only KI can create meeting notes
+        if (Auth::user()->role !== 'KI') {
+            abort(403, 'Anda tidak memiliki izin untuk membuat notulen rapat.');
+        }
+        
         $meetings = MeetingSchedule::orderBy('meeting_date', 'desc')->get();
         $selectedMeetingId = $request->get('meeting_id');
         
@@ -50,6 +55,11 @@ class MeetingNoteController extends Controller
      */
     public function store(Request $request)
     {
+        // Only KI can create meeting notes
+        if (Auth::user()->role !== 'KI') {
+            abort(403, 'Anda tidak memiliki izin untuk membuat notulen rapat.');
+        }
+        
         $request->validate([
             'meeting_schedule_id' => 'required|exists:meeting_schedules,id',
             'title' => 'required|string|max:255',
@@ -106,9 +116,9 @@ class MeetingNoteController extends Controller
      */
     public function edit(MeetingNote $note)
     {
-        // Check if user can edit this note
-        if ($note->created_by !== Auth::id() && !in_array(Auth::user()->role, ['KI', 'kabid'])) {
-            abort(403, 'Unauthorized');
+        // Check if user can edit this note - only creator or KI
+        if ($note->created_by !== Auth::id() && Auth::user()->role !== 'KI') {
+            abort(403, 'Anda tidak memiliki izin untuk mengedit notulen ini.');
         }
         
         $meetings = MeetingSchedule::orderBy('meeting_date', 'desc')->get();
@@ -125,9 +135,9 @@ class MeetingNoteController extends Controller
      */
     public function update(Request $request, MeetingNote $note)
     {
-        // Check if user can edit this note
-        if ($note->created_by !== Auth::id() && !in_array(Auth::user()->role, ['KI', 'kabid'])) {
-            abort(403, 'Unauthorized');
+        // Check if user can edit this note - only creator or KI
+        if ($note->created_by !== Auth::id() && Auth::user()->role !== 'KI') {
+            abort(403, 'Anda tidak memiliki izin untuk mengedit notulen ini.');
         }
         
         $request->validate([
@@ -173,9 +183,9 @@ class MeetingNoteController extends Controller
      */
     public function toggleArchive(Request $request, MeetingNote $note)
     {
-        // Check if user can archive this note
-        if (!in_array(Auth::user()->role, ['KI', 'kabid'])) {
-            abort(403, 'Unauthorized');
+        // Check if user can archive this note - only KI
+        if (Auth::user()->role !== 'KI') {
+            abort(403, 'Anda tidak memiliki izin untuk mengarsipkan notulen.');
         }
         
         $request->validate([

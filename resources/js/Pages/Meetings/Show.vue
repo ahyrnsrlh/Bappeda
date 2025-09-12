@@ -325,7 +325,7 @@ const canEdit = computed(() => {
 
 const canCreateNote = computed(() => {
     const user = page.props.auth.user;
-    return user && ["KI", "kabid"].includes(user.role);
+    return user && user.role === "KI";
 });
 
 const canEditNote = (note) => {

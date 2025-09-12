@@ -17,11 +17,11 @@ class DatabaseSeeder extends Seeder
     {
         // Create Teams
         $teams = [
-            ['name' => 'Tim Kerja Penanggulangan Kemiskinan', 'code' => 'tim_1', 'description' => 'Tim Kerja Penanggulangan Kemiskinan'],
-            ['name' => 'Tim Kerja Kawasan Industri & PSN', 'code' => 'tim_2', 'description' => 'Tim Kerja Kawasan Industri & PSN (Proyek Strategis Nasional)'],
-            ['name' => 'Tim Kerja Peluang Investasi', 'code' => 'tim_3', 'description' => 'Tim Kerja Peluang Investasi'],
-            ['name' => 'Tim Kerja CSR/TJSL', 'code' => 'tim_4', 'description' => 'Tim Kerja CSR/TJSL (Corporate Social Responsibility / Tanggung Jawab Sosial dan Lingkungan)'],
-            ['name' => 'Tim Kerja DBH Perkebunan', 'code' => 'tim_5', 'description' => 'Tim Kerja DBH (Dana Bagi Hasil) Perkebunan'],
+            ['name' => 'Tim Kerja Penanggulangan Kemiskinan', 'code' => 'tim_kemiskinan', 'description' => 'Tim Kerja Penanggulangan Kemiskinan'],
+            ['name' => 'Tim Kerja Kawasan Industri & PSN', 'code' => 'tim_industri_psn', 'description' => 'Tim Kerja Kawasan Industri & PSN (Proyek Strategis Nasional)'],
+            ['name' => 'Tim Kerja Peluang Investasi', 'code' => 'tim_investasi', 'description' => 'Tim Kerja Peluang Investasi'],
+            ['name' => 'Tim Kerja CSR/TJSL', 'code' => 'tim_csr', 'description' => 'Tim Kerja CSR/TJSL (Corporate Social Responsibility / Tanggung Jawab Sosial dan Lingkungan)'],
+            ['name' => 'Tim Kerja DBH Perkebunan', 'code' => 'tim_dbh', 'description' => 'Tim Kerja DBH (Dana Bagi Hasil) Perkebunan'],
         ];
 
         foreach ($teams as $teamData) {
@@ -36,6 +36,8 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'role' => 'kabid',
                 'team_id' => null,
+                'is_approved' => true,
+                'approved_at' => now(),
             ],
             [
                 'name' => 'Konsultan Individu',
@@ -43,27 +45,53 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'role' => 'KI',
                 'team_id' => null,
+                'is_approved' => true,
+                'approved_at' => now(),
             ],
             [
-                'name' => 'Anggota Tim 1',
-                'email' => 'tim1@bappeda.com',
+                'name' => 'Anggota Tim Kemiskinan',
+                'email' => 'tim_kemiskinan@bappeda.com',
                 'password' => Hash::make('password'),
-                'role' => 'tim_1',
+                'role' => 'tim_kemiskinan',
                 'team_id' => 1,
+                'is_approved' => true,
+                'approved_at' => now(),
             ],
             [
-                'name' => 'Anggota Tim 2',
-                'email' => 'tim2@bappeda.com',
+                'name' => 'Anggota Tim Industri PSN',
+                'email' => 'tim_industri_psn@bappeda.com',
                 'password' => Hash::make('password'),
-                'role' => 'tim_2',
+                'role' => 'tim_industri_psn',
                 'team_id' => 2,
+                'is_approved' => true,
+                'approved_at' => now(),
             ],
             [
-                'name' => 'Anggota Tim 3',
-                'email' => 'tim3@bappeda.com',
+                'name' => 'Anggota Tim Investasi',
+                'email' => 'tim_investasi@bappeda.com',
                 'password' => Hash::make('password'),
-                'role' => 'tim_3',
+                'role' => 'tim_investasi',
                 'team_id' => 3,
+                'is_approved' => true,
+                'approved_at' => now(),
+            ],
+            [
+                'name' => 'Anggota Tim CSR',
+                'email' => 'tim_csr@bappeda.com',
+                'password' => Hash::make('password'),
+                'role' => 'tim_csr',
+                'team_id' => 4,
+                'is_approved' => true,
+                'approved_at' => now(),
+            ],
+            [
+                'name' => 'Anggota Tim DBH',
+                'email' => 'tim_dbh@bappeda.com',
+                'password' => Hash::make('password'),
+                'role' => 'tim_dbh',
+                'team_id' => 5,
+                'is_approved' => true,
+                'approved_at' => now(),
             ],
         ];
 

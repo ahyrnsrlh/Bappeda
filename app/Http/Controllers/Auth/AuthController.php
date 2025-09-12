@@ -65,7 +65,7 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|in:kabid,wakabid,KI,tim_1,tim_2,tim_3,tim_4,tim_5',
+            'role' => 'required|in:kabid,wakabid,KI,tim_1,tim_2,tim_3,tim_4,tim_5,tim_kemiskinan,tim_industri_psn,tim_investasi,tim_csr,tim_dbh',
             'team_id' => 'nullable|exists:teams,id',
         ]);
 

@@ -165,16 +165,12 @@ class FileController extends Controller
     public function store(Request $request)
     {
         try {
-            $user = Auth::user();
-            
             Log::info('FileController@store called', [
                 'user_id' => Auth::id(),
-                'user_role' => $user->role,
-                'user_team_id' => $user->team_id,
+                'user_role' => Auth::user()->role,
                 'request_data' => $request->except(['file', 'attachments']),
                 'has_file' => $request->hasFile('file'),
-                'has_attachments' => $request->hasFile('attachments'),
-                'folder_type' => $request->folder_type
+                'has_attachments' => $request->hasFile('attachments')
             ]);
             
             // Check if this is a notulen upload
@@ -194,28 +190,26 @@ class FileController extends Controller
                 
                 // For team users, validate that they can only upload to their own team
                 if (in_array($user->role, ['tim_1', 'tim_2', 'tim_3', 'tim_4', 'tim_5', 'tim_kemiskinan', 'tim_industri_psn', 'tim_investasi', 'tim_csr', 'tim_dbh'])) {
-                    // Get user's allowed team - prioritize team_id from user record
-                    $userTeamId = $user->team_id;
-                    
-                    // If user doesn't have team_id set, try to determine from role (for backward compatibility)
-                    if (!$userTeamId) {
-                        if (in_array($user->role, ['tim_1', 'tim_2', 'tim_3', 'tim_4', 'tim_5'])) {
-                            $roleToTeamMapping = [
-                                'tim_1' => 'tim_kemiskinan',
-                                'tim_2' => 'tim_industri_psn', 
-                                'tim_3' => 'tim_investasi',
-                                'tim_4' => 'tim_csr',
-                                'tim_5' => 'tim_dbh'
-                            ];
-                            $teamCode = $roleToTeamMapping[$user->role] ?? null;
-                            if ($teamCode) {
-                                $userTeam = Team::where('code', $teamCode)->first();
-                                $userTeamId = $userTeam ? $userTeam->id : null;
-                            }
-                        } else if (in_array($user->role, ['tim_kemiskinan', 'tim_industri_psn', 'tim_investasi', 'tim_csr', 'tim_dbh'])) {
-                            $userTeam = Team::where('code', $user->role)->first();
+                    // Get user's allowed team
+                    $userTeamId = null;
+                    if (in_array($user->role, ['tim_1', 'tim_2', 'tim_3', 'tim_4', 'tim_5'])) {
+                        $roleToTeamMapping = [
+                            'tim_1' => 'tim_kemiskinan',
+                            'tim_2' => 'tim_industri_psn', 
+                            'tim_3' => 'tim_investasi',
+                            'tim_4' => 'tim_csr',
+                            'tim_5' => 'tim_dbh'
+                        ];
+                        $teamCode = $roleToTeamMapping[$user->role] ?? null;
+                        if ($teamCode) {
+                            $userTeam = Team::where('code', $teamCode)->first();
                             $userTeamId = $userTeam ? $userTeam->id : null;
                         }
+                    } else if (in_array($user->role, ['tim_kemiskinan', 'tim_industri_psn', 'tim_investasi', 'tim_csr', 'tim_dbh'])) {
+                        $userTeam = Team::where('code', $user->role)->first();
+                        $userTeamId = $userTeam ? $userTeam->id : null;
+                    } else if ($user->team_id) {
+                        $userTeamId = $user->team_id;
                     }
                     
                     // If team_id is provided, validate it's the user's team
@@ -234,16 +228,6 @@ class FileController extends Controller
                     }
                 }
                 
-                // Validate team_id is not null before creating notulen
-                if (!$teamId) {
-                    Log::error('Team ID is null for notulen upload', [
-                        'user_id' => Auth::id(),
-                        'user_role' => $user->role,
-                        'user_team_id' => $user->team_id
-                    ]);
-                    return back()->withErrors(['team_id' => 'Tim tidak ditemukan. Silakan hubungi administrator.'])->withInput();
-                }
-                
                 // Create MeetingNote
                 $meetingNote = \App\Models\MeetingNote::create([
                     'title' => $request->title,
@@ -260,7 +244,6 @@ class FileController extends Controller
                         
                         File::create([
                             'original_name' => $attachment->getClientOriginalName(),
-                            'filename' => $fileName,
                             'file_path' => $filePath,
                             'file_size' => $attachment->getSize(),
                             'mime_type' => $attachment->getMimeType(),
@@ -288,36 +271,27 @@ class FileController extends Controller
             
             // For team users, validate that they can only upload to their own team
             if (in_array($user->role, ['tim_1', 'tim_2', 'tim_3', 'tim_4', 'tim_5', 'tim_kemiskinan', 'tim_industri_psn', 'tim_investasi', 'tim_csr', 'tim_dbh'])) {
-                // Get user's allowed team - prioritize team_id from user record
-                $userTeamId = $user->team_id;
-                
-                // If user doesn't have team_id set, try to determine from role (for backward compatibility)
-                if (!$userTeamId) {
-                    if (in_array($user->role, ['tim_1', 'tim_2', 'tim_3', 'tim_4', 'tim_5'])) {
-                        $roleToTeamMapping = [
-                            'tim_1' => 'tim_kemiskinan',
-                            'tim_2' => 'tim_industri_psn', 
-                            'tim_3' => 'tim_investasi',
-                            'tim_4' => 'tim_csr',
-                            'tim_5' => 'tim_dbh'
-                        ];
-                        $teamCode = $roleToTeamMapping[$user->role] ?? null;
-                        if ($teamCode) {
-                            $userTeam = Team::where('code', $teamCode)->first();
-                            $userTeamId = $userTeam ? $userTeam->id : null;
-                        }
-                    } else if (in_array($user->role, ['tim_kemiskinan', 'tim_industri_psn', 'tim_investasi', 'tim_csr', 'tim_dbh'])) {
-                        $userTeam = Team::where('code', $user->role)->first();
+                // Get user's allowed team
+                $userTeamId = null;
+                if (in_array($user->role, ['tim_1', 'tim_2', 'tim_3', 'tim_4', 'tim_5'])) {
+                    $roleToTeamMapping = [
+                        'tim_1' => 'tim_kemiskinan',
+                        'tim_2' => 'tim_industri_psn', 
+                        'tim_3' => 'tim_investasi',
+                        'tim_4' => 'tim_csr',
+                        'tim_5' => 'tim_dbh'
+                    ];
+                    $teamCode = $roleToTeamMapping[$user->role] ?? null;
+                    if ($teamCode) {
+                        $userTeam = Team::where('code', $teamCode)->first();
                         $userTeamId = $userTeam ? $userTeam->id : null;
                     }
+                } else if (in_array($user->role, ['tim_kemiskinan', 'tim_industri_psn', 'tim_investasi', 'tim_csr', 'tim_dbh'])) {
+                    $userTeam = Team::where('code', $user->role)->first();
+                    $userTeamId = $userTeam ? $userTeam->id : null;
+                } else if ($user->team_id) {
+                    $userTeamId = $user->team_id;
                 }
-                
-                Log::info('Team validation for regular upload', [
-                    'user_role' => $user->role,
-                    'user_team_id' => $user->team_id,
-                    'calculated_team_id' => $userTeamId,
-                    'request_team_id' => $teamId
-                ]);
                 
                 // If team_id is provided, validate it's the user's team
                 if ($teamId && $teamId != $userTeamId) {
@@ -330,23 +304,12 @@ class FileController extends Controller
                 }
             }
             
-            // Validate team_id is not null before creating file
-            if (!$teamId) {
-                Log::error('Team ID is null for file upload', [
-                    'user_id' => Auth::id(),
-                    'user_role' => $user->role,
-                    'user_team_id' => $user->team_id
-                ]);
-                return back()->withErrors(['team_id' => 'Tim tidak ditemukan. Silakan hubungi administrator.'])->withInput();
-            }
-            
             $file = $request->file('file');
             $fileName = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
             $filePath = $file->storeAs('files/' . $request->folder_type, $fileName, 'public');
             
             File::create([
                 'original_name' => $file->getClientOriginalName(),
-                'filename' => $fileName,
                 'file_path' => $filePath,
                 'file_size' => $file->getSize(),
                 'mime_type' => $file->getMimeType(),
@@ -488,6 +451,6 @@ class FileController extends Controller
             abort(404, 'File tidak ditemukan');
         }
         
-        return response()->download(storage_path('app/public/' . $file->file_path), $file->original_name);
+        return Storage::disk('public')->download($file->file_path, $file->original_name);
     }
 }
