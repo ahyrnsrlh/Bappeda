@@ -220,59 +220,82 @@ const teamName = computed(() => {
 const canUpload = computed(() => {
     const user = page.props.auth.user;
     if (!user) {
-        console.log('Teams/Files canUpload: No user found');
+        console.log("Teams/Files canUpload: No user found");
         return false;
     }
-    
-    console.log('Teams/Files canUpload check:', {
+
+    console.log("Teams/Files canUpload check:", {
         userRole: user.role,
         pageTeam: props.team,
-        userId: user.id
+        userId: user.id,
     });
-    
+
     // KI bisa upload ke semua tim
     if (user.role === "KI") {
-        console.log('Teams/Files canUpload: User is KI, allowing upload');
+        console.log("Teams/Files canUpload: User is KI, allowing upload");
         return true;
     }
-    
+
     // Kabid tidak bisa upload
     if (user.role === "kabid") {
-        console.log('Teams/Files canUpload: User is kabid, denying upload');
+        console.log("Teams/Files canUpload: User is kabid, denying upload");
         return false;
     }
-    
+
     // Tim kerja hanya bisa upload ke tim mereka sendiri
-    if (["tim_1", "tim_2", "tim_3", "tim_4", "tim_5", "tim_kemiskinan", "tim_industri_psn", "tim_investasi", "tim_csr", "tim_dbh"].includes(user.role)) {
+    if (
+        [
+            "tim_1",
+            "tim_2",
+            "tim_3",
+            "tim_4",
+            "tim_5",
+            "tim_kemiskinan",
+            "tim_industri_psn",
+            "tim_investasi",
+            "tim_csr",
+            "tim_dbh",
+        ].includes(user.role)
+    ) {
         // Check if current team page matches user's team
         let userTeamCode = null;
-        
+
         // For legacy roles, map to new team codes
         if (["tim_1", "tim_2", "tim_3", "tim_4", "tim_5"].includes(user.role)) {
             const roleToTeamMapping = {
-                'tim_1': 'tim_kemiskinan',
-                'tim_2': 'tim_industri_psn', 
-                'tim_3': 'tim_investasi',
-                'tim_4': 'tim_csr',
-                'tim_5': 'tim_dbh'
+                tim_1: "tim_kemiskinan",
+                tim_2: "tim_industri_psn",
+                tim_3: "tim_investasi",
+                tim_4: "tim_csr",
+                tim_5: "tim_dbh",
             };
             userTeamCode = roleToTeamMapping[user.role];
-        } else if (["tim_kemiskinan", "tim_industri_psn", "tim_investasi", "tim_csr", "tim_dbh"].includes(user.role)) {
+        } else if (
+            [
+                "tim_kemiskinan",
+                "tim_industri_psn",
+                "tim_investasi",
+                "tim_csr",
+                "tim_dbh",
+            ].includes(user.role)
+        ) {
             // Direct role to team mapping
             userTeamCode = user.role;
         }
-        
-        console.log('Teams/Files canUpload team check:', {
+
+        console.log("Teams/Files canUpload team check:", {
             userTeamCode,
             pageTeam: props.team,
-            match: props.team === userTeamCode
+            match: props.team === userTeamCode,
         });
-        
+
         // Allow upload if current page team matches user's team
         return props.team === userTeamCode;
     }
-    
-    console.log('Teams/Files canUpload: User role not recognized, denying upload');
+
+    console.log(
+        "Teams/Files canUpload: User role not recognized, denying upload"
+    );
     return false;
 });
 </script>

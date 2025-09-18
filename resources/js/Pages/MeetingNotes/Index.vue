@@ -105,9 +105,7 @@
                                                 "
                                                 class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800"
                                             >
-                                                {{
-                                                    note.attachments_count
-                                                }}
+                                                {{ note.attachments_count }}
                                                 Lampiran
                                             </p>
                                         </div>

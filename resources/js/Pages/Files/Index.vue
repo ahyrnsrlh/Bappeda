@@ -312,7 +312,7 @@ const debouncedSearch = () => {
     if (searchTimeout) {
         clearTimeout(searchTimeout);
     }
-    
+
     searchTimeout = setTimeout(() => {
         applyFilters();
     }, 500); // 500ms delay
@@ -353,31 +353,54 @@ const canEditFile = (file) => {
     if (user.role === "kabid") return false;
 
     // Tim kerja hanya bisa edit file dari tim mereka sendiri
-    if (["tim_1", "tim_2", "tim_3", "tim_4", "tim_5", "tim_kemiskinan", "tim_industri_psn", "tim_investasi", "tim_csr", "tim_dbh"].includes(user.role)) {
+    if (
+        [
+            "tim_1",
+            "tim_2",
+            "tim_3",
+            "tim_4",
+            "tim_5",
+            "tim_kemiskinan",
+            "tim_industri_psn",
+            "tim_investasi",
+            "tim_csr",
+            "tim_dbh",
+        ].includes(user.role)
+    ) {
         // Check if file belongs to user's team
         let userTeamId = null;
-        
+
         // Legacy role mapping
         if (["tim_1", "tim_2", "tim_3", "tim_4", "tim_5"].includes(user.role)) {
             const roleToTeamMapping = {
-                'tim_1': 'tim_kemiskinan',
-                'tim_2': 'tim_industri_psn', 
-                'tim_3': 'tim_investasi',
-                'tim_4': 'tim_csr',
-                'tim_5': 'tim_dbh'
+                tim_1: "tim_kemiskinan",
+                tim_2: "tim_industri_psn",
+                tim_3: "tim_investasi",
+                tim_4: "tim_csr",
+                tim_5: "tim_dbh",
             };
             const teamCode = roleToTeamMapping[user.role];
             // Find team by code
-            const userTeam = props.teams.find(team => team.code === teamCode);
+            const userTeam = props.teams.find((team) => team.code === teamCode);
             userTeamId = userTeam ? userTeam.id : null;
-        } else if (["tim_kemiskinan", "tim_industri_psn", "tim_investasi", "tim_csr", "tim_dbh"].includes(user.role)) {
+        } else if (
+            [
+                "tim_kemiskinan",
+                "tim_industri_psn",
+                "tim_investasi",
+                "tim_csr",
+                "tim_dbh",
+            ].includes(user.role)
+        ) {
             // Direct role to team mapping
-            const userTeam = props.teams.find(team => team.code === user.role);
+            const userTeam = props.teams.find(
+                (team) => team.code === user.role
+            );
             userTeamId = userTeam ? userTeam.id : null;
         } else if (user.team_id) {
             userTeamId = user.team_id;
         }
-        
+
         return file.team_id === userTeamId;
     }
 
@@ -395,31 +418,54 @@ const canDeleteFile = (file) => {
     if (user.role === "kabid") return false;
 
     // Tim kerja hanya bisa delete file dari tim mereka sendiri
-    if (["tim_1", "tim_2", "tim_3", "tim_4", "tim_5", "tim_kemiskinan", "tim_industri_psn", "tim_investasi", "tim_csr", "tim_dbh"].includes(user.role)) {
+    if (
+        [
+            "tim_1",
+            "tim_2",
+            "tim_3",
+            "tim_4",
+            "tim_5",
+            "tim_kemiskinan",
+            "tim_industri_psn",
+            "tim_investasi",
+            "tim_csr",
+            "tim_dbh",
+        ].includes(user.role)
+    ) {
         // Check if file belongs to user's team
         let userTeamId = null;
-        
+
         // Legacy role mapping
         if (["tim_1", "tim_2", "tim_3", "tim_4", "tim_5"].includes(user.role)) {
             const roleToTeamMapping = {
-                'tim_1': 'tim_kemiskinan',
-                'tim_2': 'tim_industri_psn', 
-                'tim_3': 'tim_investasi',
-                'tim_4': 'tim_csr',
-                'tim_5': 'tim_dbh'
+                tim_1: "tim_kemiskinan",
+                tim_2: "tim_industri_psn",
+                tim_3: "tim_investasi",
+                tim_4: "tim_csr",
+                tim_5: "tim_dbh",
             };
             const teamCode = roleToTeamMapping[user.role];
             // Find team by code
-            const userTeam = props.teams.find(team => team.code === teamCode);
+            const userTeam = props.teams.find((team) => team.code === teamCode);
             userTeamId = userTeam ? userTeam.id : null;
-        } else if (["tim_kemiskinan", "tim_industri_psn", "tim_investasi", "tim_csr", "tim_dbh"].includes(user.role)) {
+        } else if (
+            [
+                "tim_kemiskinan",
+                "tim_industri_psn",
+                "tim_investasi",
+                "tim_csr",
+                "tim_dbh",
+            ].includes(user.role)
+        ) {
             // Direct role to team mapping
-            const userTeam = props.teams.find(team => team.code === user.role);
+            const userTeam = props.teams.find(
+                (team) => team.code === user.role
+            );
             userTeamId = userTeam ? userTeam.id : null;
         } else if (user.team_id) {
             userTeamId = user.team_id;
         }
-        
+
         return file.team_id === userTeamId;
     }
 

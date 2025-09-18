@@ -45,7 +45,12 @@
                     <div class="flex items-center space-x-3">
                         <Link
                             v-if="canUpload"
-                            :href="route('files.create', { team: team, folder: folder })"
+                            :href="
+                                route('files.create', {
+                                    team: team,
+                                    folder: folder,
+                                })
+                            "
                             class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white font-medium rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all duration-200 shadow-lg"
                         >
                             <svg
@@ -260,7 +265,9 @@
                 </p>
                 <Link
                     v-if="canUpload"
-                    :href="route('files.create', { team: team, folder: folder })"
+                    :href="
+                        route('files.create', { team: team, folder: folder })
+                    "
                     class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white font-medium rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all duration-200"
                 >
                     <svg
@@ -333,37 +340,58 @@ const folderDisplayName = computed(() => {
 const canUpload = computed(() => {
     const user = page.props.auth.user;
     if (!user) return false;
-    
+
     // KI bisa upload ke semua tim
     if (user.role === "KI") return true;
-    
+
     // Kabid tidak bisa upload
     if (user.role === "kabid") return false;
-    
+
     // Tim kerja hanya bisa upload ke tim mereka sendiri
-    if (["tim_1", "tim_2", "tim_3", "tim_4", "tim_5", "tim_kemiskinan", "tim_industri_psn", "tim_investasi", "tim_csr", "tim_dbh"].includes(user.role)) {
+    if (
+        [
+            "tim_1",
+            "tim_2",
+            "tim_3",
+            "tim_4",
+            "tim_5",
+            "tim_kemiskinan",
+            "tim_industri_psn",
+            "tim_investasi",
+            "tim_csr",
+            "tim_dbh",
+        ].includes(user.role)
+    ) {
         // Check if current team page matches user's team
         let userTeamCode = null;
-        
+
         // For legacy roles, map to new team codes
         if (["tim_1", "tim_2", "tim_3", "tim_4", "tim_5"].includes(user.role)) {
             const roleToTeamMapping = {
-                'tim_1': 'tim_kemiskinan',
-                'tim_2': 'tim_industri_psn', 
-                'tim_3': 'tim_investasi',
-                'tim_4': 'tim_csr',
-                'tim_5': 'tim_dbh'
+                tim_1: "tim_kemiskinan",
+                tim_2: "tim_industri_psn",
+                tim_3: "tim_investasi",
+                tim_4: "tim_csr",
+                tim_5: "tim_dbh",
             };
             userTeamCode = roleToTeamMapping[user.role];
-        } else if (["tim_kemiskinan", "tim_industri_psn", "tim_investasi", "tim_csr", "tim_dbh"].includes(user.role)) {
+        } else if (
+            [
+                "tim_kemiskinan",
+                "tim_industri_psn",
+                "tim_investasi",
+                "tim_csr",
+                "tim_dbh",
+            ].includes(user.role)
+        ) {
             // Direct role to team mapping
             userTeamCode = user.role;
         }
-        
+
         // Allow upload if current page team matches user's team
         return props.team === userTeamCode;
     }
-    
+
     return false;
 });
 
@@ -378,24 +406,45 @@ const canManageFile = (file) => {
     if (user.role === "kabid") return false;
 
     // Tim kerja hanya bisa manage file dari tim mereka sendiri
-    if (["tim_1", "tim_2", "tim_3", "tim_4", "tim_5", "tim_kemiskinan", "tim_industri_psn", "tim_investasi", "tim_csr", "tim_dbh"].includes(user.role)) {
+    if (
+        [
+            "tim_1",
+            "tim_2",
+            "tim_3",
+            "tim_4",
+            "tim_5",
+            "tim_kemiskinan",
+            "tim_industri_psn",
+            "tim_investasi",
+            "tim_csr",
+            "tim_dbh",
+        ].includes(user.role)
+    ) {
         // Check if file belongs to user's team
         let userTeamCode = null;
-        
+
         // For legacy roles, map to new team codes
         if (["tim_1", "tim_2", "tim_3", "tim_4", "tim_5"].includes(user.role)) {
             const roleToTeamMapping = {
-                'tim_1': 'tim_kemiskinan',
-                'tim_2': 'tim_industri_psn', 
-                'tim_3': 'tim_investasi',
-                'tim_4': 'tim_csr',
-                'tim_5': 'tim_dbh'
+                tim_1: "tim_kemiskinan",
+                tim_2: "tim_industri_psn",
+                tim_3: "tim_investasi",
+                tim_4: "tim_csr",
+                tim_5: "tim_dbh",
             };
             userTeamCode = roleToTeamMapping[user.role];
-        } else if (["tim_kemiskinan", "tim_industri_psn", "tim_investasi", "tim_csr", "tim_dbh"].includes(user.role)) {
+        } else if (
+            [
+                "tim_kemiskinan",
+                "tim_industri_psn",
+                "tim_investasi",
+                "tim_csr",
+                "tim_dbh",
+            ].includes(user.role)
+        ) {
             userTeamCode = user.role;
         }
-        
+
         // Check if current page team matches user's team
         return props.team === userTeamCode;
     }

@@ -248,8 +248,9 @@ class FileController extends Controller
                 $meetingNote = \App\Models\MeetingNote::create([
                     'title' => $request->title,
                     'content' => $request->content,
-                    'team_id' => $teamId,
-                    'user_id' => Auth::id()
+                    'meeting_schedule_id' => null, // Notulen standalone tidak terkait meeting tertentu
+                    'created_by' => Auth::id(),
+                    'is_archived' => false
                 ]);
                 
                 // Handle file attachments for notulen
@@ -267,6 +268,7 @@ class FileController extends Controller
                             'uploaded_by' => Auth::id(),
                             'team_id' => $teamId,
                             'type' => 'meeting_note',
+                            'folder_type' => 'notulen', // Penting: Set folder_type untuk notulen
                             'meeting_note_id' => $meetingNote->id
                         ]);
                     }
@@ -353,6 +355,7 @@ class FileController extends Controller
                 'uploaded_by' => Auth::id(),
                 'team_id' => $teamId,
                 'type' => $request->folder_type === 'notulen' ? 'meeting_note' : 'document',
+                'folder_type' => $request->folder_type, // Penting: Set folder_type dari request
                 'description' => $request->description
             ]);
             

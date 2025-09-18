@@ -580,15 +580,15 @@ const formatFileSize = (bytes) => {
 
 const getSelectedTeamName = () => {
     if (props.selectedTeam) {
-        const team = props.teams.find(t => t.id === props.selectedTeam);
-        return team ? team.name : 'Tim tidak ditemukan';
+        const team = props.teams.find((t) => t.id === props.selectedTeam);
+        return team ? team.name : "Tim tidak ditemukan";
     }
-    return '';
+    return "";
 };
 
 const submit = () => {
     console.log("Form submit started", form.data());
-    
+
     // Ensure team_id is set if selectedTeam is available but form.team_id is empty
     if (!form.team_id && props.selectedTeam) {
         form.team_id = props.selectedTeam;
@@ -608,7 +608,7 @@ const submit = () => {
             formData.append(`attachments[${index}]`, file);
         });
 
-        form.post(route('files.store'), {
+        form.post(route("files.store"), {
             data: formData,
             forceFormData: true,
             onSuccess: () => {
@@ -623,7 +623,7 @@ const submit = () => {
         });
     } else {
         // Submit as regular file
-        form.post(route('files.store'), {
+        form.post(route("files.store"), {
             onSuccess: () => {
                 console.log("Upload successful");
             },

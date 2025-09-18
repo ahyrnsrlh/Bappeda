@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('meeting_notes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('meeting_schedule_id')->constrained()->onDelete('cascade');
+            $table->foreignId('meeting_schedule_id')->nullable()->constrained()->onDelete('cascade');
             $table->text('content');
             $table->text('decisions')->nullable();
             $table->text('action_items')->nullable();
