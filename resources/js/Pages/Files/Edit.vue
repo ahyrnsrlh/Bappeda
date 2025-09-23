@@ -38,6 +38,36 @@
                                 </div>
                             </div>
 
+                            <!-- Original Name -->
+                            <div>
+                                <label
+                                    for="original_name"
+                                    class="block text-sm font-medium text-gray-700"
+                                >
+                                    Nama File
+                                </label>
+                                <div class="mt-1">
+                                    <input
+                                        id="original_name"
+                                        v-model="form.original_name"
+                                        type="text"
+                                        required
+                                        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                        :class="{
+                                            'border-red-300':
+                                                errors.original_name,
+                                        }"
+                                        placeholder="Nama file"
+                                    />
+                                </div>
+                                <p
+                                    v-if="errors.original_name"
+                                    class="mt-2 text-sm text-red-600"
+                                >
+                                    {{ errors.original_name }}
+                                </p>
+                            </div>
+
                             <!-- Description -->
                             <div>
                                 <label
@@ -176,6 +206,7 @@ const props = defineProps({
 const processing = ref(false);
 
 const form = reactive({
+    original_name: props.file.original_name || "",
     description: props.file.description || "",
     type: props.file.type || "document",
     team_id: props.file.team_id || "",

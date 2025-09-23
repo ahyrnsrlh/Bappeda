@@ -395,16 +395,90 @@ class FileController extends Controller
      */
     public function update(Request $request, File $file)
     {
+        $user = Auth::user();
+        
+        // Check permission - only file owner, team members, or KI can edit
+        if ($user->role !== 'KI') {
+            // For team users, check if file belongs to their team
+            if (in_array($user->role, ['tim_1', 'tim_2', 'tim_3', 'tim_4', 'tim_5', 'tim_kemiskinan', 'tim_industri_psn', 'tim_investasi', 'tim_csr', 'tim_dbh'])) {
+                // Get user's team ID
+                $userTeamId = $user->team_id;
+                
+                // If user doesn't have team_id set, try to determine from role
+                if (!$userTeamId) {
+                    if (in_array($user->role, ['tim_1', 'tim_2', 'tim_3', 'tim_4', 'tim_5'])) {
+                        $roleToTeamMapping = [
+                            'tim_1' => 'tim_kemiskinan',
+                            'tim_2' => 'tim_industri_psn', 
+                            'tim_3' => 'tim_investasi',
+                            'tim_4' => 'tim_csr',
+                            'tim_5' => 'tim_dbh'
+                        ];
+                        $teamCode = $roleToTeamMapping[$user->role] ?? null;
+                        if ($teamCode) {
+                            $userTeam = Team::where('code', $teamCode)->first();
+                            $userTeamId = $userTeam ? $userTeam->id : null;
+                        }
+                    } else if (in_array($user->role, ['tim_kemiskinan', 'tim_industri_psn', 'tim_investasi', 'tim_csr', 'tim_dbh'])) {
+                        $userTeam = Team::where('code', $user->role)->first();
+                        $userTeamId = $userTeam ? $userTeam->id : null;
+                    }
+                }
+                
+                // Check if file belongs to user's team
+                if ($file->team_id !== $userTeamId) {
+                    abort(403, 'Anda hanya dapat mengedit file dari tim Anda sendiri.');
+                }
+            } else if ($user->role === 'kabid') {
+                // Kabid can only view, not edit
+                abort(403, 'Anda tidak memiliki izin untuk mengedit file.');
+            }
+        }
+        
         $request->validate([
             'original_name' => 'required|string|max:255',
             'description' => 'nullable|string|max:500',
-            'team_id' => 'required|exists:teams,id'
+            'team_id' => 'required|exists:teams,id',
+            'type' => 'nullable|string|in:document,meeting_note,other'
         ]);
+        
+        // For team users, validate they can only change team_id to their own team
+        if (in_array($user->role, ['tim_1', 'tim_2', 'tim_3', 'tim_4', 'tim_5', 'tim_kemiskinan', 'tim_industri_psn', 'tim_investasi', 'tim_csr', 'tim_dbh'])) {
+            // Get user's team ID (same logic as above)
+            $userTeamId = $user->team_id;
+            
+            if (!$userTeamId) {
+                if (in_array($user->role, ['tim_1', 'tim_2', 'tim_3', 'tim_4', 'tim_5'])) {
+                    $roleToTeamMapping = [
+                        'tim_1' => 'tim_kemiskinan',
+                        'tim_2' => 'tim_industri_psn', 
+                        'tim_3' => 'tim_investasi',
+                        'tim_4' => 'tim_csr',
+                        'tim_5' => 'tim_dbh'
+                    ];
+                    $teamCode = $roleToTeamMapping[$user->role] ?? null;
+                    if ($teamCode) {
+                        $userTeam = Team::where('code', $teamCode)->first();
+                        $userTeamId = $userTeam ? $userTeam->id : null;
+                    }
+                } else if (in_array($user->role, ['tim_kemiskinan', 'tim_industri_psn', 'tim_investasi', 'tim_csr', 'tim_dbh'])) {
+                    $userTeam = Team::where('code', $user->role)->first();
+                    $userTeamId = $userTeam ? $userTeam->id : null;
+                }
+            }
+            
+            // Validate new team_id is user's team
+            if ($request->team_id != $userTeamId) {
+                return back()->withErrors(['team_id' => 'Anda hanya dapat memindahkan file ke tim Anda sendiri.'])->withInput();
+            }
+        }
         
         $file->update([
             'original_name' => $request->original_name,
             'description' => $request->description,
-            'team_id' => $request->team_id
+            'team_id' => $request->team_id,
+            'type' => $request->type ?? $file->type,
+            'folder_type' => $request->folder_type ?? $file->folder_type
         ]);
         
         return redirect()->route('files.index')->with('success', 'File berhasil diupdate.');
