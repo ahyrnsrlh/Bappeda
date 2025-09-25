@@ -228,20 +228,17 @@ class FileController extends Controller
                         $teamId = $userTeamId;
                     }
                 } else {
-                    // For KI users, if no team_id provided, try to get it from user's role
+                    // For KI users, they can upload to any team
+                    // If no team_id provided in form, this is an error for KI users
                     if (!$teamId) {
-                        $teamId = $user->team_id;
+                        return back()->withErrors(['team_id' => 'Silakan pilih tim untuk notulen ini.'])->withInput();
                     }
-                }
-                
-                // Validate team_id is not null before creating notulen
-                if (!$teamId) {
-                    Log::error('Team ID is null for notulen upload', [
-                        'user_id' => Auth::id(),
-                        'user_role' => $user->role,
-                        'user_team_id' => $user->team_id
-                    ]);
-                    return back()->withErrors(['team_id' => 'Tim tidak ditemukan. Silakan hubungi administrator.'])->withInput();
+                    
+                    // Validate the provided team_id exists
+                    $team = Team::find($teamId);
+                    if (!$team) {
+                        return back()->withErrors(['team_id' => 'Tim yang dipilih tidak valid.'])->withInput();
+                    }
                 }
                 
                 // Create MeetingNote

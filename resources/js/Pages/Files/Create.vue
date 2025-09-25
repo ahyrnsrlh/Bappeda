@@ -423,15 +423,18 @@
                                 for="team_id"
                                 class="block text-sm font-medium text-gray-700 mb-2"
                             >
-                                Tim
+                                Tim 
+                                <span v-if="form.folder_type === 'notulen'" class="text-red-500">*</span>
                             </label>
                             <select
                                 id="team_id"
                                 v-model="form.team_id"
                                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                                :required="form.folder_type === 'notulen'"
                             >
                                 <option value="">
-                                    Tim Default (berdasarkan user)
+                                    <span v-if="form.folder_type === 'notulen'">Pilih Tim</span>
+                                    <span v-else>Tim Default (berdasarkan user)</span>
                                 </option>
                                 <option
                                     v-for="team in props.teams || []"
@@ -442,7 +445,7 @@
                                 </option>
                             </select>
                             <div
-                                v-if="form.team_id === '' && props.selectedTeam"
+                                v-if="form.team_id === '' && props.selectedTeam && form.folder_type !== 'notulen'"
                                 class="text-blue-600 text-sm mt-1"
                             >
                                 Tim yang dipilih: {{ getSelectedTeamName() }}
@@ -588,6 +591,12 @@ const getSelectedTeamName = () => {
 
 const submit = () => {
     console.log("Form submit started", form.data());
+
+    // Validasi untuk notulen - tim wajib dipilih
+    if (form.folder_type === 'notulen' && !form.team_id) {
+        form.setError('team_id', 'Tim harus dipilih untuk upload notulen');
+        return;
+    }
 
     // Ensure team_id is set if selectedTeam is available but form.team_id is empty
     if (!form.team_id && props.selectedTeam) {
