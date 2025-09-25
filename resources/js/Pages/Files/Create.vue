@@ -423,8 +423,12 @@
                                 for="team_id"
                                 class="block text-sm font-medium text-gray-700 mb-2"
                             >
-                                Tim 
-                                <span v-if="form.folder_type === 'notulen'" class="text-red-500">*</span>
+                                Tim
+                                <span
+                                    v-if="form.folder_type === 'notulen'"
+                                    class="text-red-500"
+                                    >*</span
+                                >
                             </label>
                             <select
                                 id="team_id"
@@ -433,8 +437,12 @@
                                 :required="form.folder_type === 'notulen'"
                             >
                                 <option value="">
-                                    <span v-if="form.folder_type === 'notulen'">Pilih Tim</span>
-                                    <span v-else>Tim Default (berdasarkan user)</span>
+                                    <span v-if="form.folder_type === 'notulen'"
+                                        >Pilih Tim</span
+                                    >
+                                    <span v-else
+                                        >Tim Default (berdasarkan user)</span
+                                    >
                                 </option>
                                 <option
                                     v-for="team in props.teams || []"
@@ -445,7 +453,11 @@
                                 </option>
                             </select>
                             <div
-                                v-if="form.team_id === '' && props.selectedTeam && form.folder_type !== 'notulen'"
+                                v-if="
+                                    form.team_id === '' &&
+                                    props.selectedTeam &&
+                                    form.folder_type !== 'notulen'
+                                "
                                 class="text-blue-600 text-sm mt-1"
                             >
                                 Tim yang dipilih: {{ getSelectedTeamName() }}
@@ -593,8 +605,8 @@ const submit = () => {
     console.log("Form submit started", form.data());
 
     // Validasi untuk notulen - tim wajib dipilih
-    if (form.folder_type === 'notulen' && !form.team_id) {
-        form.setError('team_id', 'Tim harus dipilih untuk upload notulen');
+    if (form.folder_type === "notulen" && !form.team_id) {
+        form.setError("team_id", "Tim harus dipilih untuk upload notulen");
         return;
     }
 
